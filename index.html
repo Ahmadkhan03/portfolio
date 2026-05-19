@@ -19,6 +19,56 @@
   body { background: var(--bg); color: var(--cream); font-family: 'Outfit', sans-serif; font-weight: 300; cursor: auto; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-size: 200px 200px; pointer-events: none; z-index: 9999; opacity: 0.5; }
 
+  /* ── LOADER ── */
+  #loader {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #0C0B0A;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.done { opacity: 0; visibility: hidden; }
+
+  .loader-inner {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 16px;
+    text-align: center;
+  }
+  .loader-logo {
+    width: 72px; height: 72px;
+    border: 1px solid rgba(201,165,90,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 8px;
+    animation: loaderPulse 2s ease-in-out infinite;
+  }
+  @keyframes loaderPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(201,165,90,0.15); }
+    50%      { box-shadow: 0 0 0 12px rgba(201,165,90,0); }
+  }
+  .loader-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    color: #F2EDE4; letter-spacing: 0.05em;
+  }
+  .loader-role {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #6B6560;
+  }
+  .loader-bar-wrap {
+    width: 200px; margin-top: 12px;
+    display: flex; flex-direction: column; gap: 8px; align-items: center;
+  }
+  .loader-bar {
+    width: 0%; height: 1px;
+    background: var(--gold);
+    transition: width 0.05s linear;
+    box-shadow: 0 0 8px rgba(201,165,90,0.4);
+  }
+  .loader-percent {
+    font-size: 10px; letter-spacing: 0.2em;
+    color: rgba(201,165,90,0.5);
+  }
+
   /* Cursor */
   #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); }
   #cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.25s ease; transform: translate(-50%,-50%); opacity: 0.6; }
@@ -298,6 +348,25 @@
 </style>
 </head>
 <body>
+
+<!-- ── LOADING SCREEN ── -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 L44 24 L24 44 L4 24 Z" stroke="#C9A55A" stroke-width="1" fill="none" opacity="0.3" />
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Cormorant Garamond, serif"
+          font-size="20" fill="#C9A55A" font-weight="300">AK</text>
+      </svg>
+    </div>
+    <div class="loader-name">Ahmad Khan</div>
+    <div class="loader-role">Graphic Designer & Photographer</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+      <div class="loader-percent" id="loaderPercent">0%</div>
+    </div>
+  </div>
+</div>
 
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
@@ -845,6 +914,26 @@
 </footer>
 
 <script>
+
+/* ── LOADER ── */
+const loaderBar = document.getElementById('loaderBar');
+const loaderPercent = document.getElementById('loaderPercent');
+let progress = 0;
+const loaderTimer = setInterval(() => {
+  progress += Math.random() * 18;
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(loaderTimer);
+    loaderBar.style.width = '100%';
+    loaderPercent.textContent = '100%';
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('done');
+    }, 500);
+  }
+  loaderBar.style.width = progress + '%';
+  loaderPercent.textContent = Math.floor(progress) + '%';
+}, 120);
+
 /* ── CURSOR ── */
 const dot = document.getElementById('cursor-dot');
 const ring = document.getElementById('cursor-ring');
