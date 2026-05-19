@@ -373,6 +373,10 @@
   </div>
 </div>
 
+<div id="scrollBar"
+  style="position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(to right,#8A6F3A,#C9A55A,#8A6F3A);z-index:99998;transition:width 0.1s linear;box-shadow:0 0 6px rgba(201,165,90,0.5);">
+</div>
+
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
@@ -947,6 +951,13 @@ const loaderTimer = setInterval(() => {
   loaderBar.style.width = progress + '%';
   loaderPercent.textContent = Math.floor(progress) + '%';
 }, 120);
+
+  /* ── SCROLL PROGRESS ── */
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('scrollBar').style.width = (scrolled / total * 100) + '%';
+  });
 
 /* ── CURSOR ── */
 const dot = document.getElementById('cursor-dot');
