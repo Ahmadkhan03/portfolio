@@ -965,93 +965,135 @@ function isMobile() {
   return window.matchMedia('(max-width: 900px)').matches;
 }
 
-/* ── CARD SLIDESHOW ── */
-document.querySelectorAll('.project-card[data-images]').forEach(card => {
-  const images = card.dataset.images.split(',').map(s => s.trim()).filter(Boolean);
-  if (!images.length) return;
+  /* ── CARD SLIDESHOW ── */
+  document.querySelectorAll('.project-card[data-images]').forEach(card => {
+    const images = card.dataset.images.split(',').map(s => s.trim()).filter(Boolean);
+    if (!images.length) return;
 
-  const wrap = card.querySelector('.card-img-wrap');
-  if (!wrap) return;
+    const wrap = card.querySelector('.card-img-wrap');
+    if (!wrap) return;
 
-  // Single image layer — fade out, swap src, fade in
-  const img = document.createElement('img');
-  img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.4s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);';
-  img.src = images[0];
-  img.alt = card.dataset.title || '';
-  wrap.appendChild(img);
+    // Layer A — always shows current image, never hides
+    const imgA = document.createElement('img');
+    imgA.style.cssText = `
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;display:block;
+    z-index:2;opacity:1;
+    transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  `;
+    imgA.src = images[0];
+    imgA.alt = card.dataset.title || '';
 
-  // Zoom on hover via CSS class
-  card.addEventListener('mouseenter', () => img.style.transform = 'scale(1.05)');
-  card.addEventListener('mouseleave', () => img.style.transform = 'scale(1)');
+    // Layer B — next image fades IN on top, background never exposed
+    const imgB = document.createElement('img');
+    imgB.style.cssText = `
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;display:block;
+    z-index:3;opacity:0;
+    transition:opacity 0.55s ease;
+  `;
+    imgB.alt = '';
 
-  // Counter badge
-  const ctr = card.querySelector('.img-counter');
-  if (ctr && images.length > 1) ctr.textContent = '1 / ' + images.length;
+    // Shimmer overlay — gold sweep during transition
+    const shimmer = document.createElement('div');
+    shimmer.style.cssText = `
+    position:absolute;inset:0;z-index:4;pointer-events:none;
+    background:linear-gradient(105deg,
+      transparent 30%,
+      rgba(201,165,90,0.06) 50%,
+      transparent 70%
+    );
+    background-size:200% 100%;
+    opacity:0;
+    transition:opacity 0.3s ease;
+  `;
 
-  // Dots
-  const dotsEl = card.querySelector('.card-dots');
-  if (dotsEl && images.length > 1) {
-    images.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'card-dot' + (i === 0 ? ' active' : '');
-      dotsEl.appendChild(d);
-    });
-  }
+    wrap.appendChild(imgA);
+    wrap.appendChild(imgB);
+    wrap.appendChild(shimmer);
 
-  function updateUI(i) {
-    if (ctr && images.length > 1) ctr.textContent = (i + 1) + ' / ' + images.length;
-    if (dotsEl) dotsEl.querySelectorAll('.card-dot').forEach((d, n) => d.classList.toggle('active', n === i));
-  }
+    // Zoom on hover
+    card.addEventListener('mouseenter', () => imgA.style.transform = 'scale(1.05)');
+    card.addEventListener('mouseleave', () => imgA.style.transform = 'scale(1)');
 
-  let idx = 0, timer = null, busy = false;
+    // Counter badge
+    const ctr = card.querySelector('.img-counter');
+    if (ctr && images.length > 1) ctr.textContent = '1 / ' + images.length;
 
-  function goTo(n) {
-    const next = (n + images.length) % images.length;
-    if (next === idx || busy) return;
-    busy = true;
-
-    img.style.opacity = '0';
-
-    setTimeout(() => {
-      img.src = images[next];
-      idx = next;
-      updateUI(idx);
-
-      const show = () => { img.style.opacity = '1'; busy = false; };
-      if (img.complete && img.naturalWidth) show();
-      else img.onload = show;
-    }, 400);
-  }
-
-  // Desktop — hover to play
-  card.addEventListener('mouseenter', () => {
-    if (images.length <= 1 || isMobile()) return;
-    timer = setInterval(() => goTo(idx + 1), 1800);
-  });
-
-  card.addEventListener('mouseleave', () => {
-    if (isMobile()) return;
-    clearInterval(timer);
-    timer = null;
-    if (idx !== 0) setTimeout(() => goTo(0), 300);
-  });
-
-  // Mobile — auto-play when card enters viewport
-  if (images.length > 1) {
-    const mobileObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && isMobile()) {
-          timer = setInterval(() => goTo(idx + 1), 1800);
-        } else {
-          clearInterval(timer);
-          timer = null;
-        }
+    // Dots
+    const dotsEl = card.querySelector('.card-dots');
+    if (dotsEl && images.length > 1) {
+      images.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'card-dot' + (i === 0 ? ' active' : '');
+        dotsEl.appendChild(d);
       });
-    }, { threshold: 0.99 });
+    }
 
-    mobileObserver.observe(card);
-  }
-});
+    function updateUI(i) {
+      if (ctr && images.length > 1) ctr.textContent = (i + 1) + ' / ' + images.length;
+      if (dotsEl) dotsEl.querySelectorAll('.card-dot')
+        .forEach((d, n) => d.classList.toggle('active', n === i));
+    }
+
+    let idx = 0, timer = null, busy = false;
+
+    function goTo(n) {
+      const next = (n + images.length) % images.length;
+      if (next === idx || busy) return;
+      busy = true;
+
+      // Preload next image into layer B
+      imgB.src = images[next];
+      shimmer.style.opacity = '1';
+
+      const doSwap = () => {
+        // Fade B in ON TOP of A — background never shows
+        imgB.style.opacity = '1';
+
+        setTimeout(() => {
+          // Once B is visible, quietly move it to A and reset B
+          imgA.src = images[next];
+          imgB.style.opacity = '0';
+          imgB.src = '';
+          shimmer.style.opacity = '0';
+          idx = next;
+          busy = false;
+          updateUI(idx);
+        }, 580);
+      };
+
+      if (imgB.complete && imgB.naturalWidth) doSwap();
+      else imgB.onload = doSwap;
+    }
+
+    // Desktop — hover
+    card.addEventListener('mouseenter', () => {
+      if (images.length <= 1 || isMobile()) return;
+      timer = setInterval(() => goTo(idx + 1), 1800);
+    });
+    card.addEventListener('mouseleave', () => {
+      if (isMobile()) return;
+      clearInterval(timer);
+      timer = null;
+      if (idx !== 0) setTimeout(() => goTo(0), 300);
+    });
+
+    // Mobile — auto-play on scroll into view
+    if (images.length > 1) {
+      const mobileObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && isMobile()) {
+            timer = setInterval(() => goTo(idx + 1), 1800);
+          } else {
+            clearInterval(timer);
+            timer = null;
+          }
+        });
+      }, { threshold: 0.5 });
+      mobileObserver.observe(card);
+    }
+  });
 
 /* ── FILTER ── */
 document.querySelectorAll('.filter-btn').forEach(btn=>{
