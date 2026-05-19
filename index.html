@@ -366,6 +366,20 @@
     display: none;
   }
   }
+
+  /* ── CARD TILT ── */
+.project-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.project-card .card-img-wrap,
+.project-card .project-info,
+.project-card .project-cta,
+.project-card .img-counter,
+.project-card .card-dots {
+  transform: translateZ(0);
+}
+
 </style>
 </head>
 <body>
@@ -550,6 +564,9 @@
          data-year="2024"
          data-images="bits-pieces/1.jpg,bits-pieces/2.jpg,bits-pieces/3.jpg,bits-pieces/4.jpg">
       <div class="card-img-wrap ratio-landscape">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-web">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
@@ -569,6 +586,9 @@
       data-description="Designer for Bukhara by Legacy — a high-end restaurant in Faisalabad. Created the complete visual identity including logo, menu design, signage, and print collateral to establish a sophisticated and memorable brand presence."
       data-year="2025-2026" data-images="bukhara/1.jpg,bukhara/2.jpg,bukhara/3.jpg,bukhara/4.jpg,bukhara/5.jpg,bukhara/6.jpg,bukhara/7.jpg,bukhara/8.jpg,bukhara/9.jpg,bukhara/10.jpg,bukhara/11.jpg,bukhara/12.jpg">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-social">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -594,6 +614,9 @@
       data-description="Professional website design for Duluxe Fitness — a modern fitness studio. Designed clean, engaging web layouts optimised for showcasing services and creating a strong online presence."
       data-year="2025" data-images="duluxe-fitness/1.png,duluxe-fitness/2.png,duluxe-fitness/3.png,duluxe-fitness/4.webp">
       <div class="card-img-wrap ratio-landscape">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-web">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -621,6 +644,9 @@
       data-description="Graphic design and visual identity work for Manzar Kashi and freelance clients. Includes poster design, promotional materials, and brand collateral across print and digital mediums."
       data-year="2023–2024" data-images="manzar-kashi/1.jpg,manzar-kashi/2.jpg,manzar-kashi/3.jpg">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-print">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -651,6 +677,9 @@
          data-year="2024"
          data-images="fps/1.jpg">
       <div class="card-img-wrap ratio-landscape">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-fps">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
         </div>
@@ -670,6 +699,9 @@
       data-description="Full event branding for CHOPAAL — BOL Society's flagship cultural event. Scope included event identity, promotional posters, digital/print assets, sponsorship decks, and social media campaigns."
       data-year="2022–2023" data-images="CHOPAAL/1.jpg">
       <div class="card-img-wrap ratio-landscape">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-CHOPAAL">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -698,6 +730,9 @@
          data-year="2025"
          data-images="felo-mart/1.jpg,felo-mart/2.webp,felo-mart/3.png">
       <div class="card-img-wrap ratio-landscape">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-social">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </div>
@@ -720,6 +755,9 @@
          data-year="2022–2023"
          data-images="duluxe-fitness-insta/1.png,duluxe-fitness-insta/2.png,duluxe-fitness-insta/3.png,duluxe-fitness-insta/4.png">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-social">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
@@ -742,6 +780,9 @@
          data-year="2024"
          data-images="bunai/1.jpg,bunai/2.jpg">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-bunai">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
@@ -761,6 +802,9 @@
       data-description="Graphic design work for apniwebsite — a local artisanal brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
       data-year="2024" data-images="apniwebsite/1.jpg,apniwebsite/2.jpg,apniwebsite/3.jpg">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-apniwebsite">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -790,6 +834,9 @@
       data-year="2022–2023"
       data-images="chasenow-insta/2.webp,chasenow-insta/3.png,chasenow-insta/4.png,chasenow-insta/5.png,chasenow-insta/6.png,chasenow-insta/7.png">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-social">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -815,6 +862,9 @@
       data-description="Head Graphic Designer for the BOL Society's flagship debating competition — Debates VII. Designed the complete visual identity including posters, social media assets, certificates, schedules, and event collateral."
       data-year="2023" data-images="bol-debates/1.jpg,bol-debates/2.jpg,bol-debates/3.jpg">
       <div class="card-img-wrap ratio-portrait">
+        <div
+          style="position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:var(--radius);background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(201,165,90,0.08) 0%,transparent 65%);opacity:var(--glare-opacity,0);transition:opacity 0.3s ease;">
+        </div>
         <div class="project-bg pb-bol">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="0.5">
@@ -1156,6 +1206,70 @@ function isMobile() {
       mobileObserver.observe(card);
     }
   });
+
+  /* ── CARD TILT ── */
+    document.querySelectorAll('.project-card').forEach(card => {
+      let bounds;
+
+      function getCardBounds() {
+        bounds = card.getBoundingClientRect();
+      }
+
+      function handleTilt(e) {
+        if (!bounds) getCardBounds();
+
+        const mouseX = e.clientX - bounds.left;
+        const mouseY = e.clientY - bounds.top;
+
+        // Convert to -1 to +1 range
+        const xRatio = (mouseX / bounds.width - 0.5) * 2;
+        const yRatio = (mouseY / bounds.height - 0.5) * 2;
+
+        // Max tilt 8 degrees — subtle and elegant
+        const tiltX = -yRatio * 8;
+        const tiltY = xRatio * 8;
+
+        // Slight scale up + tilt
+        card.style.transform = `
+      perspective(800px)
+      rotateX(${tiltX}deg)
+      rotateY(${tiltY}deg)
+      scale3d(1.02, 1.02, 1.02)
+    `;
+
+        // Move the gradient highlight based on mouse position
+        const glareX = (mouseX / bounds.width) * 100;
+        const glareY = (mouseY / bounds.height) * 100;
+        card.style.setProperty('--glare-x', glareX + '%');
+        card.style.setProperty('--glare-y', glareY + '%');
+        card.style.setProperty('--glare-opacity', '1');
+      }
+
+      function resetTilt() {
+        card.style.transform = `
+      perspective(800px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale3d(1, 1, 1)
+    `;
+        card.style.setProperty('--glare-opacity', '0');
+      }
+
+      card.addEventListener('mouseenter', () => {
+        getCardBounds();
+        card.style.transition = 'transform 0.15s ease';
+      });
+
+      card.addEventListener('mousemove', handleTilt);
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+        resetTilt();
+      });
+
+      // Recalculate on resize
+      window.addEventListener('resize', () => { bounds = null; }, { passive: true });
+    });
 
 /* ── FILTER ── */
 document.querySelectorAll('.filter-btn').forEach(btn=>{
