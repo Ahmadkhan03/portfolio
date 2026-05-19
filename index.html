@@ -69,6 +69,11 @@
     color: rgba(201,165,90,0.5);
   }
 
+  @keyframes ping {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0;   }
+  }
+
   /* Cursor */
   #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); }
   #cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.25s ease; transform: translate(-50%,-50%); opacity: 0.6; }
@@ -431,7 +436,16 @@
     <div class="hero-divider"></div>
     <div class="hero-meta-item"><span class="hero-meta-label">Experience</span><span class="hero-meta-value">5+ Years</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-meta-item"><span class="hero-meta-label">Availability</span><span class="hero-meta-value">Open to Freelance</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Availability</span>
+    <span class="hero-meta-value" style="display:flex;align-items:center;gap:8px;">
+      <span style="position:relative;width:8px;height:8px;flex-shrink:0;">
+        <span
+          style="position:absolute;inset:0;border-radius:50%;background:#4ade80;animation:ping 1.5s ease-out infinite;opacity:0.6;"></span>
+        <span style="position:absolute;inset:0;border-radius:50%;background:#4ade80;"></span>
+      </span>
+      Open to Freelance
+    </span>
+    </div>
   </div>
 </section>
 
