@@ -366,6 +366,64 @@
     display: none;
   }
   }
+
+  /* ── THE PROCESS ── */
+.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:80px; }
+.process-step { padding:32px; border:1px solid var(--border); border-right:none; position:relative; transition:background 0.3s; background:var(--bg); }
+.process-step:last-child { border-right:1px solid var(--border); }
+.process-step:hover { background:var(--bg3); }
+.process-step-num { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:rgba(201,165,90,0.12); line-height:1; margin-bottom:20px; }
+.process-step-icon { width:40px; height:40px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); margin-bottom:16px; transition:background 0.3s; }
+.process-step:hover .process-step-icon { background:rgba(201,165,90,0.08); }
+.process-step-title { font-size:15px; font-weight:500; color:var(--cream); margin-bottom:10px; }
+.process-step-desc { font-size:13px; line-height:1.65; color:var(--muted); }
+.process-step-arrow { position:absolute; top:50%; right:-13px; transform:translateY(-50%); width:26px; height:26px; background:var(--bg2); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; z-index:2; color:var(--gold); }
+.process-step:last-child .process-step-arrow { display:none; }
+
+/* Calendar */
+.cal-wrap { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.cal-header { display:flex; justify-content:space-between; align-items:center; padding:28px 32px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:16px; }
+.cal-month { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--cream); }
+.cal-platform-badge { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:20px; font-weight:500; }
+.cal-platform-ig { background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:#fff; }
+.cal-platform-fb { background:#1877F2; color:#fff; }
+.cal-days-header { display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--border); }
+.cal-day-label { padding:12px 8px; text-align:center; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); border-right:1px solid var(--border); }
+.cal-day-label:last-child { border-right:none; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
+.cal-cell { min-height:95px; padding:8px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); transition:background 0.2s; position:relative; }
+.cal-cell:nth-child(7n) { border-right:none; }
+.cal-cell.empty { background:rgba(0,0,0,0.15); }
+.cal-cell.today { background:rgba(201,165,90,0.05); }
+.cal-cell:hover { background:rgba(201,165,90,0.04); }
+.cal-date { font-size:11px; color:var(--muted); margin-bottom:5px; font-weight:500; line-height:1; }
+.cal-cell.today .cal-date { color:var(--gold); font-weight:600; }
+.cal-pill { display:flex; align-items:center; gap:4px; padding:3px 7px; border-radius:4px; font-size:9px; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; margin-bottom:3px; cursor:pointer; width:fit-content; max-width:100%; overflow:hidden; transition:transform 0.15s, box-shadow 0.15s; }
+.cal-pill:hover { transform:scale(1.06); box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+.cal-pill-dot { width:4px; height:4px; border-radius:50%; flex-shrink:0; }
+.cal-pill-text { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cal-legend { display:flex; flex-wrap:wrap; gap:14px; padding:20px 32px; border-top:1px solid var(--border); align-items:center; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--muted); letter-spacing:0.04em; }
+.legend-swatch { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
+.cal-tooltip { position:fixed; background:rgba(28,25,22,0.95); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px; z-index:5000; pointer-events:none; opacity:0; transition:opacity 0.2s; min-width:170px; backdrop-filter:blur(12px); }
+.cal-tooltip.show { opacity:1; }
+.cal-tt-type { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:5px; }
+.cal-tt-label { font-size:14px; color:var(--cream); margin-bottom:6px; font-family:'Cormorant Garamond',serif; font-weight:300; }
+.cal-tt-plat { font-size:10px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+.cal-tt-plat-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+@media (max-width:900px) {
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .process-step:nth-child(2) { border-right:1px solid var(--border); }
+  .process-step:nth-child(2) .process-step-arrow { display:none; }
+  .process-step { padding:24px 20px; }
+  .cal-cell { min-height:72px; padding:5px; }
+  .cal-pill { font-size:8px; padding:2px 5px; }
+  .cal-pill-text { display:none; }
+  .cal-legend { padding:16px 20px; gap:10px; }
+  .cal-header { padding:20px; }
+}
+
 </style>
 </head>
 <body>
@@ -915,6 +973,173 @@
   </div>
 </section>
 
+<!-- ── THE PROCESS ── -->
+<section id="process" style="border-top:1px solid var(--border);padding:120px 48px;background:var(--bg2);">
+
+  <div style="margin-bottom:72px;">
+    <div class="section-label reveal">How I Work</div>
+    <h2 class="reveal reveal-delay-1">The <em>Process</em></h2>
+    <p class="reveal reveal-delay-2"
+      style="font-size:16px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:520px;margin-top:20px;font-weight:300;">
+      Every great design starts with a strategy. Here's exactly how I turn a client brief into content that performs —
+      from first conversation to final delivery.
+    </p>
+  </div>
+
+  <!-- Steps -->
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <div class="process-step-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </div>
+      <div class="process-step-title">Discovery & Brief</div>
+      <div class="process-step-desc">Deep dive into your brand — audience, tone, goals, and what sets you apart. No
+        design starts without full clarity.</div>
+      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <polyline points="9 18 15 12 9 6" />
+        </svg></div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <div class="process-step-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+      </div>
+      <div class="process-step-title">Strategy & Planning</div>
+      <div class="process-step-desc">Monthly content calendars, campaign themes, platform-specific scheduling. Every
+        post has a purpose — nothing is random.</div>
+      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <polyline points="9 18 15 12 9 6" />
+        </svg></div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <div class="process-step-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 19l7-7 3 3-7 7-3-3z" />
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+          <circle cx="11" cy="11" r="2" />
+        </svg>
+      </div>
+      <div class="process-step-title">Design & Creation</div>
+      <div class="process-step-desc">Mood boards, palettes, typography — then the actual assets. Reels, carousels,
+        stories, statics. Crafted for scroll-stopping impact.</div>
+      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <polyline points="9 18 15 12 9 6" />
+        </svg></div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <div class="process-step-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <div class="process-step-title">Review & Deliver</div>
+      <div class="process-step-desc">Client review, revisions, and final delivery — all formats sized and optimised for
+        each platform, ready to post immediately.</div>
+    </div>
+  </div>
+
+  <!-- Calendar label -->
+  <div style="margin:80px 0 32px;">
+    <div class="section-label reveal">Content Calendar</div>
+    <h2 class="reveal reveal-delay-1">How I <em>plan</em> a month</h2>
+    <p class="reveal reveal-delay-2"
+      style="font-size:15px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:500px;margin-top:16px;font-weight:300;">
+      A real breakdown of how I structure a client's content month across Instagram and Facebook — balanced,
+      intentional, and platform-optimised.
+    </p>
+  </div>
+
+  <!-- Calendar widget -->
+  <div class="cal-wrap reveal">
+    <div class="cal-header">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">
+          Real Example</div>
+        <div class="cal-month">May 2026</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+        <div style="display:flex;gap:8px;">
+          <span class="cal-platform-badge cal-platform-ig">Instagram</span>
+          <span class="cal-platform-badge cal-platform-fb">Facebook</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);letter-spacing:0.06em;">26 posts · 4 weeks</div>
+      </div>
+    </div>
+    <div class="cal-days-header">
+      <div class="cal-day-label">Mon</div>
+      <div class="cal-day-label">Tue</div>
+      <div class="cal-day-label">Wed</div>
+      <div class="cal-day-label">Thu</div>
+      <div class="cal-day-label">Fri</div>
+      <div class="cal-day-label">Sat</div>
+      <div class="cal-day-label">Sun</div>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-legend">
+      <span
+        style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-right:4px;">Types
+        —</span>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#7C3AED;"></div>Reels
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#EC4899;"></div>Stories
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#3B82F6;"></div>Carousel
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#14B8A6;"></div>Static
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#C9A55A;"></div>Event
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#EF4444;"></div>Deal
+      </div>
+      <div style="margin-left:auto;display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="legend-item">
+          <div
+            style="width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#833ab4,#fd1d1d);flex-shrink:0;">
+          </div>IG only
+        </div>
+        <div class="legend-item">
+          <div style="width:8px;height:8px;border-radius:50%;background:#1877F2;flex-shrink:0;"></div>FB only
+        </div>
+        <div class="legend-item">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;"></div>
+          Both
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="cal-tooltip" id="calTooltip">
+    <div class="cal-tt-type" id="ttType"></div>
+    <div class="cal-tt-label" id="ttLabel"></div>
+    <div class="cal-tt-plat">
+      <div class="cal-tt-plat-dot" id="ttDot"></div>
+      <span id="ttPlat"></span>
+    </div>
+  </div>
+
+</section>
+
 <!-- ── CONTACT ── -->
 <section id="contact">
   <div class="contact-left">
@@ -1258,6 +1483,163 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
   const diff=tx-e.changedTouches[0].clientX;
   if(Math.abs(diff)>50){ diff>0?lbNext():lbPrev(); }
 });
+
+  /* ── CONTENT CALENDAR ── */
+  (function () {
+    const grid = document.getElementById('calGrid');
+    if (!grid) return;
+
+    // May 2026 starts on Friday → 4 empty cells (Mon=0 … Fri=4)
+    const startOffset = 4;
+    const totalDays = 31;
+    const todayDay = 8; 
+
+
+    // ── Calendar data ──
+    const schedule = [
+      { day: 1, type: 'static', platform: 'ig', label: 'Brand Introduction Post' },
+      { day: 2, type: 'reel', platform: 'both', label: 'Behind the Scenes — Studio' },
+      { day: 3, type: 'story', platform: 'ig', label: 'Weekend Poll & Q&A' },
+      { day: 5, type: 'carousel', platform: 'ig', label: 'Fun Facts' },
+      { day: 6, type: 'story', platform: 'ig', label: 'Day in the Life' },
+      { day: 7, type: 'static', platform: 'fb', label: 'Brand Spotlight' },
+      { day: 8, type: 'reel', platform: 'both', label: 'Order Process Time-lapse' },
+      { day: 9, type: 'story', platform: 'ig', label: 'Ask Us Anything Session' },
+      { day: 10, type: 'event', platform: 'both', label: 'Event Highlight' },
+      { day: 12, type: 'deal', platform: 'both', label: 'Monday Deal — 20% Off Package' },
+      { day: 13, type: 'carousel', platform: 'ig', label: 'Branding Process Breakdown' },
+      { day: 14, type: 'reel', platform: 'ig', label: 'Behind the Kitchen' },
+      { day: 15, type: 'static', platform: 'both', label: 'Motivational Quote Card' },
+      { day: 16, type: 'story', platform: 'ig', label: 'Flash Poll — Next Content' },
+      { day: 17, type: 'event', platform: 'both', label: 'Campaign Launch' },
+      { day: 19, type: 'static', platform: 'both', label: 'Product Feature — New Work' },
+      { day: 20, type: 'reel', platform: 'both', label: 'Trending Audio Reel' },
+      { day: 21, type: 'carousel', platform: 'ig', label: 'Before & After — Rebrand' },
+      { day: 22, type: 'story', platform: 'ig', label: 'Project Countdown' },
+      { day: 23, type: 'deal', platform: 'both', label: 'Flash Sale — 24 Hours Only' },
+      { day: 24, type: 'event', platform: 'both', label: 'Showcase' },
+      { day: 26, type: 'deal', platform: 'both', label: 'End of Month Sale Announcement' },
+      { day: 27, type: 'carousel', platform: 'ig', label: 'Top 5 Wins' },
+      { day: 28, type: 'static', platform: 'fb', label: 'Client Testimonials/Reviews' },
+      { day: 29, type: 'reel', platform: 'both', label: 'Monthly Highlights Reel' },
+      { day: 30, type: 'story', platform: 'ig', label: 'Thank You — See You in June' },
+      { day: 31, type: 'static', platform: 'both', label: 'June Preview Teaser' },
+    ];
+
+    // Map day → items
+    const dayMap = {};
+    schedule.forEach(s => {
+      if (!dayMap[s.day]) dayMap[s.day] = [];
+      dayMap[s.day].push(s);
+    });
+
+    // Type config
+    const types = {
+      reel: { color: '#A78BFA', bg: 'rgba(124,58,237,0.18)', border: 'rgba(124,58,237,0.35)', dot: '#7C3AED' },
+      story: { color: '#F9A8D4', bg: 'rgba(236,72,153,0.18)', border: 'rgba(236,72,153,0.35)', dot: '#EC4899' },
+      carousel: { color: '#93C5FD', bg: 'rgba(59,130,246,0.18)', border: 'rgba(59,130,246,0.35)', dot: '#3B82F6' },
+      static: { color: '#5EEAD4', bg: 'rgba(20,184,166,0.18)', border: 'rgba(20,184,166,0.35)', dot: '#14B8A6' },
+      event: { color: '#FCD34D', bg: 'rgba(201,165,90,0.18)', border: 'rgba(201,165,90,0.35)', dot: '#C9A55A' },
+      deal: { color: '#FCA5A5', bg: 'rgba(239,68,68,0.18)', border: 'rgba(239,68,68,0.35)', dot: '#EF4444' },
+    };
+
+    const platformDot = {
+      ig: 'linear-gradient(135deg,#833ab4,#fd1d1d)',
+      fb: '#1877F2',
+      both: '#C9A55A',
+    };
+    const platformLabel = {
+      ig: 'Instagram',
+      fb: 'Facebook',
+      both: 'Instagram & Facebook',
+    };
+
+    // Tooltip
+    const tooltip = document.getElementById('calTooltip');
+    const ttType = document.getElementById('ttType');
+    const ttLabel = document.getElementById('ttLabel');
+    const ttDot = document.getElementById('ttDot');
+    const ttPlat = document.getElementById('ttPlat');
+
+    function showTT(e, item) {
+      const t = types[item.type];
+      ttType.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+      ttType.style.color = t.dot;
+      ttLabel.textContent = item.label;
+      ttDot.style.background = platformDot[item.platform];
+      ttPlat.textContent = platformLabel[item.platform];
+      tooltip.classList.add('show');
+      moveTT(e);
+    }
+    function moveTT(e) {
+      let x = e.clientX + 18, y = e.clientY - 50;
+      if (x + 190 > window.innerWidth) x = e.clientX - 208;
+      if (y < 8) y = e.clientY + 18;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    }
+    function hideTT() { tooltip.classList.remove('show'); }
+
+    // Build grid
+    // Empty offset cells
+    for (let i = 0; i < startOffset; i++) {
+      const c = document.createElement('div');
+      c.className = 'cal-cell empty';
+      grid.appendChild(c);
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell' + (day === todayDay ? ' today' : '');
+
+      // Date number
+      const dn = document.createElement('div');
+      dn.className = 'cal-date';
+      dn.textContent = day;
+      if (day === todayDay) {
+        dn.style.cssText = 'font-size:11px;color:var(--gold);font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:4px;';
+        const dot = document.createElement('span');
+        dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;';
+        dn.appendChild(dot);
+      }
+      cell.appendChild(dn);
+
+      // Pills
+      const items = dayMap[day] || [];
+      items.forEach(item => {
+        const t = types[item.type] || types.static;
+        const pill = document.createElement('div');
+        pill.className = 'cal-pill';
+        pill.style.cssText = `background:${t.bg};color:${t.color};border:1px solid ${t.border};`;
+
+        // Platform dot
+        const pd = document.createElement('span');
+        pd.className = 'cal-pill-dot';
+        pd.style.background = platformDot[item.platform];
+        pill.appendChild(pd);
+
+        // Label
+        const pl = document.createElement('span');
+        pl.className = 'cal-pill-text';
+        pl.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+        pill.appendChild(pl);
+
+        pill.addEventListener('mouseenter', e => showTT(e, item));
+        pill.addEventListener('mousemove', e => moveTT(e));
+        pill.addEventListener('mouseleave', hideTT);
+
+        // Touch tooltip for mobile
+        pill.addEventListener('touchstart', e => {
+          showTT(e.touches[0], item);
+          setTimeout(hideTT, 2000);
+        }, { passive: true });
+
+        cell.appendChild(pill);
+      });
+
+      grid.appendChild(cell);
+    }
+  })();
 
 // /* ── ADD TIP ── */
 // function showAddTip(){
