@@ -59,10 +59,16 @@
     display: flex; flex-direction: column; gap: 8px; align-items: center;
   }
   .loader-bar {
-    width: 0%; height: 1px;
-    background: var(--gold);
-    transition: width 0.05s linear;
-    box-shadow: 0 0 8px rgba(201,165,90,0.4);
+  width: 0%;
+  height: 1px;
+  background: linear-gradient(to right, #8A6F3A, #C9A55A, #E8D5A3, #C9A55A, #8A6F3A);
+  background-size: 200% 100%;
+  animation: barShimmer 2s linear infinite;
+  box-shadow: 0 0 10px rgba(201,165,90,0.5), 0 0 20px rgba(201,165,90,0.2);
+  }
+  @keyframes barShimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
   }
   .loader-percent {
     font-size: 10px; letter-spacing: 0.2em;
@@ -1225,24 +1231,64 @@
 
 <script>
 
-/* ── LOADER ── */
-const loaderBar = document.getElementById('loaderBar');
-const loaderPercent = document.getElementById('loaderPercent');
-let progress = 0;
-const loaderTimer = setInterval(() => {
-  progress += Math.random() * 18;
-  if (progress >= 100) {
-    progress = 100;
-    clearInterval(loaderTimer);
-    loaderBar.style.width = '100%';
-    loaderPercent.textContent = '100%';
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('done');
-    }, 500);
-  }
-  loaderBar.style.width = progress + '%';
-  loaderPercent.textContent = Math.floor(progress) + '%';
-}, 120);
+  /* ── LOADER ── */
+  (function () {
+    const bar = document.getElementById('loaderBar');
+    const percent = document.getElementById('loaderPercent');
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+
+    // Lock scroll while loading
+    document.body.style.overflow = 'hidden';
+
+    let current = 0;
+    let target = 0;
+    let rafId = null;
+
+    // Randomly advance target in organic bursts
+    const bursts = [
+      { to: 15, delay: 0 },
+      { to: 30, delay: 300 },
+      { to: 48, delay: 700 },
+      { to: 60, delay: 1100 },
+      { to: 72, delay: 1500 },
+      { to: 83, delay: 1900 },
+      { to: 91, delay: 2300 },
+      { to: 100, delay: 2700 },
+    ];
+
+    bursts.forEach(b => {
+      setTimeout(() => { target = b.to; }, b.delay);
+    });
+
+    // Smoothly animate current → target every frame
+    function tick() {
+      if (current < target) {
+        current += (target - current) * 0.06;
+        if (current > target) current = target;
+
+        const rounded = Math.floor(current);
+        bar.style.width = current + '%';
+        percent.textContent = rounded + '%';
+      }
+
+      if (current < 99.9) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        // Finished — pause then fade out
+        bar.style.width = '100%';
+        percent.textContent = '100%';
+
+        setTimeout(() => {
+          loader.style.transition = 'opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease';
+          loader.classList.add('done');
+          document.body.style.overflow = '';
+        }, 500);
+      }
+    }
+
+    rafId = requestAnimationFrame(tick);
+  })();
 
   /* ── SCROLL PROGRESS ── */
   window.addEventListener('scroll', () => {
