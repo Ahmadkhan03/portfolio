@@ -90,6 +90,22 @@
   .nav-cta { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 10px 22px; border-radius: var(--radius); text-decoration: none; transition: opacity 0.2s; }
   .nav-cta:hover { opacity: 0.85; }
 
+  .nav-links a.active {
+  color: var(--gold);
+  }
+  .nav-links a::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.3s ease;
+    margin-top: 2px;
+  }
+  .nav-links a.active::after {
+    width: 100%;
+  }
+
   /* Hero */
   #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 80px; position: relative; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,165,90,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,165,90,0.04) 0%, transparent 60%); }
@@ -420,10 +436,10 @@
 <nav id="nav">
   <a href="#hero" class="nav-logo">Ahmad <span>Khan</span></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#clients">Clients</a></li>
+    <li><a href="#about" data-section="about">About</a></li>
+    <li><a href="#work" data-section="work">Work</a></li>
+    <li><a href="#services" data-section="services">Services</a></li>
+    <li><a href="#clients" data-section="clients">Clients</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Work With Me</a>
 </nav>
@@ -958,6 +974,27 @@ const loaderTimer = setInterval(() => {
     const total = document.documentElement.scrollHeight - window.innerHeight;
     document.getElementById('scrollBar').style.width = (scrolled / total * 100) + '%';
   });
+
+  /* ── ACTIVE NAV ── */
+    const navSections = ['about', 'work', 'services', 'clients', 'contact'];
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + window.innerHeight / 3;
+
+      navSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+
+        if (scrollY >= top && scrollY < bottom) {
+          document.querySelectorAll('.nav-links a').forEach(a => {
+            a.classList.remove('active');
+            if (a.dataset.section === id) a.classList.add('active');
+          });
+        }
+      });
+    });
 
 /* ── CURSOR ── */
 const dot = document.getElementById('cursor-dot');
