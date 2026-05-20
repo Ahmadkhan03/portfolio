@@ -481,6 +481,179 @@
   p { font-size:13px; }
 }
 
+/* ── HERO LAYOUT ── */
+#hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  padding: 0 48px 80px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.hero-cards {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  pointer-events: none;
+}
+
+/* Keep year and scroll hint positioned absolutely */
+.hero-year {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 0;
+  max-width: 55%;
+}
+
+/* ── FLOATING CARDS ── */
+.hero-cards {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  pointer-events: none;
+}
+
+.hero-card {
+  position: absolute;
+  width: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(201,165,90,0.2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,165,90,0.08);
+  background: var(--bg2);
+}
+
+.hero-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-card-label {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--bg2);
+}
+
+.hero-card-label span:first-child {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-card-label span:last-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cream);
+}
+
+/* Card positions & rotations */
+.hero-card-1 {
+  top: 18%;
+  left: -95%;
+  transform: rotate(-4deg);
+  animation: float1 6s ease-in-out infinite;
+  z-index: 3;
+}
+
+.hero-card-2 {
+  top: 30%;
+  left: -30%;
+  transform: rotate(3deg);
+  animation: float2 7s ease-in-out infinite;
+  z-index: 2;
+}
+
+.hero-card-3 {
+  top: 52%;
+  left: -100%;
+  transform: rotate(2deg);
+  animation: float3 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: rotate(-4deg) translateY(0px);   }
+  50%       { transform: rotate(-4deg) translateY(-14px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: rotate(3deg)  translateY(0px);   }
+  50%       { transform: rotate(3deg)  translateY(-18px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: rotate(2deg)  translateY(0px);   }
+  50%       { transform: rotate(2deg)  translateY(-10px); }
+}
+
+/* Decorative rings behind cards */
+.hero-ring {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,165,90,0.08);
+  top: 15%; left: 20%;
+  animation: spin 25s linear infinite;
+}
+.hero-ring::before {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  top: -3px; left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
+.hero-ring-2 {
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,165,90,0.05);
+  top: 40%; left: 50%;
+  animation: spin 18s linear infinite reverse;
+}
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* Hide cards on mobile */
+@media (max-width: 900px) {
+  #hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 24px 60px;
+    min-height: auto;
+  }
+  .hero-cards  { display: none; }
+  .hero-content { max-width: 100%; width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -564,24 +737,64 @@
   <div class="hero-bg"></div>
   <div class="hero-year">Graphic Design — 2020–2026</div>
   <div class="hero-scroll-hint">Scroll</div>
-  <div class="hero-tag">Portfolio — Faisalabad, Pakistan</div>
-  <h1 class="hero-title">Ahmad<br><em>Khan</em></h1>
-  <div class="hero-meta">
-    <div class="hero-meta-item"><span class="hero-meta-label">Discipline</span><span class="hero-meta-value">Graphic & Web Design</span></div>
-    <div class="hero-divider"></div>
-    <div class="hero-meta-item"><span class="hero-meta-label">Experience</span><span class="hero-meta-value">5+ Years</span></div>
-    <div class="hero-divider"></div>
-    <div class="hero-meta-item"><span class="hero-meta-label">Availability</span>
-    <span class="hero-meta-value" style="display:flex;align-items:center;gap:8px;">
-      <span style="position:relative;width:8px;height:8px;flex-shrink:0;">
-        <span
-          style="position:absolute;inset:0;border-radius:50%;background:#4ade80;animation:ping 1.5s ease-out infinite;opacity:0.6;"></span>
-        <span style="position:absolute;inset:0;border-radius:50%;background:#4ade80;"></span>
-      </span>
-      Open to Freelance
-    </span>
+
+  <!-- Floating cards — right side -->
+  <div class="hero-cards">
+    <div class="hero-card hero-card-1">
+      <img src="bits-pieces/1.jpg" alt="Bits & Pieces">
+      <div class="hero-card-label">
+        <span>Web Design</span>
+        <span>Bits & Pieces</span>
+      </div>
+    </div>
+    <div class="hero-card hero-card-2">
+      <img src="chopaal/1.jpg" alt="Chopaal">
+      <div class="hero-card-label">
+        <span>Event Branding</span>
+        <span>CHOPAAL 2024</span>
+      </div>
+    </div>
+    <div class="hero-card hero-card-3">
+      <img src="bukhara/1.jpg" alt="Bukhara Restaurant">
+      <div class="hero-card-label">
+        <span>Brand Identity</span>
+        <span>Bukhara Restaurant</span>
+      </div>
+    </div>
+    <!-- Decorative ring -->
+    <div class="hero-ring"></div>
+    <div class="hero-ring-2"></div>
+  </div>
+
+  <!-- Left content -->
+  <div class="hero-content">
+    <div class="hero-tag">Portfolio — Faisalabad, Pakistan</div>
+    <h1 class="hero-title">Ahmad<br><em>Khan</em></h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Discipline</span>
+        <span class="hero-meta-value">Graphic & Web Design</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Experience</span>
+        <span class="hero-meta-value">5+ Years</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Availability</span>
+        <span class="hero-meta-value" style="display:flex;align-items:center;gap:8px;">
+          <span style="position:relative;width:8px;height:8px;flex-shrink:0;">
+            <span
+              style="position:absolute;inset:0;border-radius:50%;background:#4ade80;animation:ping 1.5s ease-out infinite;opacity:0.6;"></span>
+            <span style="position:absolute;inset:0;border-radius:50%;background:#4ade80;"></span>
+          </span>
+          Open to Freelance
+        </span>
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- ── ABOUT ── -->
