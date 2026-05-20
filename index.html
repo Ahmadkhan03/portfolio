@@ -615,7 +615,7 @@
   width: 300px; height: 300px;
   border-radius: 50%;
   border: 1px solid rgba(201,165,90,0.08);
-  top: 15%; left: 20%;
+  top: 15%; left: -30%;
   animation: spin 25s linear infinite;
 }
 .hero-ring::before {
@@ -633,8 +633,20 @@
   width: 180px; height: 180px;
   border-radius: 50%;
   border: 1px solid rgba(201,165,90,0.05);
-  top: 40%; left: 50%;
+  top: 60%; left: -125%;
   animation: spin 18s linear infinite reverse;
+}
+.hero-ring-2::before {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  top: -3px; left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  /* Counter-spins to cancel the ring's reverse, then adds forward spin */
+  animation: spin 18s linear infinite;
 }
 @keyframes spin {
   from { transform: rotate(0deg);   }
@@ -648,10 +660,104 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 0 24px 60px;
-    min-height: auto;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-cards  { display: none; }
-  .hero-content { max-width: 100%; width: 100%; }
+
+  .hero-content {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 16vw, 80px);
+    margin-bottom: 28px;
+  }
+
+  .hero-meta {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero-divider { display: none; }
+
+  .hero-meta-item { min-width: 130px; }
+
+  /* Cards float softly behind the text on mobile */
+  .hero-cards {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-card {
+    position: absolute;
+    width: 130px;
+    animation-duration: 7s;
+    opacity: 0.35;
+    filter: blur(0.5px);
+  }
+
+  /* Reposition cards to corners so text is never blocked */
+  .hero-card-1 {
+    top: 8%;
+    left: -10px;
+    transform: rotate(-6deg) !important;
+    animation: float1 6s ease-in-out infinite !important;
+  }
+
+  .hero-card-2 {
+    top: 6%;
+    right: -10px;
+    left: unset;
+    transform: rotate(5deg) !important;
+    animation: float2 7s ease-in-out infinite !important;
+  }
+
+  .hero-card-3 {
+    top: 30%;
+    right: -15px;
+    left: unset;
+    transform: rotate(-3deg) !important;
+    animation: float3 8s ease-in-out infinite !important;
+  }
+
+  .hero-card img { height: 95px; }
+
+  /* Keep rings but make them smaller and more subtle */
+  .hero-ring {
+    width: 200px;
+    height: 200px;
+    top: 5%;
+    left: 30%;
+    opacity: 0.5;
+  }
+
+  .hero-ring-2 {
+    width: 120px;
+    height: 120px;
+    top: 55%;
+    left: 60%;
+    opacity: 0.4;
+  }
+
+  .hero-scroll-hint { display: none; }
+  .hero-year { display: none; }
 }
 
 </style>
