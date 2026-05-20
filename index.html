@@ -1810,6 +1810,8 @@ function openLightbox(card){
 
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow='hidden';
+
+  history.pushState({ lightbox: true }, '');
 }
 
 function buildDots(){
@@ -2058,6 +2060,13 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
       grid.appendChild(cell);
     }
   })();
+
+  /* ── BACK BUTTON CLOSES LIGHTBOX ── */
+    window.addEventListener('popstate', () => {
+      if (document.getElementById('lightbox').classList.contains('open')) {
+        closeLightbox();
+      }
+    });
 
 // /* ── ADD TIP ── */
 // function showAddTip(){
