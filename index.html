@@ -740,83 +740,6 @@
 
 }
 
-/* ── BOTTOM NAV ── */
-#bottomNav {
-  display: none;
-}
-
-@media (max-width: 900px) {
-  #bottomNav {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 9998;
-    background: rgba(12,11,10,0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border);
-    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .bn-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    padding: 6px 16px;
-    border-radius: 12px;
-    transition: background 0.2s;
-    position: relative;
-    height: auto;   
-    width: auto;  
-  }
-
-  .bn-item:active {
-    background: rgba(201,165,90,0.08);
-  }
-
-  .bn-icon {
-    color: var(--muted);
-    transition: color 0.25s ease, transform 0.25s ease;
-  }
-
-  .bn-label {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    transition: color 0.25s ease;
-  }
-
-  /* Active state */
-  .bn-item.bn-active .bn-icon {
-    color: var(--gold);
-    transform: translateY(-2px);
-  }
-  .bn-item.bn-active .bn-label {
-    color: var(--gold);
-  }
-  .bn-item.bn-active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 6px rgba(201,165,90,0.8);
-  }
-
-  /* Push page content up so bottom nav doesn't cover it */
-  footer {
-    padding-bottom: 80px;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -1939,29 +1862,29 @@ function closeLightbox(){
   document.body.style.overflow='';
 }
 
-  document.querySelectorAll('.project-card[data-title]').forEach(card => {
-    let touchMoved = false;
+document.querySelectorAll('.project-card[data-title]').forEach(card => {
+  let touchMoved = false;
 
-    card.addEventListener('touchstart', () => {
-      touchMoved = false;
-    }, { passive: true });
+  card.addEventListener('touchstart', () => {
+    touchMoved = false;
+  }, { passive: true });
 
-    card.addEventListener('touchmove', () => {
-      touchMoved = true;
-    }, { passive: true });
+  card.addEventListener('touchmove', () => {
+    touchMoved = true;
+  }, { passive: true });
 
-    card.addEventListener('touchend', e => {
-      if (!touchMoved) {
-        e.preventDefault();
-        openLightbox(card);
-      }
-    });
-
-    // Desktop click still works
-    card.addEventListener('click', () => {
-      if (!isMobile()) openLightbox(card);
-    });
+  card.addEventListener('touchend', e => {
+    if (!touchMoved) {
+      e.preventDefault();
+      openLightbox(card);
+    }
   });
+
+  // Desktop click still works
+  card.addEventListener('click', () => {
+    if (!isMobile()) openLightbox(card);
+  });
+});
 document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeLightbox(); });
 
 document.addEventListener('keydown',e=>{
@@ -2136,40 +2059,6 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
     }
   })();
 
-  /* ── BOTTOM NAV ── */
-    if (isMobile()) {
-      const bnSections = ['hero', 'about', 'work', 'services', 'clients', 'contact'];
-      const bnItems = document.querySelectorAll('.bn-item');
-
-      function setBottomNav(id) {
-        bnItems.forEach(item => {
-          item.classList.remove('bn-active');
-          if (item.dataset.section === id) item.classList.add('bn-active');
-        });
-      }
-
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY + window.innerHeight / 2;
-        let current = 'hero';
-
-        bnSections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el && scrollY >= el.offsetTop) current = id;
-        });
-
-        setBottomNav(current);
-      }, { passive: true });
-
-      // Smooth scroll on tap
-      bnItems.forEach(item => {
-        item.addEventListener('click', e => {
-          e.preventDefault();
-          const target = document.getElementById(item.dataset.section);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-      });
-    }
-
 // /* ── ADD TIP ── */
 // function showAddTip(){
 //   const t=document.getElementById('addTip');
@@ -2177,58 +2066,5 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
 //   if(t.style.display==='block') t.scrollIntoView({behavior:'smooth',block:'nearest'});
 // }
 </script>
-
-<!-- ── BOTTOM NAV (mobile only) ── -->
-<nav id="bottomNav">
-  <a href="#hero" class="bn-item bn-active" data-section="hero">
-    <div class="bn-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    </div>
-    <span class="bn-label">Home</span>
-  </a>
-  <a href="#work" class="bn-item" data-section="work">
-    <div class="bn-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="3" y="3" width="7" height="7" />
-        <rect x="14" y="3" width="7" height="7" />
-        <rect x="3" y="14" width="7" height="7" />
-        <rect x="14" y="14" width="7" height="7" />
-      </svg>
-    </div>
-    <span class="bn-label">Work</span>
-  </a>
-  <a href="#about" class="bn-item" data-section="about">
-    <div class="bn-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    </div>
-    <span class="bn-label">About</span>
-  </a>
-  <a href="#services" class="bn-item" data-section="services">
-    <div class="bn-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="3" />
-        <path
-          d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-      </svg>
-    </div>
-    <span class="bn-label">Services</span>
-  </a>
-  <a href="#contact" class="bn-item" data-section="contact">
-    <div class="bn-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path
-          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    </div>
-    <span class="bn-label">Contact</span>
-  </a>
-</nav>
-
 </body>
 </html>
