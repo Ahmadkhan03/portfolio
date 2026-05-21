@@ -387,7 +387,7 @@
 .process-step:last-child .process-step-arrow { display:none; }
 
 /* ── CALENDAR ── */
-.cal-wrap { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.cal-wrap { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; position: relative;}
 .cal-header { display:flex; justify-content:space-between; align-items:center; padding:28px 32px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:16px; }
 .cal-month { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--cream); }
 .cal-platform-badge { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:20px; font-weight:500; }
@@ -411,7 +411,7 @@
 .cal-legend { display:flex; flex-wrap:wrap; gap:14px; padding:20px 32px; border-top:1px solid var(--border); align-items:center; }
 .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--muted); letter-spacing:0.04em; }
 .legend-swatch { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
-.cal-tooltip { position:fixed; background:rgba(28,25,22,0.95); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px; z-index:5000; pointer-events:none; opacity:0; transition:opacity 0.2s; min-width:170px; backdrop-filter:blur(12px); }
+.cal-tooltip { position:absolute; background:rgba(28,25,22,0.95); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px; z-index:5000; pointer-events:none; opacity:0; transition:opacity 0.2s; min-width:170px; backdrop-filter:blur(12px); }
 .cal-tooltip.show { opacity:1; }
 .cal-tt-type { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:5px; }
 .cal-tt-label { font-size:14px; color:var(--cream); margin-bottom:6px; font-family:'Cormorant Garamond',serif; font-weight:300; }
@@ -2062,14 +2062,40 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
         pl.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
         pill.appendChild(pl);
 
+        // Desktop hover
         pill.addEventListener('mouseenter', e => showTT(e, item));
         pill.addEventListener('mousemove', e => moveTT(e));
         pill.addEventListener('mouseleave', hideTT);
 
-        // Touch tooltip for mobile
+        // Mobile tap — show centered above the pill
         pill.addEventListener('touchstart', e => {
-          showTT(e.touches[0], item);
-          setTimeout(hideTT, 2000);
+          e.stopPropagation();
+          const rect = pill.getBoundingClientRect();
+
+          // Position tooltip centered above the tapped pill
+          const tt = document.getElementById('calTooltip');
+          const ttWidth = 180;
+          let x = rect.left + (rect.width / 2) - (ttWidth / 2);
+          let y = rect.top - 90 + window.scrollY;
+
+          // Keep inside screen horizontally
+          if (x < 8) x = 8;
+          if (x + ttWidth > window.innerWidth - 8) x = window.innerWidth - ttWidth - 8;
+          // If too close to top flip it below
+          if (rect.top < 100) y = rect.bottom + 10 + window.scrollY;
+
+          tt.style.left = x + 'px';
+          tt.style.top = y + 'px';
+
+          document.getElementById('ttType').textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+          document.getElementById('ttType').style.color = types[item.type].dot;
+          document.getElementById('ttLabel').textContent = item.label;
+          document.getElementById('ttDot').style.background = platformDot[item.platform];
+          document.getElementById('ttPlat').textContent = platformLabel[item.platform];
+
+          tt.classList.add('show');
+          clearTimeout(tt._hideTimer);
+          tt._hideTimer = setTimeout(() => tt.classList.remove('show'), 2500);
         }, { passive: true });
 
         cell.appendChild(pill);
@@ -2077,6 +2103,15 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
 
       grid.appendChild(cell);
     }
+
+    // Dismiss calendar tooltip on outside tap
+    document.addEventListener('touchstart', e => {
+      const tt = document.getElementById('calTooltip');
+      if (tt && !e.target.closest('.cal-pill')) {
+        tt.classList.remove('show');
+      }
+    }, { passive: true });
+
   })();
 
   /* ── BACK BUTTON CLOSES LIGHTBOX ── */
