@@ -857,24 +857,25 @@ a.hero-card:hover {
 /* Mobile */
 @media (max-width: 900px) {
   #backToTop {
-    bottom: 24px;
+    bottom: 80px;
     right: 24px;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    padding: 0 10px;
+    padding: 0;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    border: 1px solid rgba(201,165,90,0.5);
+    background: rgba(20,18,16,0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4),
+                0 0 12px rgba(201,165,90,0.15);
   }
 
-  /* Hidden by default on mobile — shown only near footer */
   #backToTop.visible {
     opacity: 0;
     pointer-events: none;
   }
 
-  /* Near footer on mobile — grows with label above */
   #backToTop.near-footer {
     opacity: 1 !important;
     pointer-events: all;
@@ -882,34 +883,35 @@ a.hero-card:hover {
   }
 
   #backToTop:hover {
-    width: 36px;
+    width: 44px;
     gap: 0;
+    padding: 0;
   }
 
-  /* Mobile label floats above the button */
   .btt-label {
     position: absolute;
-    bottom: 46px;
+    bottom: 52px;
     right: 0;
     width: auto !important;
+    max-width: none !important;
     opacity: 0 !important;
-    background: rgba(12,11,10,0.85);
-    border: 1px solid rgba(201,165,90,0.2);
+    background: rgba(12,11,10,0.9);
+    border: 1px solid rgba(201,165,90,0.3);
     border-radius: 6px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gold);
     white-space: nowrap;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     transition: opacity 0.4s ease;
     pointer-events: none;
   }
 
   #backToTop.near-footer .btt-label {
     opacity: 1 !important;
-    width: auto !important;
   }
 }
 
