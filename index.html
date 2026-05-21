@@ -532,6 +532,13 @@
   pointer-events: none;
 }
 
+a.hero-card {
+  pointer-events: all;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
 .hero-card {
   position: absolute;
   width: 260px;
@@ -740,6 +747,15 @@
 
 }
 
+a.hero-card {
+  text-decoration: none;
+  display: block;
+  cursor: none;
+}
+a.hero-card:hover {
+  border-color: rgba(201,165,90,0.5);
+}
+
 </style>
 </head>
 <body>
@@ -826,27 +842,29 @@
 
   <!-- Floating cards — right side -->
   <div class="hero-cards">
-    <div class="hero-card hero-card-1">
+    <a href="#work" class="hero-card hero-card-1">
       <img src="bits-pieces/1.jpg" alt="Bits & Pieces">
       <div class="hero-card-label">
         <span>Web Design</span>
         <span>Bits & Pieces</span>
       </div>
-    </div>
-    <div class="hero-card hero-card-2">
+    </a>
+    
+    <a href="#work" class="hero-card hero-card-2">
       <img src="CHOPAAL/1.jpg" alt="Chopaal">
       <div class="hero-card-label">
         <span>Event Branding</span>
         <span>CHOPAAL 2024</span>
       </div>
-    </div>
-    <div class="hero-card hero-card-3">
-      <img src="bukhara/1.jpg" alt="Bukhara Restaurant">
+    </a>
+    
+    <a href="#work" class="hero-card hero-card-3">
+      <img src="bol-debates/1.jpg" alt="BOL Debates">
       <div class="hero-card-label">
-        <span>Brand Identity</span>
-        <span>Bukhara Restaurant</span>
+        <span>Graphic Design</span>
+        <span>BOL Debates VII</span>
       </div>
-    </div>
+    </a>
     <!-- Decorative ring -->
     <div class="hero-ring"></div>
     <div class="hero-ring-2"></div>
