@@ -795,6 +795,7 @@ a.hero-card:hover {
   right: 40px;
   height: 40px;
   min-width: 40px;
+  width: 40px;
   border-radius: 20px;
   background: rgba(12,11,10,0.8);
   border: 1px solid rgba(201,165,90,0.25);
@@ -806,7 +807,6 @@ a.hero-card:hover {
   cursor: pointer;
   z-index: 999;
   opacity: 0;
-  width: 40px;
   transform: translateY(12px);
   transition: opacity 0.4s ease,
               transform 0.4s ease,
@@ -821,13 +821,10 @@ a.hero-card:hover {
   white-space: nowrap;
   padding: 0 12px;
 }
-
 #backToTop.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Desktop hover — slide out label */
 #backToTop:hover {
   width: 155px;
   gap: 8px;
@@ -835,7 +832,6 @@ a.hero-card:hover {
   border-color: rgba(201,165,90,0.6);
   background: rgba(28,25,22,0.9);
 }
-
 .btt-label {
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -844,72 +840,68 @@ a.hero-card:hover {
   opacity: 0;
   max-width: 0;
   overflow: hidden;
-  transition: opacity 0.5s ease 0.15s, max-width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  transition: opacity 0.5s ease 0.15s,
+              max-width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
   white-space: nowrap;
   display: inline-block;
 }
-
 #backToTop:hover .btt-label {
   opacity: 1;
   max-width: 120px;
 }
 
-/* Mobile */
+/* ── MOBILE ONLY ── */
 @media (max-width: 900px) {
   #backToTop {
-    bottom: 80px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
-    border: 1px solid rgba(201,165,90,0.5);
-    background: rgba(20,18,16,0.95);
+    bottom: 80px !important;
+    right: 24px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    border: 1px solid rgba(201,165,90,0.5) !important;
+    background: rgba(20,18,16,0.95) !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.4),
-                0 0 12px rgba(201,165,90,0.15);
-  }
-
-  #backToTop.visible {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #backToTop.near-footer {
-    opacity: 1 !important;
-    pointer-events: all;
+                0 0 12px rgba(201,165,90,0.15) !important;
     transform: translateY(0) !important;
   }
-
-  #backToTop:hover {
-    width: 44px;
-    gap: 0;
-    padding: 0;
+  #backToTop.visible {
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
-
+  #backToTop.near-footer {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+  #backToTop:hover {
+    width: 44px !important;
+    gap: 0 !important;
+    padding: 0 !important;
+  }
   .btt-label {
-    position: absolute;
-    bottom: 52px;
-    right: 0;
+    position: absolute !important;
+    bottom: 52px !important;
+    right: 0 !important;
     width: auto !important;
     max-width: none !important;
     opacity: 0 !important;
-    background: rgba(12,11,10,0.9);
-    border: 1px solid rgba(201,165,90,0.3);
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    white-space: nowrap;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    background: rgba(12,11,10,0.9) !important;
+    border: 1px solid rgba(201,165,90,0.3) !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.12em !important;
+    color: var(--gold) !important;
+    white-space: nowrap !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    transition: opacity 0.4s ease !important;
+    pointer-events: none !important;
+    display: block !important;
   }
-
   #backToTop.near-footer .btt-label {
     opacity: 1 !important;
   }
