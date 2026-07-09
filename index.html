@@ -907,6 +907,219 @@ a.hero-card:hover {
   }
 }
 
+/* ── REELS SECTION ── */
+#reels { border-top: 1px solid var(--border); background: var(--bg); }
+
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 60px;
+}
+
+.reel-card {
+  position: relative;
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.reel-card:hover {
+  border-color: rgba(201,165,90,0.4);
+  transform: scale(1.02);
+}
+
+/* Video inside card */
+.reel-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s;
+}
+
+/* Thumbnail image shown before hover */
+.reel-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+.reel-card:hover .reel-thumb { opacity: 0; }
+
+/* Overlay at bottom */
+.reel-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px 14px 16px;
+  background: linear-gradient(to top, rgba(12,11,10,0.95) 0%, transparent 100%);
+  z-index: 3;
+  transform: translateY(4px);
+  transition: transform 0.3s;
+}
+.reel-card:hover .reel-overlay { transform: translateY(0); }
+
+.reel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.reel-client {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Play button shown on hover */
+.reel-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(201,165,90,0.9);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.reel-card:hover .reel-play {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.reel-play svg { color: #0C0B0A; margin-left: 3px; }
+
+/* Reel type badge */
+.reel-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  z-index: 4;
+  background: rgba(12,11,10,0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(201,165,90,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.reel-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+/* Fullscreen reel viewer */
+#reelViewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(6,5,5,0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(20px);
+}
+#reelViewer.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.rv-inner {
+  display: grid;
+  grid-template-columns: auto 300px;
+  gap: 48px;
+  align-items: center;
+  max-width: 1000px;
+  width: 90%;
+}
+.rv-video-wrap {
+  position: relative;
+  aspect-ratio: 9/16;
+  max-height: 80vh;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+}
+.rv-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rv-close {
+  position: fixed;
+  top: 24px; right: 40px;
+  font-size: 12px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  background: none; border: 1px solid var(--border);
+  padding: 8px 18px; border-radius: var(--radius);
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+  z-index: 10;
+}
+.rv-close:hover { color: var(--cream); border-color: var(--muted); }
+.rv-info { display: flex; flex-direction: column; gap: 20px; }
+.rv-cat { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+.rv-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; }
+.rv-desc { font-size: 14px; line-height: 1.75; color: rgba(242,237,228,0.6); font-weight: 300; }
+.rv-year { font-size: 12px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
+
+/* Prev/Next arrows for reel viewer */
+.rv-arrow {
+  position: fixed;
+  top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(12,11,10,0.8);
+  color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.rv-arrow:hover { border-color: var(--gold-dim); background: rgba(28,25,22,0.95); }
+.rv-arrow.rv-prev { left: 20px; }
+.rv-arrow.rv-next { right: 20px; }
+.rv-arrow.hidden { opacity: 0; pointer-events: none; }
+.rv-counter {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px; letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .rv-inner { grid-template-columns: 1fr; }
+  .rv-info { display: none; }
+  .rv-video-wrap { max-height: 75vh; width: auto; }
+  .rv-arrow.rv-prev { left: 8px; }
+  .rv-arrow.rv-next { right: 8px; }
+  .rv-close { top: 16px; right: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -1427,10 +1640,10 @@ a.hero-card:hover {
         </svg></div>
     </div>
 
-    <!-- PROJECT 2: BOL Debates VII — col-4 portrait -->
+    <!-- PROJECT 2: Neelam Furniture — col-4 portrait -->
     <div class="project-card col-4 reveal reveal-delay-1" data-cat="branding" data-title="Neelam Furniture"
       data-description="Graphic design work for Neelam Furniture — a local furniture brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-      data-year="2023" data-images="neelam-furniture/ghulfam-house/1.jpg,neelam-furniture/ghulfam-house/2.jpg,neelam-furniture/ghulfam-house/3.jpg,neelam-furniture/ghulfam-house/4.jpg,neelam-furniture/ghulfam-house/5.jpg,neelam-furniture/ghulfam-house/6.jpg,neelam-furniture/ghulfam-house/7.jpg,neelam-furniture/ghulfam-house/8.jpg,neelam-furniture/ghulfam-house/9.jpg,neelam-furniture/ghulfam-house/10.jpg,neelam-furniture/ghulfam-house/11.jpg,neelam-furniture/ghulfam-house/12.jpg,neelam-furniture/ghulfam-house/13.jpg,neelam-furniture/ghulfam-house/14.jpg,neelam-furniture/ghulfam-house/15.jpg,neelam-furniture/ghulfam-house/16.jpg,neelam-furniture/ghulfam-house/17.jpg,neelam-furniture/ghulfam-house/18.jpg">
+      data-year="2023" data-images="neelam-furniture/ghulfam-house/1.jpg,neelam-furniture/ghulfam-house/2.jpg,neelam-furniture/ghulfam-house/3.jpg,neelam-furniture/ghulfam-house/4.jpg,neelam-furniture/ghulfam-house/5.jpg,neelam-furniture/ghulfam-house/6.jpg,neelam-furniture/ghulfam-house/7.jpg,neelam-furniture/ghulfam-house/8.jpg,neelam-furniture/ghulfam-house/9.jpg,neelam-furniture/ghulfam-house/10.jpg,neelam-furniture/ghulfam-house/11.jpg,neelam-furniture/ghulfam-house/12.jpg,neelam-furniture/ghulfam-house/13.jpg,neelam-furniture/ghulfam-house/14.jpg,neelam-furniture/ghulfam-house/15.jpg,neelam-furniture/ghulfam-house/16.jpg">
       <div class="card-img-wrap ratio-portrait">
         <div class="project-bg pb-bol">
           <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1476,6 +1689,219 @@ a.hero-card:hover {
     </p>
   </div>
 </section>
+
+<!-- ── REELS ── -->
+<section id="reels">
+  <div class="section-label reveal">Behind the Camera</div>
+  <h2 class="reveal reveal-delay-1">Reels & <em>Videography</em></h2>
+  <p class="reveal reveal-delay-2"
+    style="font-size:16px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:520px;margin-top:20px;font-weight:300;">
+    Motion content crafted for brands, events and social media — hover to preview, click to watch.
+  </p>
+
+  <div class="reels-grid" id="reelsGrid">
+
+    <!--
+    ═══════════════════════════════════════════════════════
+    HOW TO ADD A REEL:
+    1. Put your video file next to index.html e.g. reels/1.mp4
+    2. Put a thumbnail image e.g. reels/1-thumb.jpg
+    3. Duplicate any reel-card block below
+    4. Update src, poster, data-title, data-client, data-desc
+    ═══════════════════════════════════════════════════════
+    -->
+
+    <!-- REEL 1 -->
+    <div class="reel-card reveal" data-title="Circle Club Event" data-client="Circle Club"
+      data-desc="Event coverage reel for Circle Club — capturing the energy, atmosphere and key moments of the evening."
+      data-year="2025" data-video="reels/1.mp4">
+      <video src="reels/1.mp4" poster="reels/1-thumb.jpg" muted loop playsinline preload="none"></video>
+      <img class="reel-thumb" src="reels/1-thumb.jpg" alt="Circle ClubEE">
+      <div class="reel-badge">
+        <div class="reel-badge-dot"></div> Reel
+      </div>
+      <div class="reel-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+      </div>
+      <div class="reel-overlay">
+        <div class="reel-client">Circle Club</div>
+        <div class="reel-title">Event Coverage Reel</div>
+      </div>
+    </div>
+
+    <!-- REEL 2 -->
+    <div class="reel-card reveal reveal-delay-1" data-title="Ashkolay Campaign" data-client="Ashkolay"
+      data-desc="Brand campaign videography for Ashkolay — showcasing the brand's identity through cinematic visuals."
+      data-year="2025" data-video="reels/2.mp4">
+      <video src="reels/2.mp4" poster="reels/2-thumb.jpg" muted loop playsinline preload="none"></video>
+      <img class="reel-thumb" src="reels/2-thumb.jpg" alt="Ashkolay">
+      <div class="reel-badge">
+        <div class="reel-badge-dot"></div> Reel
+      </div>
+      <div class="reel-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+      </div>
+      <div class="reel-overlay">
+        <div class="reel-client">Ashkolay</div>
+        <div class="reel-title">Brand Campaign</div>
+      </div>
+    </div>
+
+    <!-- REEL 3 -->
+    <div class="reel-card reveal reveal-delay-2" data-title="Concert Coverage" data-client="Event Coverage"
+      data-desc="Live concert videography — raw energy, crowd moments and stage highlights captured in motion."
+      data-year="2024" data-video="reels/3.mp4">
+      <video src="reels/3.mp4" poster="reels/3-thumb.jpg" muted loop playsinline preload="none"></video>
+      <img class="reel-thumb" src="reels/3-thumb.jpg" alt="Concert">
+      <div class="reel-badge">
+        <div class="reel-badge-dot"></div> Reel
+      </div>
+      <div class="reel-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+      </div>
+      <div class="reel-overlay">
+        <div class="reel-client">Event Coverage</div>
+        <div class="reel-title">Concert Coverage</div>
+      </div>
+    </div>
+
+    <!-- REEL 4 -->
+    <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
+      data-desc="Restaurant brand videography for Bukhara by Legacy — atmosphere, food and brand storytelling."
+      data-year="2025" data-video="reels/4.mp4">
+      <video src="reels/4.mp4" poster="reels/4-thumb.jpg" muted loop playsinline preload="none"></video>
+      <img class="reel-thumb" src="reels/4-thumb.jpg" alt="Bukhara">
+      <div class="reel-badge">
+        <div class="reel-badge-dot"></div> Reel
+      </div>
+      <div class="reel-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+      </div>
+      <div class="reel-overlay">
+        <div class="reel-client">Bukhara by Legacy</div>
+        <div class="reel-title">Brand Showcase</div>
+      </div>
+    </div>
+
+      <!-- REEL 5 -->
+      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
+        data-desc="Restaurant brand videography for Bukhara by Legacy — atmosphere, food and brand storytelling."
+        data-year="2025" data-video="reels/5.mp4">
+        <video src="reels/5.mp4" poster="reels/5-thumb.jpg" muted loop playsinline preload="none"></video>
+        <img class="reel-thumb" src="reels/5-thumb.jpg" alt="Bukhara">
+        <div class="reel-badge">
+          <div class="reel-badge-dot"></div> Reel
+        </div>
+        <div class="reel-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </div>
+        <div class="reel-overlay">
+          <div class="reel-client">Bukhara by Legacy</div>
+          <div class="reel-title">Brand Showcase</div>
+        </div>
+      </div>
+      
+      <!-- REEL 6 -->
+      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
+        data-desc="Restaurant brand videography for Bukhara by Legacy — atmosphere, food and brand storytelling."
+        data-year="2025" data-video="reels/6.mp4">
+        <video src="reels/6.mp4" poster="reels/6-thumb.jpg" muted loop playsinline preload="none"></video>
+        <img class="reel-thumb" src="reels/6-thumb.jpg" alt="Bukhara">
+        <div class="reel-badge">
+          <div class="reel-badge-dot"></div> Reel
+        </div>
+        <div class="reel-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </div>
+        <div class="reel-overlay">
+          <div class="reel-client">Bukhara by Legacy</div>
+          <div class="reel-title">Brand Showcase</div>
+        </div>
+      </div>
+
+      <!-- REEL 7 -->
+      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
+        data-desc="Restaurant brand videography for Bukhara by Legacy — atmosphere, food and brand storytelling."
+        data-year="2025" data-video="reels/7.mp4">
+        <video src="reels/7.mp4" poster="reels/7-thumb.jpg" muted loop playsinline preload="none"></video>
+        <img class="reel-thumb" src="reels/7-thumb.jpg" alt="Bukhara">
+        <div class="reel-badge">
+          <div class="reel-badge-dot"></div> Reel
+        </div>
+        <div class="reel-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </div>
+        <div class="reel-overlay">
+          <div class="reel-client">Bukhara by Legacy</div>
+          <div class="reel-title">Brand Showcase</div>
+        </div>
+      </div>
+
+      <!-- REEL 8 -->
+      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
+        data-desc="Restaurant brand videography for Bukhara by Legacy — atmosphere, food and brand storytelling."
+        data-year="2025" data-video="reels/8.mp4">
+        <video src="reels/8.mp4" poster="reels/8-thumb.jpg" muted loop playsinline preload="none"></video>
+        <img class="reel-thumb" src="reels/8-thumb.jpg" alt="Bukhara">
+        <div class="reel-badge">
+          <div class="reel-badge-dot"></div> Reel
+        </div>
+        <div class="reel-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </div>
+        <div class="reel-overlay">
+          <div class="reel-client">Bukhara by Legacy</div>
+          <div class="reel-title">Brand Showcase</div>
+        </div>
+      </div>
+
+    <!-- ADD MORE REELS HERE — duplicate any reel-card block above -->
+
+  </div>
+</section>
+
+<!-- ── REEL VIEWER ── -->
+<div id="reelViewer">
+  <button class="rv-close" onclick="closeReelViewer()">✕ Close</button>
+  <button class="rv-arrow rv-prev hidden" id="rvPrev">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  </button>
+  <div class="rv-inner">
+    <div class="rv-video-wrap">
+      <video id="rvVideo" controls playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+    </div>
+    <div class="rv-info">
+      <div class="rv-cat" id="rvCat"></div>
+      <div class="rv-title" id="rvTitle"></div>
+      <div class="rv-desc" id="rvDesc"></div>
+      <div class="rv-year" id="rvYear"></div>
+    </div>
+  </div>
+  <button class="rv-arrow rv-next hidden" id="rvNext">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  </button>
+  <div class="rv-counter" id="rvCounter"></div>
+</div>
 
 <!-- ── SERVICES ── -->
 <section id="services">
@@ -2095,6 +2521,14 @@ document.querySelectorAll('.project-card[data-title]').forEach(card => {
 document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeLightbox(); });
 
 document.addEventListener('keydown',e=>{
+
+  if (document.getElementById('reelViewer').classList.contains('open')) {
+    if (e.key === 'ArrowRight') rvNext();
+    if (e.key === 'ArrowLeft') rvPrev();
+    if (e.key === 'Escape') closeReelViewer();
+    return;
+  }
+
   if(!document.getElementById('lightbox').classList.contains('open')) return;
   if(e.key==='Escape') closeLightbox();
   if(e.key==='ArrowRight') lbNext();
@@ -2303,6 +2737,11 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
 
   /* ── BACK BUTTON CLOSES LIGHTBOX ── */
     window.addEventListener('popstate', () => {
+
+      if (document.getElementById('reelViewer').classList.contains('open')) {
+        closeReelViewer(); return;
+      }
+
       if (document.getElementById('lightbox').classList.contains('open')) {
         closeLightbox();
       }
@@ -2339,6 +2778,92 @@ document.getElementById('lightbox').addEventListener('touchend',e=>{
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+
+  /* ── REELS ── */
+  const reelCards = document.querySelectorAll('.reel-card[data-video]');
+  let rvIdx = 0;
+
+  // Hover to preview
+  reelCards.forEach(card => {
+    const video = card.querySelector('video');
+    if (!video) return;
+
+    card.addEventListener('mouseenter', () => {
+      video.play().catch(() => { });
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+
+  // Open viewer
+  function openReelViewer(idx) {
+    rvIdx = idx;
+    renderReel();
+    document.getElementById('reelViewer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    history.pushState({ reelViewer: true }, '');
+  }
+
+  function renderReel() {
+    const card = reelCards[rvIdx];
+    const video = document.getElementById('rvVideo');
+
+    video.pause();
+    video.src = card.dataset.video;
+    video.load();
+    video.play().catch(() => { });
+
+    document.getElementById('rvCat').textContent = card.dataset.client || '';
+    document.getElementById('rvTitle').textContent = card.dataset.title || '';
+    document.getElementById('rvDesc').textContent = card.dataset.desc || '';
+    document.getElementById('rvYear').textContent = card.dataset.year ? '— ' + card.dataset.year : '';
+    document.getElementById('rvCounter').textContent = (rvIdx + 1) + ' / ' + reelCards.length;
+
+    document.getElementById('rvPrev').classList.toggle('hidden', reelCards.length <= 1);
+    document.getElementById('rvNext').classList.toggle('hidden', reelCards.length <= 1);
+  }
+
+  function closeReelViewer() {
+    const video = document.getElementById('rvVideo');
+    video.pause();
+    video.src = '';
+    document.getElementById('reelViewer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function rvNext() { rvIdx = (rvIdx + 1) % reelCards.length; renderReel(); }
+  function rvPrev() { rvIdx = (rvIdx - 1 + reelCards.length) % reelCards.length; renderReel(); }
+
+  document.getElementById('rvPrev').addEventListener('click', rvPrev);
+  document.getElementById('rvNext').addEventListener('click', rvNext);
+
+  reelCards.forEach((card, i) => {
+    card.addEventListener('click', () => openReelViewer(i));
+
+    // Mobile tap
+    let touched = false;
+    card.addEventListener('touchstart', () => { touched = false; }, { passive: true });
+    card.addEventListener('touchmove', () => { touched = true; }, { passive: true });
+    card.addEventListener('touchend', e => {
+      if (!touched) { e.preventDefault(); openReelViewer(i); }
+    });
+  });
+
+  document.getElementById('reelViewer').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeReelViewer();
+  });
+
+  // Touch swipe in viewer
+  let rvTouch = 0;
+  document.getElementById('reelViewer').addEventListener('touchstart', e => {
+    rvTouch = e.touches[0].clientX;
+  }, { passive: true });
+  document.getElementById('reelViewer').addEventListener('touchend', e => {
+    const diff = rvTouch - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? rvNext() : rvPrev(); }
+  });
 
 // /* ── ADD TIP ── */
 // function showAddTip(){
