@@ -1,3015 +1,590 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmad Khan — Graphic Design Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmad Khan — Graphic Designer</title>
+<meta name="description" content="Ahmad Khan is a graphic designer in Faisalabad, Pakistan who also shoots, edits and writes code. Branding, social and ad creatives, event identities, photo, video and web.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&text=%DA%86%D9%88%D9%BE%D8%A7%D9%84&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0C0B0A; --bg2: #141210; --bg3: #1C1916;
-    --gold: #C9A55A; --gold-dim: #8A6F3A;
-    --cream: #F2EDE4; --muted: #6B6560;
-    --border: rgba(201,165,90,0.15); --radius: 4px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--cream); font-family: 'Outfit', sans-serif; font-weight: 300; cursor: auto; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-size: 200px 200px; pointer-events: none; z-index: 9999; opacity: 0.5; }
-
-  /* ── LOADER ── */
-  #loader {
-    position: fixed; inset: 0; z-index: 99999;
-    background: #0C0B0A;
-    display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #loader.done { opacity: 0; visibility: hidden; }
-
-  .loader-inner {
-    display: flex; flex-direction: column;
-    align-items: center; gap: 16px;
-    text-align: center;
-  }
-  .loader-logo {
-    width: 72px; height: 72px;
-    border: 1px solid rgba(201,165,90,0.2);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 8px;
-    animation: loaderPulse 2s ease-in-out infinite;
-  }
-  @keyframes loaderPulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(201,165,90,0.15); }
-    50%      { box-shadow: 0 0 0 12px rgba(201,165,90,0); }
-  }
-  .loader-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300;
-    color: #F2EDE4; letter-spacing: 0.05em;
-  }
-  .loader-role {
-    font-size: 11px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: #6B6560;
-  }
-  .loader-bar-wrap {
-    width: 200px; margin-top: 12px;
-    display: flex; flex-direction: column; gap: 8px; align-items: center;
-  }
-  .loader-bar {
-  width: 0%;
-  height: 1px;
-  background: linear-gradient(to right, #8A6F3A, #C9A55A, #E8D5A3, #C9A55A, #8A6F3A);
-  background-size: 200% 100%;
-  animation: barShimmer 2s linear infinite;
-  box-shadow: 0 0 10px rgba(201,165,90,0.5), 0 0 20px rgba(201,165,90,0.2);
-  }
-  @keyframes barShimmer {
-    0%   { background-position: 200% center; }
-    100% { background-position: -200% center; }
-  }
-  .loader-percent {
-    font-size: 10px; letter-spacing: 0.2em;
-    color: rgba(201,165,90,0.5);
-  }
-
-  @keyframes ping {
-  0%   { transform: scale(1);   opacity: 0.6; }
-  100% { transform: scale(2.5); opacity: 0;   }
-  }
-
-  /* Cursor */
-  #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); }
-  #cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.25s ease; transform: translate(-50%,-50%); opacity: 0.6; }
-  body.cursor-hover #cursor-ring { width: 60px; height: 60px; opacity: 1; }
-
-  /* Nav */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; border-bottom: 1px solid transparent; transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s; }
-  nav.scrolled { background: rgba(12,11,10,0.85); border-color: var(--border); backdrop-filter: blur(12px); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.05em; color: var(--cream); text-decoration: none; }
-  .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--cream); }
-  .nav-cta { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 10px 22px; border-radius: var(--radius); text-decoration: none; transition: opacity 0.2s; }
-  .nav-cta:hover { opacity: 0.85; }
-
-  .nav-links a.active {
-  color: var(--gold);
-  }
-  .nav-links a::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 0;
-    background: var(--gold);
-    transition: width 0.3s ease;
-    margin-top: 2px;
-  }
-  .nav-links a.active::after {
-    width: 100%;
-  }
-
-  /* Hero */
-  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 80px; position: relative; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,165,90,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,165,90,0.04) 0%, transparent 60%); }
-  .hero-year { position: absolute; top: 160px; right: 48px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; transform: rotate(180deg); }
-  .hero-scroll-hint { position: absolute; bottom: 80px; right: 48px; display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--muted); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .hero-scroll-hint::after { content: ''; width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: scrollLine 2s ease-in-out infinite; }
-  @keyframes scrollLine { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(0.6)} }
-  .hero-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(60px,9vw,130px); font-weight: 300; line-height: 0.92; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
-  .hero-title em { font-style: italic; color: var(--gold); }
-  .hero-meta { display: flex; align-items: center; gap: 48px; opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards; }
-  .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .hero-meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-  .hero-meta-value { font-size: 14px; color: var(--cream); }
-  .hero-divider { width: 1px; height: 40px; background: var(--border); }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-
-  /* Sections */
-  section { padding: 120px 48px; }
-  .section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
-  .section-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
-  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px,5vw,64px); line-height: 1.05; }
-  h2 em { font-style: italic; color: var(--gold); }
-
-  /* Reveal */
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* About */
-  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; border-top: 1px solid var(--border); }
-  .about-photo { position: relative; aspect-ratio: 3/4; background: var(--bg3); border-radius: 2px; overflow: hidden; border: 1px solid var(--border); }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .about-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--muted); background: linear-gradient(135deg,#141210,#1C1916); }
-  .about-photo-placeholder svg { opacity: 0.3; }
-  .about-photo-placeholder span { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; }
-  .about-content { padding-top: 20px; }
-  .about-bio { font-size: 18px; line-height: 1.7; color: rgba(242,237,228,0.75); margin: 32px 0 48px; font-weight: 300; }
-  .about-bio strong { color: var(--cream); font-weight: 500; }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
-  .skill-item { padding: 14px 16px; background: var(--bg2); border: 1px solid var(--border); font-size: 13px; letter-spacing: 0.05em; color: var(--cream); display: flex; align-items: center; gap: 12px; transition: background 0.2s, border-color 0.2s; }
-  .skill-item:hover { background: var(--bg3); border-color: var(--gold-dim); }
-  .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-  .about-stats { display: flex; gap: 48px; margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1; }
-  .stat-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
-
-  /* Work */
-  #work { border-top: 1px solid var(--border); }
-  .work-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
-  .filter-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-  .filter-btn { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: none; transition: all 0.2s; border-radius: var(--radius); }
-  .filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); }
-
-  /* Projects grid */
-  .projects-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 16px; }
-  .project-card { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); cursor: none; transition: border-color 0.3s; }
-  .project-card:hover { border-color: rgba(201,165,90,0.4); }
-  .project-card.col-8 { grid-column: span 8; }
-  .project-card.col-4 { grid-column: span 4; }
-  .project-card.col-6 { grid-column: span 6; }
-  .project-card.col-12 { grid-column: span 12; }
-
-  /* Card image wrap */
-  .card-img-wrap { position: relative; width: 100%; overflow: hidden; }
-  .card-img-wrap.ratio-landscape { aspect-ratio: 16/10; }
-  .card-img-wrap.ratio-portrait  { aspect-ratio: 4/5; }
-
-  /* Crossfade layers */
-  .slide-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.6s ease; }
-  .slide-layer.layer-a { opacity: 1; z-index: 2; }
-  .slide-layer.layer-b { opacity: 0; z-index: 1; }
-
-  /* Zoom on hover */
-  .project-card:hover .card-img-wrap .slide-layer.layer-a { transform: scale(1.05); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
-
-  /* Placeholder bg */
-  .project-bg { width: 100%; height: 100%; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .project-card:hover .project-bg { transform: scale(1.05); }
-  .pb-web     { background: linear-gradient(135deg,#0D1B2A,#1A3A5C,#0D2438); }
-  .pb-bol     { background: linear-gradient(135deg,#1A0A0A,#3D0B0B,#1A0808); }
-  .pb-chopaal { background: linear-gradient(135deg,#1A1208,#3D2E10,#1A160A); }
-  .pb-social  { background: linear-gradient(135deg,#0F0A1A,#2A1050,#0F0A1A); }
-  .pb-print   { background: linear-gradient(135deg,#0A1A10,#1A3D25,#0A1A10); }
-  .pb-brand   { background: linear-gradient(135deg,#1A1508,#3D3010,#1A1508); }
-  .pb-fps     { background: linear-gradient(135deg,#0A1510,#152B1E,#0A1510); }
-  .project-bg-icon { opacity: 0.08; color: var(--cream); }
-
-  /* Image counter badge */
-  .img-counter { position: absolute; top: 12px; left: 12px; z-index: 10; background: rgba(12,11,10,0.75); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 10px; letter-spacing: 0.1em; color: var(--gold); opacity: 0; transform: translateY(-4px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
-  .project-card:hover .img-counter { opacity: 1; transform: translateY(0); }
-
-  /* Card dots */
-  .card-dots { position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 5px; opacity: 0; transition: opacity 0.3s 0.1s; pointer-events: none; }
-  .project-card:hover .card-dots { opacity: 1; }
-  .card-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s; }
-  .card-dot.active { background: var(--gold); transform: scale(1.4); }
-
-  /* Project info */
-  .project-info {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 18px 24px 20px;
-  background: linear-gradient(
-    to top,
-    rgba(12,11,10,0.97) 0%,
-    rgba(12,11,10,0.85) 40%,
-    rgba(12,11,10,0.4)  70%,
-    transparent 100%
-  );
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transform: translateY(6px);
-  transition: transform 0.4s ease;
-  z-index: 5;
-  }
-  .project-card:hover .project-info {
-    transform: translateY(0);
-  }
-  .project-card:hover .project-info { transform: translateY(0); }
-  .project-cat { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .project-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.2;
-  color: #ffffff;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  }
-
-  .project-year {
-    font-size: 11px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 4px;
-  }
-  .project-year { font-size: 11px; color: var(--muted); margin-top: 4px; }
-  .project-cta { position: absolute; top: 14px; right: 14px; z-index: 10; width: 38px; height: 38px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.6); transition: opacity 0.3s 0.1s, transform 0.3s 0.1s; }
-  .project-card:hover .project-cta { opacity: 1; transform: scale(1); }
-  .project-cta svg { color: var(--bg); }
-
-  /* Add card */
-  .add-project-card { grid-column: span 4; min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; border: 2px dashed rgba(201,165,90,0.2); background: var(--bg); border-radius: var(--radius); transition: border-color 0.3s, background 0.3s; cursor: none; text-align: center; padding: 32px; }
-  .add-project-card:hover { border-color: rgba(201,165,90,0.5); background: var(--bg2); }
-  .add-icon { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(201,165,90,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); transition: background 0.3s; }
-  .add-project-card:hover .add-icon { background: rgba(201,165,90,0.1); }
-  .add-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .add-sub { font-size: 11px; color: rgba(107,101,96,0.6); max-width: 160px; line-height: 1.5; }
-
-  /* Services */
-  #services { border-top: 1px solid var(--border); background: var(--bg2); }
-  .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-top: 60px; border: 1px solid var(--border); }
-  .service-item { background: var(--bg2); padding: 40px 32px; transition: background 0.3s; }
-  .service-item:hover { background: var(--bg3); }
-  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: rgba(201,165,90,0.2); margin-bottom: 24px; line-height: 1; }
-  .service-title { font-size: 15px; font-weight: 500; color: var(--cream); margin-bottom: 12px; }
-  .service-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
-
-  /* Clients */
-  #clients { border-top: 1px solid var(--border); overflow: hidden; }
-  .clients-header { margin-bottom: 60px; }
-  .marquee-track { display: flex; width: max-content; animation: marquee 18s linear infinite; }
-  .marquee-track:hover { animation-play-state: paused; }
-  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .client-item { display: flex; align-items: center; padding: 0 60px; border-right: 1px solid var(--border); height: 80px; white-space: nowrap; }
-  .client-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--muted); transition: color 0.3s; letter-spacing: 0.05em; }
-  .marquee-track:hover .client-name { color: var(--cream); }
-
-  /* Quote */
-  #quote { border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 48px; }
-  .quote-inner { max-width: 760px; }
-  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 80px; color: var(--gold); line-height: 0.5; margin-bottom: 32px; opacity: 0.4; }
-  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px,3.5vw,40px); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--cream); }
-  .quote-text em { color: var(--gold); font-style: normal; }
-  .quote-attr { margin-top: 32px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-
-  /* Contact */
-  #contact { border-top: 1px solid var(--border); background: var(--bg2); display: grid; grid-template-columns: 1fr 1fr; }
-  .contact-left { padding: 80px 48px; border-right: 1px solid var(--border); }
-  .contact-right { padding: 80px 48px; display: flex; flex-direction: column; gap: 24px; }
-  .contact-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4.5vw,56px); font-weight: 300; line-height: 1.1; margin-top: 24px; }
-  .contact-tagline em { color: var(--gold); font-style: italic; }
-  .contact-email { display: inline-block; font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,2.5vw,28px); font-weight: 300; color: var(--gold); text-decoration: none; margin-top: 40px; padding-bottom: 4px; border-bottom: 1px solid rgba(201,165,90,0.3); transition: border-color 0.3s; }
-  .contact-email:hover { border-color: var(--gold); }
-  .contact-detail { display: flex; flex-direction: column; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--border); }
-  .contact-detail-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-  .contact-detail-value { font-size: 15px; color: var(--cream); }
-  .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
-  .social-link { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.2s; }
-  .social-link:hover { color: var(--gold); border-color: var(--gold-dim); }
-
-  /* Footer */
-  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
-  .footer-copy { font-size: 12px; color: var(--muted); }
-  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--cream); }
-  .footer-brand span { color: var(--gold); }
-
-  /* ── LIGHTBOX ── */
-  #lightbox { position: fixed; inset: 0; background: rgba(12,11,10,0.97); z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; backdrop-filter: blur(10px); }
-  #lightbox.open { opacity: 1; pointer-events: all; }
-
-  .lb-top-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 9995; display: flex; justify-content: space-between; align-items: center; padding: 22px 40px; border-bottom: 1px solid var(--border); }
-  .lb-project-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; display: flex; align-items: center; gap: 12px; }
-  .lb-project-cat-badge { font-size: 10px; letter-spacing: 0.2em; font-family: 'Outfit', sans-serif; text-transform: uppercase; color: var(--gold); background: rgba(201,165,90,0.1); border: 1px solid rgba(201,165,90,0.2); padding: 3px 10px; border-radius: 20px; }
-  .lb-close { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 8px 18px; border-radius: var(--radius); cursor: none; transition: all 0.2s; }
-  .lb-close:hover { color: var(--cream); border-color: var(--muted); }
-
-  .lb-body { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 88px 80px 100px; gap: 0; position: relative; }
-
-  /* Arrow buttons */
-  .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); background: rgba(20,18,16,0.8); color: var(--cream); cursor: none; z-index: 10; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; backdrop-filter: blur(6px); }
-  .lb-arrow:hover { border-color: var(--gold-dim); background: rgba(28,25,22,0.95); }
-  .lb-arrow.lb-prev { left: 20px; }
-  .lb-arrow.lb-next { right: 20px; }
-  .lb-arrow.hidden { opacity: 0; pointer-events: none; }
-
-  .lb-main { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: center; max-width: 1100px; width: 100%; }
-  .lb-img-container { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: var(--bg2); }
-  .lb-img-container img { width: 100%; max-height: calc(100vh - 240px); object-fit: contain; display: block; transition: opacity 0.4s ease; }
-  .lb-img-container img.fading { opacity: 0; }
-  .lb-placeholder { width: 100%; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; background: var(--bg3); }
-
-  .lb-info { display: flex; flex-direction: column; gap: 20px; }
-  .lb-cat { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
-  .lb-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; }
-  .lb-desc { font-size: 14px; line-height: 1.75; color: rgba(242,237,228,0.6); font-weight: 300; }
-  .lb-year { font-size: 12px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
-
-  /* Lightbox bottom strip */
-  .lb-bottom { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; padding: 18px 40px; gap: 20px; border-top: 1px solid var(--border); }
-  .lb-dots-strip { display: flex; gap: 7px; align-items: center; }
-  .lb-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background 0.3s, transform 0.3s; cursor: none; }
-  .lb-dot:hover { background: rgba(255,255,255,0.5); }
-  .lb-dot.active { background: var(--gold); transform: scale(1.5); }
-  .lb-count { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; min-width: 50px; text-align: center; }
-
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
-
-  @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
-    .nav-links { display: none; }
-    section { padding: 80px 24px; }
-    #hero { padding: 0 24px 60px; }
-    #about { grid-template-columns: 1fr; gap: 48px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card.col-8,.project-card.col-4,.project-card.col-6,.project-card.col-12,.add-project-card { grid-column: span 1; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    #contact { grid-template-columns: 1fr; }
-    .contact-left { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 24px; }
-    .contact-right { padding: 60px 24px; }
-    .lb-main { grid-template-columns: 1fr; }
-    .lb-info { display: none; }
-    .lb-arrow.lb-prev { left: 8px; }
-    .lb-arrow.lb-next { right: 8px; }
-    footer { padding: 20px 24px; }
-    #hero {
-    min-height: auto;
-    padding: 120px 24px 60px;
-  }
-
-  #cursor-dot,
-  #cursor-ring { display: none; }
-
-  body { cursor: auto; }
-
-  .filter-btn,
-  .lb-close,
-  .lb-arrow,
-  .add-project-card,
-  .project-card { cursor: pointer; }
-
-  .hero-meta {
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .hero-divider {
-    display: none;
-  }
-
-  .hero-meta-item {
-    min-width: 120px;
-  }
-
-  .hero-scroll-hint {
-    display: none;
-  }
-  }
-
-  /* ── THE PROCESS ── */
-.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:80px; }
-.process-step { padding:32px; border:1px solid var(--border); border-right:none; position:relative; transition:background 0.3s; background:var(--bg); }
-.process-step:last-child { border-right:1px solid var(--border); }
-.process-step:hover { background:var(--bg3); }
-.process-step-num { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:rgba(201,165,90,0.12); line-height:1; margin-bottom:20px; }
-.process-step-icon { width:40px; height:40px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); margin-bottom:16px; transition:background 0.3s; }
-.process-step:hover .process-step-icon { background:rgba(201,165,90,0.08); }
-.process-step-title { font-size:15px; font-weight:500; color:var(--cream); margin-bottom:10px; }
-.process-step-desc { font-size:13px; line-height:1.65; color:var(--muted); }
-.process-step-arrow { position:absolute; top:50%; right:-13px; transform:translateY(-50%); width:26px; height:26px; background:var(--bg2); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; z-index:2; color:var(--gold); }
-.process-step:last-child .process-step-arrow { display:none; }
-
-/* ── CALENDAR ── */
-.cal-wrap { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; position: relative;}
-.cal-header { display:flex; justify-content:space-between; align-items:center; padding:28px 32px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:16px; }
-.cal-month { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--cream); }
-.cal-platform-badge { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:20px; font-weight:500; }
-.cal-platform-ig { background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:#fff; }
-.cal-platform-fb { background:#1877F2; color:#fff; }
-.cal-days-header { display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--border); }
-.cal-day-label { padding:12px 8px; text-align:center; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); border-right:1px solid var(--border); }
-.cal-day-label:last-child { border-right:none; }
-.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
-.cal-cell { min-height:95px; padding:8px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); transition:background 0.2s; position:relative; }
-.cal-cell:nth-child(7n) { border-right:none; }
-.cal-cell.empty { background:rgba(0,0,0,0.15); }
-.cal-cell.today { background:rgba(201,165,90,0.05); }
-.cal-cell:hover { background:rgba(201,165,90,0.04); }
-.cal-date { font-size:11px; color:var(--muted); margin-bottom:5px; font-weight:500; line-height:1; }
-.cal-cell.today .cal-date { color:var(--gold); font-weight:600; }
-.cal-pill { display:flex; align-items:center; gap:4px; padding:3px 7px; border-radius:4px; font-size:9px; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; margin-bottom:3px; cursor:pointer; width:fit-content; max-width:100%; overflow:hidden; transition:transform 0.15s, box-shadow 0.15s; }
-.cal-pill:hover { transform:scale(1.06); box-shadow:0 2px 8px rgba(0,0,0,0.3); }
-.cal-pill-dot { width:4px; height:4px; border-radius:50%; flex-shrink:0; }
-.cal-pill-text { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.cal-legend { display:flex; flex-wrap:wrap; gap:14px; padding:20px 32px; border-top:1px solid var(--border); align-items:center; }
-.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--muted); letter-spacing:0.04em; }
-.legend-swatch { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
-.cal-tooltip { position:absolute; background:rgba(28,25,22,0.95); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px; z-index:5000; pointer-events:none; opacity:0; transition:opacity 0.2s; min-width:170px; backdrop-filter:blur(12px); }
-.cal-tooltip.show { opacity:1; }
-.cal-tt-type { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:5px; }
-.cal-tt-label { font-size:14px; color:var(--cream); margin-bottom:6px; font-family:'Cormorant Garamond',serif; font-weight:300; }
-.cal-tt-plat { font-size:10px; color:var(--muted); display:flex; align-items:center; gap:6px; }
-.cal-tt-plat-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-
-@media (max-width:900px) {
-  .process-steps { grid-template-columns:1fr 1fr; }
-  .process-step:nth-child(2) { border-right:1px solid var(--border); }
-  .process-step:nth-child(2) .process-step-arrow { display:none; }
-  .process-step { padding:24px 20px; }
-  .cal-cell { min-height:72px; padding:5px; }
-  .cal-pill { font-size:8px; padding:2px 5px; }
-  .cal-pill-text { display:none; }
-  .cal-legend { padding:16px 20px; gap:10px; }
-  .cal-header { padding:20px; }
+:root {
+  --signal: #2b35ff;
+  --paper: #f4f1ea;
+  --ink: #111111;
+  /* live palette, swapped per section by JS */
+  --bg: var(--signal);
+  --fg: var(--paper);
+  --ac: #ffe14d;
+  --sans: 'Archivo', system-ui, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --gutter: clamp(16px, 4vw, 56px);
 }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--sans); font-variation-settings: "wdth" 100;
+  transition: background-color .7s cubic-bezier(.4,0,.2,1), color .7s cubic-bezier(.4,0,.2,1);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ac); outline-offset: 3px; }
+.mono { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+.serif { font-family: var(--serif); font-weight: 400; }
+.display { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; letter-spacing: -.02em; line-height: .82; }
+[data-fit] { display: block; width: max-content; white-space: nowrap; }
 
-@media (max-width:600px) {
-  .process-steps { grid-template-columns:1fr; }
-  .process-step:nth-child(2) { border-right:none; }
-  .process-step { border-right:1px solid var(--border); padding:20px 16px; }
-  .process-step-num { font-size:42px; margin-bottom:16px; }
-  .process-step-arrow { display:none; }
+/* ---------- nav ---------- */
+.nav { position: fixed; z-index: 50; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 14px var(--gutter); pointer-events: none; }
+.nav > * { pointer-events: auto; }
+.nav .brand { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; text-decoration: none; font-size: 15px; letter-spacing: -.01em; background: var(--bg); padding: 6px 10px; transition: background-color .7s; }
+.nav .brand i { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--ac); font-size: 1.15em; transition: color .7s; }
+.nav-links { display: flex; gap: 4px; background: var(--bg); padding: 4px; transition: background-color .7s; }
+.nav-links a { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 6px 10px; }
+.nav-links a:hover { background: var(--fg); color: var(--bg); }
+.nav-links a.hire { background: var(--ac); color: var(--bg); }
 
-  .cal-wrap { border-radius:8px; }
-  .cal-header { padding:16px; flex-direction:column; align-items:flex-start; gap:12px; }
-  .cal-month { font-size:24px; }
-  .cal-header > div:last-child { align-items:flex-start; width:100%; }
-  .cal-days-header { gap:0; }
-  .cal-day-label { padding:8px 4px; font-size:9px; }
-  .cal-grid { gap:0; }
-  .cal-cell { 
-    min-height:64px; 
-    padding:4px; 
-    font-size:12px;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-  }
-  .cal-date { font-size:10px; margin-bottom:3px; }
-  .cal-pill { 
-    font-size:7px; 
-    padding:1px 4px; 
-    margin-bottom:2px;
-    min-width:20px;
-  }
-  .cal-pill-dot { width:3px; height:3px; }
-  .cal-legend { 
-    flex-direction:column;
-    align-items:flex-start; 
-    padding:12px 16px; 
-    gap:8px;
-  }
-  .legend-item { font-size:10px; }
-  .cal-legend > div:last-child { 
-    flex-direction:column;
-    align-items:flex-start;
-    margin-left:0;
-    gap:6px;
-    width:100%;
-  }
+/* ---------- cover ---------- */
+.cover { min-height: 100svh; padding: 64px var(--gutter) 28px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.cover-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--fg); border-bottom: 1px solid var(--fg); padding: 8px 0; margin-top: 12px; }
+.cover-name { margin-top: 2vh; position: relative; z-index: 2; }
+.cover-body { flex: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 32px; align-items: end; margin-top: 3vh; position: relative; }
+.cover-lede { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 58px); line-height: 1.02; max-width: 15ch; }
+.cover-lede em { color: var(--ac); }
+.coverlines { margin-top: 32px; display: grid; gap: 0; max-width: 520px; }
+.coverlines a { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid currentColor; text-decoration: none; font-weight: 700; font-size: clamp(16px, 1.4vw, 19px); font-variation-settings: "wdth" 110; text-transform: uppercase; letter-spacing: -.005em; }
+.coverlines a span { font-family: var(--mono); font-weight: 400; font-size: 11.5px; }
+.coverlines a:hover { color: var(--ac); }
+.cover-photo { position: relative; justify-self: end; width: min(400px, 100%, 34svh); }
+.cover-photo .frame { aspect-ratio: 4/5; background: var(--signal); overflow: hidden; position: relative; }
+.cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.25) brightness(1.05); mix-blend-mode: multiply; }
+.cover-photo .frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 60%, rgba(43,53,255,.55)); }
+.cover-photo figcaption { margin-top: 8px; display: flex; justify-content: space-between; }
+.sticker { position: absolute; z-index: 3; left: -46px; top: 24px; width: 118px; height: 118px; border-radius: 50%; background: var(--ac); color: var(--signal); display: grid; place-items: center; text-align: center; transform: rotate(-14deg); font-weight: 900; font-variation-settings: "wdth" 115; text-transform: uppercase; font-size: 14px; line-height: 1; animation: spin 18s linear infinite; }
+.sticker b { display: block; font-size: 30px; letter-spacing: -.03em; }
+@keyframes spin { to { transform: rotate(346deg); } }
+.barcode { display: flex; align-items: flex-end; gap: 10px; margin-top: 22px; }
+.barcode i { display: block; width: 120px; height: 40px; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 4px, currentColor 4px 5px, transparent 5px 8px, currentColor 8px 11px, transparent 11px 12px); }
 
-  #process { padding:60px 16px; }
-  .section-label { font-size:10px; }
-  h2 { font-size:24px; }
-  p { font-size:13px; }
-}
+/* ---------- ticker ---------- */
+.ticker { overflow: hidden; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; padding: 12px 0; white-space: nowrap; }
+.ticker-track { display: inline-flex; gap: 32px; animation: tick 30s linear infinite; font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; font-size: clamp(22px, 3vw, 40px); letter-spacing: -.01em; }
+.ticker-track span:nth-child(even) { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--ac); font-variation-settings: normal; letter-spacing: 0; }
+@keyframes tick { to { transform: translateX(-50%); } }
 
-/* ── HERO LAYOUT ── */
-#hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  padding: 0 48px 80px;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
+/* ---------- contents ---------- */
+.contents { padding: 110px var(--gutter) 120px; }
+.contents-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; border-bottom: 2px solid currentColor; padding-bottom: 14px; }
+.contents-head p { max-width: 34ch; font-size: 16px; line-height: 1.45; }
+.toc { list-style: none; }
+.toc a { display: grid; grid-template-columns: 70px minmax(0, 1fr) 170px 110px 40px; gap: 16px; align-items: center; padding: 14px 10px; border-bottom: 1px solid currentColor; text-decoration: none; transition: background-color .2s, color .2s, padding .25s; }
+.toc a:hover { background: var(--signal); color: var(--paper); padding-left: 22px; }
+.toc .t { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; font-size: clamp(26px, 3.6vw, 52px); line-height: .9; letter-spacing: -.02em; }
+.toc .arrow { font-size: 26px; text-align: right; }
+.peek { position: fixed; z-index: 40; width: 240px; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) rotate(-4deg) scale(.9); transition: opacity .2s, transform .25s; box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+.peek.on { opacity: 1; transform: translate(-50%, -50%) rotate(-4deg) scale(1); }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  grid-column: 1;
-  grid-row: 1;
-}
+/* ---------- posters ---------- */
+.poster { min-height: 100svh; padding: 96px var(--gutter) 40px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.p-meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 2px solid currentColor; padding-top: 8px; position: relative; z-index: 2; }
+.p-meta .tag { color: var(--ac); }
+.folio { margin-top: auto; padding-top: 28px; display: flex; justify-content: space-between; opacity: .75; position: relative; z-index: 2; }
+.p-title { position: relative; z-index: 2; }
+.type-grotesk .p-title { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; letter-spacing: -.025em; line-height: .82; }
+.type-serif .p-title { font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; line-height: .86; }
+.type-serif .p-title em { font-style: italic; color: var(--ac); }
+.type-neon .p-title { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; letter-spacing: -.02em; line-height: .84;
+  text-shadow: 0 0 6px var(--fg), 0 0 24px var(--fg), 0 0 60px var(--fg); color: #fff; }
+.p-desc { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.5; max-width: 44ch; }
+.p-desc::first-letter { font-family: var(--serif); font-size: 3.4em; float: left; line-height: .8; padding: 6px 8px 0 0; color: var(--ac); }
+.p-facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; font-size: 14px; border-top: 1px solid currentColor; padding-top: 12px; max-width: 420px; }
+.p-facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; padding-top: 2px; }
+.p-facts dd { font-weight: 600; }
+.p-more { display: inline-flex; align-items: center; gap: 12px; align-self: flex-start; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 13px 18px; background: var(--fg); color: var(--bg); transition: transform .2s, background-color .7s, color .7s; }
+.p-more:hover { transform: translateX(6px); }
+.p-img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.shot { overflow: hidden; position: relative; aspect-ratio: var(--ar); }
+.shot img { transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.shot:hover img { transform: scale(1.035); }
+.bgword { position: absolute; z-index: 0; pointer-events: none; font-family: 'Noto Nastaliq Urdu', serif; font-weight: 700; font-size: 42vw; line-height: 1; right: -4vw; top: 50%; transform: translateY(-46%); opacity: .09; color: var(--fg); direction: rtl; }
 
-.hero-cards {
-  position: relative;
-  grid-column: 2;
-  grid-row: 1;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  pointer-events: none;
-}
+/* layout: split */
+.lay-split .p-grid { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; margin-top: 36px; position: relative; z-index: 1; }
+.lay-split .p-text { display: flex; flex-direction: column; gap: 26px; }
+.lay-split .p-title { font-size: clamp(54px, 8.4vw, 150px); }
+.lay-split .p-media { position: relative; }
+.lay-split .p-media .main { aspect-ratio: var(--ar); max-height: 74svh; margin-left: auto; }
+.lay-split .p-media .main img { height: 100%; }
+.lay-split .p-media .float { position: absolute; width: 38%; left: -10%; bottom: -8%; box-shadow: 0 24px 50px rgba(0,0,0,.35); border: 6px solid var(--bg); transition: border-color .7s; }
+.lay-split.flip .p-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+.lay-split.flip .p-media { order: -1; }
+.lay-split.flip .p-media .main { margin-left: 0; }
+.lay-split.flip .p-media .float { left: auto; right: -8%; }
 
-/* Keep year and scroll hint positioned absolutely */
-.hero-year {
-  grid-column: 2;
-  grid-row: 1;
-}
+/* layout: mega */
+.lay-mega .p-title { margin: 24px 0 22px; }
+.lay-mega .strip { display: flex; gap: 14px; height: clamp(240px, 40svh, 480px); }
+.lay-mega .strip .shot { flex: 0 1 auto; height: 100%; min-width: 0; }
+.lay-mega .p-under { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 32px; margin-top: 28px; align-items: start; }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 0;
-  max-width: 55%;
-}
+/* layout: center */
+.lay-center .p-grid { flex: 1; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(260px, .7fr); gap: clamp(20px, 3vw, 48px); align-items: stretch; margin-top: 30px; }
+.lay-center .p-title { writing-mode: vertical-rl; transform: rotate(180deg); font-size: clamp(60px, 9.5svh, 120px); white-space: nowrap; align-self: end; }
+.lay-center .main { height: min(70svh, 720px); max-width: 100%; justify-self: center; align-self: center; }
+.lay-center .p-side { display: flex; flex-direction: column; gap: 20px; justify-content: end; }
+.lay-center .p-side .shot { width: 46%; }
+.lay-center .big-n { font-family: var(--serif); font-size: clamp(70px, 8vw, 120px); line-height: .8; color: var(--ac); }
 
-/* ── FLOATING CARDS ── */
-.hero-cards {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  pointer-events: none;
-}
+/* ---------- reels ---------- */
+.reels { padding: 110px 0 120px; }
+.reels .wrap { padding: 0 var(--gutter); }
+.sec-title { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; letter-spacing: -.025em; line-height: .84; font-size: clamp(56px, 10vw, 170px); }
+.sec-title em { font-family: var(--serif); font-weight: 400; font-style: italic; text-transform: none; color: var(--ac); letter-spacing: -.01em; font-variation-settings: normal; }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; margin-bottom: 40px; }
+.sec-head p { max-width: 34ch; font-size: 16px; line-height: 1.45; }
+.reel-row { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 16px; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: var(--ac) transparent; }
+.reel { flex: 0 0 auto; width: clamp(200px, 19vw, 260px); scroll-snap-align: start; text-align: left; }
+.reel .shot { aspect-ratio: 9/16; background: #000; display: block; }
+.reel img, .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reel video { opacity: 0; transition: opacity .3s; }
+.reel.playing video { opacity: 1; }
+.reel .num { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 11px; background: var(--ac); color: var(--ink); padding: 3px 7px; z-index: 2; }
+.reel b { display: block; margin-top: 10px; font-weight: 800; font-variation-settings: "wdth" 110; text-transform: uppercase; font-size: 16px; line-height: 1.05; }
+.reel .mono { display: block; margin-top: 4px; opacity: .7; font-size: 10.5px; }
 
-a.hero-card {
-  pointer-events: all;
-  text-decoration: none;
-  display: block;
-  cursor: pointer;
-}
+/* ---------- services ---------- */
+.services { padding: 110px var(--gutter) 120px; }
+.cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid currentColor; }
+.col { padding: 22px 22px 10px 0; border-right: 1px solid currentColor; margin-right: 22px; }
+.col:last-child { border-right: 0; margin-right: 0; }
+.col .n { font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--signal); }
+.col h3 { font-weight: 900; font-variation-settings: "wdth" 120; text-transform: uppercase; font-size: 24px; line-height: .95; letter-spacing: -.015em; margin: 10px 0 14px; }
+.col p { font-size: 15.5px; line-height: 1.55; }
+.col .tools { margin-top: 16px; opacity: .65; line-height: 1.7; }
+.pull { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 48px; margin-top: 96px; align-items: start; }
+.pull blockquote { font-family: var(--serif); font-size: clamp(36px, 4.6vw, 72px); line-height: 1; letter-spacing: -.01em; }
+.pull blockquote em { color: var(--signal); }
+.pull .story { font-size: 17px; line-height: 1.6; columns: 2 220px; column-gap: 32px; }
+.pull .story p + p { margin-top: 1em; }
+.note { margin-top: 40px; padding: 16px 18px; border: 1.5px solid currentColor; display: flex; gap: 14px; align-items: baseline; max-width: 720px; font-size: 15px; line-height: 1.5; }
+.note .mono { color: var(--signal); white-space: nowrap; }
 
-.hero-card {
-  position: absolute;
-  width: 260px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(201,165,90,0.2);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,165,90,0.08);
-  background: var(--bg2);
-}
+/* ---------- back cover ---------- */
+.back { min-height: 100svh; padding: 110px var(--gutter) 28px; display: flex; flex-direction: column; }
+.back .kicker { font-family: var(--serif); font-style: italic; font-size: clamp(28px, 3vw, 44px); color: var(--ac); }
+.back .big { margin-top: 10px; }
+.back .mail { display: block; margin-top: 4vh; font-weight: 900; font-variation-settings: "wdth" 100; font-size: clamp(22px, 4.2vw, 64px); letter-spacing: -.02em; text-decoration: none; border-bottom: 4px solid var(--ac); width: fit-content; max-width: 100%; overflow-wrap: anywhere; transition: color .2s; }
+.back .mail:hover { color: var(--ac); }
+.back-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: auto; padding-top: 48px; border-top: 2px solid currentColor; }
+.back-grid div { padding-top: 10px; }
+.back-grid .mono { opacity: .7; display: block; margin-bottom: 6px; }
+.back-grid a, .back-grid span.v { font-weight: 700; font-size: 17px; text-decoration: none; }
+.back-grid a:hover { color: var(--ac); }
+.colophon { margin-top: 36px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; opacity: .75; }
 
-.hero-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
+/* ---------- lightbox ---------- */
+.lb { position: fixed; inset: 0; z-index: 100; background: rgba(8,8,8,.96); color: #f4f1ea; display: none; grid-template-rows: auto 1fr auto; }
+.lb.open { display: grid; animation: fade .25s; }
+@keyframes fade { from { opacity: 0; } }
+.lb-top, .lb-bot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px var(--gutter); }
+.lb-top b { font-weight: 900; font-variation-settings: "wdth" 125; text-transform: uppercase; font-size: 18px; }
+.lb-stage { position: relative; display: grid; place-items: center; min-height: 0; padding: 0 70px; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-stage video { max-height: calc(100svh - 140px); }
+.lb-btn { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid currentColor; display: grid; place-items: center; transition: background-color .2s, color .2s; }
+.lb-btn:hover { background: #f4f1ea; color: #111; }
+.lb-btn svg { width: 18px; height: 18px; }
+.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); }
+.lb-prev { left: 12px; } .lb-next { right: 12px; }
 
-.hero-card-label {
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  background: var(--bg2);
-}
-
-.hero-card-label span:first-child {
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.hero-card-label span:last-child {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--cream);
-}
-
-/* Card positions & rotations */
-.hero-card-1 {
-  top: 18%;
-  left: -95%;
-  transform: rotate(-4deg);
-  animation: float1 6s ease-in-out infinite;
-  z-index: 3;
-}
-
-.hero-card-2 {
-  top: 30%;
-  left: -30%;
-  transform: rotate(3deg);
-  animation: float2 7s ease-in-out infinite;
-  z-index: 2;
-}
-
-.hero-card-3 {
-  top: 52%;
-  left: -100%;
-  transform: rotate(2deg);
-  animation: float3 8s ease-in-out infinite;
-  z-index: 1;
-}
-
-@keyframes float1 {
-  0%, 100% { transform: rotate(-4deg) translateY(0px);   }
-  50%       { transform: rotate(-4deg) translateY(-14px); }
-}
-@keyframes float2 {
-  0%, 100% { transform: rotate(3deg)  translateY(0px);   }
-  50%       { transform: rotate(3deg)  translateY(-18px); }
-}
-@keyframes float3 {
-  0%, 100% { transform: rotate(2deg)  translateY(0px);   }
-  50%       { transform: rotate(2deg)  translateY(-10px); }
-}
-
-/* Decorative rings behind cards */
-.hero-ring {
-  position: absolute;
-  width: 300px; height: 300px;
-  border-radius: 50%;
-  border: 1px solid rgba(201,165,90,0.08);
-  top: 15%; left: -30%;
-  animation: spin 25s linear infinite;
-}
-.hero-ring::before {
-  content: '';
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  top: -3px; left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.5;
-}
-.hero-ring-2 {
-  position: absolute;
-  width: 180px; height: 180px;
-  border-radius: 50%;
-  border: 1px solid rgba(201,165,90,0.05);
-  top: 60%; left: -125%;
-  animation: spin 18s linear infinite reverse;
-}
-.hero-ring-2::before {
-  content: '';
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  top: -3px; left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.5;
-  /* Counter-spins to cancel the ring's reverse, then adds forward spin */
-  animation: spin 18s linear infinite;
-}
-@keyframes spin {
-  from { transform: rotate(0deg);   }
-  to   { transform: rotate(360deg); }
-}
-
-/* Hide cards on mobile */
+/* ---------- responsive ---------- */
 @media (max-width: 900px) {
-  #hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 140px 24px 50px;
-    min-height: auto;
-  }
-
-  .hero-content {
-    max-width: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-tag {
-    font-size: 10px;
-    margin-bottom: 16px;
-  }
-
-  .hero-title {
-    font-size: clamp(52px, 16vw, 80px);
-    margin-bottom: 28px;
-  }
-
-  .hero-meta {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .hero-divider    { display: none; }
-  .hero-meta-item  { min-width: 130px; }
-  .hero-cards      { display: none; }
-  .hero-scroll-hint {
-    display: flex;
-    bottom: 50px;
-    right: 24px;
-    font-size: 9px;
-  }
-
-  .hero-year {
-    display: block;
-    top: 100px;
-    right: 24px;
-    font-size: 9px;
-  }
-
-  .hero-ring {
-    display: block;
-    width: 160px;
-    height: 160px;
-    top: 10%;
-    left: 55%;
-    opacity: 0.4;
-  }
-
-  .hero-ring-2 {
-    display: block;
-    width: 100px;
-    height: 100px;
-    top: 45%;
-    left: 65%;
-    opacity: 0.3;
-  }
-
-  .filter-tabs {
-    justify-content: flex-start;
-    gap: 6px;
-  }
-
-  .filter-btn {
-    font-size: 10px;
-    padding: 7px 12px;
-    letter-spacing: 0.08em;
-  }
-
-  .work-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    margin-bottom: 40px;
-  }
-
+  .nav-links a:not(.hire) { display: none; }
+  .cover-body { grid-template-columns: minmax(0, 1fr); }
+  .cover-photo { justify-self: start; width: min(340px, 78%); margin-left: 40px; }
+  .contents-head, .sec-head { grid-template-columns: 1fr; }
+  .toc a { grid-template-columns: 44px minmax(0, 1fr) 30px; }
+  .toc .cat, .toc .yr { display: none; }
+  .lay-split .p-grid, .lay-split.flip .p-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .lay-split .p-media, .lay-split.flip .p-media { order: 2; padding-bottom: 28px; }
+  .lay-split .p-media .main { margin: 0; }
+  .lay-split .p-media .float, .lay-split.flip .p-media .float { width: 42%; left: auto; right: 0; bottom: 0; }
+  .lay-mega .strip { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); }
+  .lay-mega .strip .shot { flex: 0 0 auto; height: 52svh; aspect-ratio: var(--ar); scroll-snap-align: start; }
+  .lay-mega .p-under { grid-template-columns: 1fr; gap: 22px; }
+  .lay-center .p-grid { grid-template-columns: minmax(0, 1fr); }
+  .lay-center .p-title { writing-mode: horizontal-tb; transform: none; font-size: clamp(48px, 13vw, 96px); white-space: normal; order: -1; }
+  .lay-center .main { height: auto; width: 100%; max-height: none; }
+  .lay-center .p-side .shot { display: none; }
+  .cols { grid-template-columns: 1fr 1fr; }
+  .col:nth-child(2n) { border-right: 0; margin-right: 0; }
+  .pull { grid-template-columns: 1fr; gap: 28px; }
+  .back-grid { grid-template-columns: 1fr 1fr; }
+  .lb-stage { padding: 0 8px; }
+  .lb-prev, .lb-next { top: auto; bottom: -62px; transform: none; }
+  .lb-prev { left: var(--gutter); } .lb-next { right: var(--gutter); }
+  .lb-bot { justify-content: center; }
 }
-
-a.hero-card {
-  text-decoration: none;
-  display: block;
-  cursor: none;
+@media (max-width: 520px) {
+  .cols { grid-template-columns: 1fr; }
+  .col { border-right: 0; margin-right: 0; border-bottom: 1px solid currentColor; padding-bottom: 22px; }
+  .sticker { left: -30px; width: 96px; height: 96px; font-size: 11px; }
+  .sticker b { font-size: 24px; }
+  .cover-top span:nth-child(n+3) { display: none; }
 }
-a.hero-card:hover {
-  border-color: rgba(201,165,90,0.5);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
 }
-
-/* ── BACK TO TOP ── */
-#backToTop {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  height: 40px;
-  min-width: 40px;
-  width: 40px;
-  border-radius: 20px;
-  background: rgba(12,11,10,0.8);
-  border: 1px solid rgba(201,165,90,0.25);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0px;
-  cursor: pointer;
-  z-index: 999;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease,
-              transform 0.4s ease,
-              width 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
-              gap 0.4s ease,
-              border-color 0.2s,
-              background 0.2s,
-              padding 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 0 12px;
-}
-#backToTop.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-#backToTop:hover {
-  width: 155px;
-  gap: 8px;
-  padding: 0 16px;
-  border-color: rgba(201,165,90,0.6);
-  background: rgba(28,25,22,0.9);
-}
-.btt-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  transition: opacity 0.5s ease 0.15s,
-              max-width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-  white-space: nowrap;
-  display: inline-block;
-}
-#backToTop:hover .btt-label {
-  opacity: 1;
-  max-width: 120px;
-}
-
-/* ── MOBILE ONLY ── */
-@media (max-width: 900px) {
-  #backToTop {
-    bottom: 80px !important;
-    right: 24px !important;
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    border-radius: 50% !important;
-    padding: 0 !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    border: 1px solid rgba(201,165,90,0.5) !important;
-    background: rgba(20,18,16,0.95) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4),
-                0 0 12px rgba(201,165,90,0.15) !important;
-    transform: translateY(0) !important;
-  }
-  #backToTop.visible {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  #backToTop.near-footer {
-    opacity: 1 !important;
-    pointer-events: all !important;
-  }
-  #backToTop:hover {
-    width: 44px !important;
-    gap: 0 !important;
-    padding: 0 !important;
-  }
-  .btt-label {
-    position: absolute !important;
-    bottom: 52px !important;
-    right: 0 !important;
-    width: auto !important;
-    max-width: none !important;
-    opacity: 0 !important;
-    background: rgba(12,11,10,0.9) !important;
-    border: 1px solid rgba(201,165,90,0.3) !important;
-    border-radius: 6px !important;
-    padding: 6px 12px !important;
-    font-size: 10px !important;
-    letter-spacing: 0.12em !important;
-    color: var(--gold) !important;
-    white-space: nowrap !important;
-    backdrop-filter: blur(8px) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
-    transition: opacity 0.4s ease !important;
-    pointer-events: none !important;
-    display: block !important;
-  }
-  #backToTop.near-footer .btt-label {
-    opacity: 1 !important;
-  }
-}
-
-/* ── REELS SECTION ── */
-#reels { border-top: 1px solid var(--border); background: var(--bg); }
-
-.reels-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 60px;
-}
-
-.reel-card {
-  position: relative;
-  aspect-ratio: 9/16;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: border-color 0.3s, transform 0.3s;
-}
-.reel-card:hover {
-  border-color: rgba(201,165,90,0.4);
-  transform: scale(1.02);
-}
-
-/* Video inside card */
-.reel-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.3s;
-}
-
-/* Thumbnail image shown before hover */
-.reel-thumb {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 2;
-  transition: opacity 0.4s ease;
-}
-.reel-card:hover .reel-thumb { opacity: 0; }
-
-/* Overlay at bottom */
-.reel-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 40px 14px 16px;
-  background: linear-gradient(to top, rgba(12,11,10,0.95) 0%, transparent 100%);
-  z-index: 3;
-  transform: translateY(4px);
-  transition: transform 0.3s;
-}
-.reel-card:hover .reel-overlay { transform: translateY(0); }
-
-.reel-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--cream);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.reel-client {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-/* Play button shown on hover */
-.reel-play {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: rgba(201,165,90,0.9);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 4;
-  opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
-}
-.reel-card:hover .reel-play {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-.reel-play svg { color: #0C0B0A; margin-left: 3px; }
-
-/* Reel type badge */
-.reel-badge {
-  position: absolute;
-  top: 12px; left: 12px;
-  z-index: 4;
-  background: rgba(12,11,10,0.75);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(201,165,90,0.2);
-  border-radius: 20px;
-  padding: 3px 10px;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.reel-badge-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--gold);
-  animation: dotPulse 1.5s ease-in-out infinite;
-}
-
-/* Fullscreen reel viewer */
-#reelViewer {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(6,5,5,0.98);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  backdrop-filter: blur(20px);
-}
-#reelViewer.open {
-  opacity: 1;
-  pointer-events: all;
-}
-.rv-inner {
-  display: grid;
-  grid-template-columns: auto 300px;
-  gap: 48px;
-  align-items: center;
-  max-width: 1000px;
-  width: 90%;
-}
-.rv-video-wrap {
-  position: relative;
-  aspect-ratio: 9/16;
-  max-height: 80vh;
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-}
-.rv-video-wrap video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.rv-close {
-  position: fixed;
-  top: 24px; right: 40px;
-  font-size: 12px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--muted);
-  background: none; border: 1px solid var(--border);
-  padding: 8px 18px; border-radius: var(--radius);
-  cursor: pointer; transition: all 0.2s;
-  font-family: 'Outfit', sans-serif;
-  z-index: 10;
-}
-.rv-close:hover { color: var(--cream); border-color: var(--muted); }
-.rv-info { display: flex; flex-direction: column; gap: 20px; }
-.rv-cat { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
-.rv-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; }
-.rv-desc { font-size: 14px; line-height: 1.75; color: rgba(242,237,228,0.6); font-weight: 300; }
-.rv-year { font-size: 12px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
-
-/* Prev/Next arrows for reel viewer */
-.rv-arrow {
-  position: fixed;
-  top: 50%; transform: translateY(-50%);
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: rgba(12,11,10,0.8);
-  color: var(--cream);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-  backdrop-filter: blur(6px);
-  z-index: 10;
-}
-.rv-arrow:hover { border-color: var(--gold-dim); background: rgba(28,25,22,0.95); }
-.rv-arrow.rv-prev { left: 20px; }
-.rv-arrow.rv-next { right: 20px; }
-.rv-arrow.hidden { opacity: 0; pointer-events: none; }
-.rv-counter {
-  position: fixed;
-  bottom: 24px; left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px; letter-spacing: 0.15em;
-  color: var(--muted);
-}
-
-@media (max-width: 900px) {
-  .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .rv-inner { grid-template-columns: 1fr; }
-  .rv-info { display: none; }
-  .rv-video-wrap { max-height: 75vh; width: auto; }
-  .rv-arrow.rv-prev { left: 8px; }
-  .rv-arrow.rv-next { right: 8px; }
-  .rv-close { top: 16px; right: 16px; }
-}
-
 </style>
 </head>
 <body>
 
-<!-- ── LOADING SCREEN ── -->
-<div id="loader">
-  <div class="loader-inner">
-    <div class="loader-logo">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <path d="M24 4 L44 24 L24 44 L4 24 Z" stroke="#C9A55A" stroke-width="1" fill="none" opacity="0.3" />
-        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Cormorant Garamond, serif"
-          font-size="20" fill="#C9A55A" font-weight="300">AK</text>
-      </svg>
-    </div>
-    <div class="loader-name">Ahmad Khan</div>
-    <div class="loader-role">Graphic Designer & Photographer</div>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar" id="loaderBar"></div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
-    </div>
+<header class="nav">
+  <a class="brand" href="#cover">Ahmad Khan <i>studio</i></a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#contents">Work</a>
+    <a href="#reels">Reels</a>
+    <a href="#services">Services</a>
+    <a href="#contact" class="hire">Hire me</a>
+  </nav>
+</header>
+
+<main>
+<!-- ================= COVER ================= -->
+<section class="cover" id="cover" data-bg="#2b35ff" data-fg="#f4f1ea" data-ac="#ffe14d" aria-label="Introduction">
+  <div class="cover-top mono">
+    <span>The Ahmad Khan Issue</span>
+    <span>No. 03 — Autumn 2026</span>
+    <span>Faisalabad → Worldwide</span>
+    <span>Free to read</span>
   </div>
-</div>
-
-<div id="scrollBar"
-  style="position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(to right,#8A6F3A,#C9A55A,#8A6F3A);z-index:99998;transition:width 0.1s linear;box-shadow:0 0 6px rgba(201,165,90,0.5);">
-</div>
-
-<!-- Back to top -->
-<button id="backToTop" aria-label="Back to top">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <polyline points="18 15 12 9 6 15" />
-  </svg>
-  <span class="btt-label">Back to Top</span>
-</button>
-
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-
-<!-- ── LIGHTBOX ── -->
-<div id="lightbox" role="dialog" aria-modal="true">
-  <div class="lb-top-bar">
-    <div class="lb-project-name">
-      <span class="lb-project-cat-badge" id="lb-badge"></span>
-      <span id="lb-name-top"></span>
-    </div>
-    <button class="lb-close" onclick="closeLightbox()">✕ Close</button>
-  </div>
-
-  <div class="lb-body">
-    <button class="lb-arrow lb-prev hidden" id="lb-prev" aria-label="Previous image">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-
-    <div class="lb-main">
-      <div class="lb-img-container" id="lb-img-container"></div>
-      <div class="lb-info">
-        <div class="lb-cat" id="lb-cat"></div>
-        <div class="lb-title" id="lb-title"></div>
-        <div class="lb-desc" id="lb-desc"></div>
-        <div class="lb-year" id="lb-year"></div>
-      </div>
-    </div>
-
-    <button class="lb-arrow lb-next hidden" id="lb-next" aria-label="Next image">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-
-  <div class="lb-bottom">
-    <div class="lb-count" id="lb-count"></div>
-    <div class="lb-dots-strip" id="lb-dots"></div>
-  </div>
-</div>
-
-<!-- ── NAV ── -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">Ahmad <span>Khan</span></a>
-  <ul class="nav-links">
-    <li><a href="#about" data-section="about">About</a></li>
-    <li><a href="#work" data-section="work">Work</a></li>
-    <li><a href="#services" data-section="services">Services</a></li>
-    <li><a href="#clients" data-section="clients">Clients</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Work With Me</a>
-</nav>
-
-<!-- ── HERO ── -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-year">Graphic Design — 2020–2026</div>
-  <div class="hero-scroll-hint">Scroll</div>
-
-  <!-- Floating cards — right side -->
-  <div class="hero-cards">
-    <a href="#work" class="hero-card hero-card-1">
-      <img src="bits-pieces/1.jpg" alt="Bits & Pieces">
-      <div class="hero-card-label">
-        <span>Web Design</span>
-        <span>Bits & Pieces</span>
-      </div>
-    </a>
-    
-    <a href="#work" class="hero-card hero-card-2">
-      <img src="CHOPAAL/1.jpg" alt="Chopaal">
-      <div class="hero-card-label">
-        <span>Event Branding</span>
-        <span>CHOPAAL 2024</span>
-      </div>
-    </a>
-    
-    <a href="#work" class="hero-card hero-card-3">
-      <img src="bol-debates/1.jpg" alt="BOL Debates">
-      <div class="hero-card-label">
-        <span>Graphic Design</span>
-        <span>BOL Debates VII</span>
-      </div>
-    </a>
-    <!-- Decorative ring -->
-    <div class="hero-ring"></div>
-    <div class="hero-ring-2"></div>
-  </div>
-
-  <!-- Left content -->
-  <div class="hero-content">
-    <div class="hero-tag">Portfolio — Faisalabad, Pakistan</div>
-    <h1 class="hero-title">Ahmad<br><em>Khan</em></h1>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Discipline</span>
-        <span class="hero-meta-value">Graphic & Web Design</span>
-      </div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Experience</span>
-        <span class="hero-meta-value">5+ Years</span>
-      </div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Availability</span>
-        <span class="hero-meta-value" style="display:flex;align-items:center;gap:8px;">
-          <span style="position:relative;width:8px;height:8px;flex-shrink:0;">
-            <span
-              style="position:absolute;inset:0;border-radius:50%;background:#4ade80;animation:ping 1.5s ease-out infinite;opacity:0.6;"></span>
-            <span style="position:absolute;inset:0;border-radius:50%;background:#4ade80;"></span>
-          </span>
-          Open to Freelance
-        </span>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- ── ABOUT ── -->
-<section id="about">
-  <div class="about-photo reveal">
-    <!-- REPLACE with: <img src="Me.jpg" alt="Ahmad Khan"> -->
-    <div class="about-photo-placeholder">
-      <img src="Me.jpg" alt="Ahmad Khan">
-    </div>
-    <div style="
-          padding: 20px 24px;
-          background: rgba(20,18,16,0.85);
-          backdrop-filter: blur(8px);
-          border-top: 1px solid rgba(201,165,90,0.15);
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          z-index: 5;
-        ">
-      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#C9A55A;margin-bottom:8px;">Also a
-      </div>
-      <div
-        style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:#F2EDE4;line-height:1.3;margin-bottom:10px;">
-        Professional Photographer<br>& Videographer
-      </div>
-      <div style="font-size:12px;color:rgba(242,237,228,0.55);line-height:1.6;font-weight:300;">
-        Covering major events & concerts.<br>
-        Working with brands like <span style="color:rgba(201,165,90,0.8);">Circle Club</span> & <span
-          style="color:rgba(201,165,90,0.8);">Ashkolay</span>.
-      </div>
-    </div>
-  </div>
-  <div class="about-content">
-    <div class="section-label reveal">About Me</div>
-    <h2 class="reveal reveal-delay-1">Creative <em>designer</em><br>with a story</h2>
-    <p class="about-bio reveal reveal-delay-2">
-      I'm a <strong>Creative Designer based in Faisalabad, Pakistan</strong> with over half a decade of experience across various fields of design. I've built brands, designed events, crafted web experiences and created compelling visual identities for societies, startups and businesses alike.
-      <br><br>
-      I've served as <strong>Head Graphic Designer</strong> for Chase Now - E-Commerce store, worked with brands like <strong>LuxeLime, BUNAI, Daira</strong> and the FPS Society — and I'm always looking for the next great collaboration.
-      <br><br>
-      Being a <strong>photographer and videographer</strong>, I can combine my skills in design, photography, and videography to create a complete visual experience for clients. From branding to web design, I ensure that every project tells a cohesive story and leaves a lasting impression.
-    </p>
-    <div class="section-label reveal reveal-delay-2">Skill Set</div>
-    <div class="skills-grid reveal reveal-delay-3">
-      <div class="skill-item"><span class="skill-dot"></span>Adobe CC</div>
-      <div class="skill-item"><span class="skill-dot"></span>Canva</div>
-      <div class="skill-item"><span class="skill-dot"></span>Framer</div>
-      <div class="skill-item"><span class="skill-dot"></span>Figma</div>
-      <div class="skill-item"><span class="skill-dot"></span>WordPress</div>
-      <div class="skill-item"><span class="skill-dot"></span>MERN Stack</div>
-    </div>
-    <div class="about-stats reveal reveal-delay-4">
-      <div><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
-      <div><div class="stat-num">20+</div><div class="stat-label">Projects Delivered</div></div>
-      <div><div class="stat-num">10+</div><div class="stat-label">Satisfied Clients</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── WORK ── -->
-<section id="work">
-  <div class="work-header reveal">
+  <h1 class="cover-name display">
+    <span data-fit="name">Ahmad</span>
+    <span data-fit="name">Khan</span>
+  </h1>
+  <div class="cover-body">
     <div>
-      <div class="section-label">Selected Work</div>
-      <h2>The <em>portfolio</em></h2>
+      <p class="cover-lede">Graphic designer who also <em>shoots, edits</em> &amp; writes code.</p>
+      <nav class="coverlines" aria-label="In this issue">
+        <a href="#contents">14 brands, one wall <span>p.04</span></a>
+        <a href="#reels">Reels, shot &amp; cut by me <span>p.32</span></a>
+        <a href="#services">Why a CS grad makes posters <span>p.36</span></a>
+        <a href="#contact">Hire me <span>back cover</span></a>
+      </nav>
+      <div class="barcode"><i></i><span class="mono">3+ yrs · 15+ clients<br>US · AU · PK</span></div>
     </div>
-    <div class="filter-tabs">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="branding">Branding & Photography</button>
-      <button class="filter-btn" data-filter="web">Web Design</button>
-      <button class="filter-btn" data-filter="graphic">Graphic Design</button>
-      <button class="filter-btn" data-filter="event">Event Branding</button>
-      <button class="filter-btn" data-filter="social">Social Media</button>
-      <button class="filter-btn" data-filter="print">Print</button>
-    </div>
-  </div>
-
-  <div class="projects-grid">
-
-    <!-- PROJECT 1: Bits & Pieces — col-8 landscape -->
-    <div class="project-card col-8 reveal"
-         data-cat="web"
-         data-title="Bits & Pieces"
-         data-description="Professional website design for Bits & Pieces — a curated lifestyle and creative brand. Designed clean, editorial web layouts optimised for showcasing products and editorial content in the arts and design space."
-         data-year="2024"
-         data-images="bits-pieces/1.jpg,bits-pieces/2.jpg,bits-pieces/3.jpg,bits-pieces/4.jpg">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-web">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Web Design</div>
-        <div class="project-title">Bits & Pieces</div>
-        <div class="project-year">2024 — Editorial Lifestyle Brand</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-    </div>
-
-    <!-- PROJECT 2: Bukhara by Legacy — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-1" data-cat="branding" data-title="Bukhara by Legacy"
-      data-description="Designer for Bukhara by Legacy — a high-end restaurant in Faisalabad. Created the complete visual identity including logo, menu design, signage, and print collateral to establish a sophisticated and memorable brand presence."
-      data-year="2025-2026" data-images="bukhara/1.jpg,bukhara/2.jpg,bukhara/3.jpg,bukhara/4.jpg,bukhara/5.jpg,bukhara/6.jpg,bukhara/7.jpg,bukhara/8.jpg,bukhara/9.jpg,bukhara/10.jpg,bukhara/11.jpg,bukhara/12.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-branding">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Branding & Photography</div>
-        <div class="project-title">Bukhara by Legacy</div>
-        <div class="project-year">2025-2026</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 2nd: Duluxe Fitness — col-8 landscape -->
-    <div class="project-card col-8 reveal" data-cat="web" data-title="Duluxe Fitness"
-      data-description="Professional website design for Duluxe Fitness — a modern fitness studio. Designed clean, engaging web layouts optimised for showcasing services and creating a strong online presence."
-      data-year="2025" data-images="duluxe-fitness/1.png,duluxe-fitness/2.png,duluxe-fitness/3.png,duluxe-fitness/4.webp">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-web">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <rect x="2" y="3" width="20" height="14" rx="2" />
-            <line x1="8" y1="21" x2="16" y2="21" />
-            <line x1="12" y1="17" x2="12" y2="21" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Web Design</div>
-        <div class="project-title">Duluxe Fitness</div>
-        <div class="project-year">2025 — Modern Fitness Studio</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 5: Manzar Kashi — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-1" data-cat="print" data-title="Manzar Kashi"
-      data-description="Graphic design and visual identity work for Manzar Kashi and freelance clients. Includes poster design, promotional materials, and brand collateral across print and digital mediums."
-      data-year="2023–2024" data-images="manzar-kashi/1.jpg,manzar-kashi/2.jpg,manzar-kashi/3.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-print">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Print Design</div>
-        <div class="project-title">Manzar Kashi</div>
-        <div class="project-year">2023</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 3: FPS — col-6 landscape -->
-    <div class="project-card col-6 reveal reveal-delay-1"
-         data-cat="event"
-         data-title="FPS"
-         data-description="Full event branding for FPS — BOL Society's flagship cultural event. Scope included event identity, promotional posters, digital/print assets, sponsorship decks, and social media campaigns."
-         data-year="2024"
-         data-images="fps/1.jpg">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-fps">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Event Branding</div>
-        <div class="project-title">FPS Society</div>
-        <div class="project-year">2021–2023</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-    </div>
-
-    <!-- PROJECT 3: CHOPAAL — col-6 landscape -->
-    <div class="project-card col-6 reveal reveal-delay-1" data-cat="event" data-title="CHOPAAL"
-      data-description="Full event branding for CHOPAAL — BOL Society's flagship cultural event. Scope included event identity, promotional posters, digital/print assets, sponsorship decks, and social media campaigns."
-      data-year="2022–2023" data-images="CHOPAAL/1.jpg">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-CHOPAAL">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Event Branding</div>
-        <div class="project-title">CHOPAAL Event</div>
-        <div class="project-year">2022–2023</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 4: Felo Mart - Graphic Design — col-6 landscape -->
-    <div class="project-card col-6 reveal reveal-delay-2"
-         data-cat="graphic"
-         data-title="Felo Mart - Graphic Design"
-         data-description="Graphic design work for Felo Mart — a local e-commerce brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-         data-year="2025"
-         data-images="felo-mart/1.jpg,felo-mart/2.webp,felo-mart/3.png">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-social">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">  
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">Felo Mart</div>
-        <div class="project-year">2025</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-    </div>
-
-    <!-- PROJECT 4: RANG RASIYA - Graphic Design — col-6 landscape -->
-    <div class="project-card col-6 reveal reveal-delay-2" data-cat="graphic" data-title="RANG RASIYA - Graphic Design"
-      data-description="Graphic design work for RANG RASIYA — a local e-commerce brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-      data-year="2026"
-      data-images="rangrasiya/1.png,rangrasiya/2.png,rangrasiya/3.png,rangrasiya/4.png,rangrasiya/5.png,rangrasiya/6.png,rangrasiya/7.png">
-      <div class="card-img-wrap ratio-landscape">
-        <div class="project-bg pb-social">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <rect x="2" y="2" width="20" height="20" rx="5" />
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">RANG RASIYA</div>
-        <div class="project-year">2026</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 7: BUNAI — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-3"
-         data-cat="graphic"
-         data-title="BUNAI"
-         data-description="Graphic design work for BUNAI — a local artisanal brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-         data-year="2024"
-         data-images="bunai/1.jpg,bunai/2.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-bunai">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">BUNAI</div>
-        <div class="project-year">2024</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-    </div>
-
-    <!-- PROJECT 7: apniwebsite — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-3" data-cat="graphic" data-title="apniwebsite"
-      data-description="Graphic design work for apniwebsite — a local artisanal brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-      data-year="2024" data-images="apniwebsite/1.jpg,apniwebsite/2.jpg,apniwebsite/3.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-apniwebsite">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">apniwebsite</div>
-        <div class="project-year">2024</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 6: ChaseNow — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-2" data-cat="social" data-title="ChaseNow - Social Media"
-      data-description="Brand and graphic design work for ChaseNow — a e-commerce brand. Designed visual content, promotional assets, and brand collateral to position the brand within a high-end market segment."
-      data-year="2022–2023"
-      data-images="chasenow-insta/2.webp,chasenow-insta/3.png,chasenow-insta/4.png,chasenow-insta/5.png,chasenow-insta/6.png,chasenow-insta/7.png">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-social">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Social Media</div>
-        <div class="project-title">ChaseNow</div>
-        <div class="project-year">2025</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 2: BOL Debates VII — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-1" data-cat="graphic" data-title="BOL Society — Debates VII"
-      data-description="Head Graphic Designer for the BOL Society's flagship debating competition — Debates VII. Designed the complete visual identity including posters, social media assets, certificates, schedules, and event collateral."
-      data-year="2023" data-images="bol-debates/1.jpg,bol-debates/2.jpg,bol-debates/3.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-bol">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">BOL Debates VII</div>
-        <div class="project-year">2023</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 2: LUXE LIME — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-1" data-cat="graphic" data-title="LUXE LIME"
-      data-description="Graphic design work for LUXE LIME — a local artisanal brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-      data-year="2025" data-images="luxelime/1.webp,luxelime/2.webp,luxelime/3.webp,luxelime/4.webp,luxelime/5.jpg,luxelime/6.webp,luxelime/7.jpg,luxelime/8.jpg,luxelime/9.png,luxelime/10.png,luxelime/11.png">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-bol">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Graphic Design</div>
-        <div class="project-title">LUXE LIME</div>
-        <div class="project-year">2025</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 2: Neelam Furniture — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-1" data-cat="branding" data-title="Neelam Furniture"
-      data-description="Graphic design work for Neelam Furniture — a local furniture brand. Created visual content, promotional assets, and brand collateral to support the brand's marketing efforts and online presence."
-      data-year="2023" data-images="neelam-furniture/ghulfam-house/1.jpg,neelam-furniture/ghulfam-house/2.jpg,neelam-furniture/ghulfam-house/3.jpg,neelam-furniture/ghulfam-house/4.jpg,neelam-furniture/ghulfam-house/5.jpg,neelam-furniture/ghulfam-house/6.jpg,neelam-furniture/ghulfam-house/7.jpg,neelam-furniture/ghulfam-house/8.jpg,neelam-furniture/ghulfam-house/9.jpg,neelam-furniture/ghulfam-house/10.jpg,neelam-furniture/ghulfam-house/11.jpg,neelam-furniture/ghulfam-house/12.jpg,neelam-furniture/ghulfam-house/13.jpg,neelam-furniture/ghulfam-house/14.jpg,neelam-furniture/ghulfam-house/15.jpg,neelam-furniture/ghulfam-house/16.jpg">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-bol">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Branding & Photography</div>
-        <div class="project-title">Neelam Furniture</div>
-        <div class="project-year">2025</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- PROJECT 6: Duluxe Fitness — col-4 portrait -->
-    <div class="project-card col-4 reveal reveal-delay-2" data-cat="social" data-title="Duluxe Fitness - Social Media"
-      data-description="Brand and graphic design work for Duluxe Fitness — a premium fitness brand. Designed visual content, promotional assets, and brand collateral to position the brand within a high-end market segment."
-      data-year="2022–2023"
-      data-images="duluxe-fitness-insta/1.png,duluxe-fitness-insta/2.png,duluxe-fitness-insta/3.png,duluxe-fitness-insta/4.png">
-      <div class="card-img-wrap ratio-portrait">
-        <div class="project-bg pb-social">
-          <svg class="project-bg-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="0.5">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-        </div>
-      </div>
-      <div class="img-counter"></div>
-      <div class="card-dots"></div>
-      <div class="project-info">
-        <div class="project-cat">Social Media</div>
-        <div class="project-title">Duluxe Fitness</div>
-        <div class="project-year">2022–2023</div>
-      </div>
-      <div class="project-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg></div>
-    </div>
-
-    <!-- ── ADD MORE PROJECTS HERE ──
-         Duplicate any project-card block above.
-         Create a folder for the project, add images named 1.jpg, 2.jpg etc.
-         Update data-images, data-title, data-cat, data-description, data-year.
-    -->
-    <!-- <div class="add-project-card reveal reveal-delay-1" onclick="showAddTip()">
-      <div class="add-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-      <div class="add-label">Add Project</div>
-      <div class="add-sub">Create a folder, drop in your images, duplicate a card</div>
-    </div> -->
-
-  </div>
-
-  <div id="addTip" style="display:none;margin-top:32px;padding:24px 32px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-width:680px;line-height:1.8;">
-    <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">How to Add a New Project</div>
-    <p style="font-size:14px;color:rgba(242,237,228,0.7);">
-      1. Create a folder next to this file — e.g. <code style="background:var(--bg3);padding:2px 8px;border-radius:2px;color:var(--gold)">my-project/</code><br>
-      2. Add images: <code style="background:var(--bg3);padding:2px 8px;border-radius:2px;color:var(--gold)">1.jpg, 2.jpg, 3.jpg...</code><br>
-      3. Duplicate any project-card block in the HTML<br>
-      4. Update <code style="background:var(--bg3);padding:2px 8px;border-radius:2px;color:var(--gold)">data-images="my-project/1.jpg,my-project/2.jpg"</code><br>
-      5. Update data-title, data-cat, data-description, data-year
-    </p>
+    <figure class="cover-photo">
+      <div class="sticker"><span><b>Open</b>for work</span></div>
+      <div class="frame"><img src="media/me.webp" alt="Portrait of Ahmad Khan holding a camera" width="900" height="1200"></div>
+      <figcaption class="mono"><span>Cover: the designer</span><span>Photo &amp; type, AK</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- ── REELS ── -->
-<section id="reels">
-  <div class="section-label reveal">Behind the Camera</div>
-  <h2 class="reveal reveal-delay-1">Reels & <em>Videography</em></h2>
-  <p class="reveal reveal-delay-2"
-    style="font-size:16px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:520px;margin-top:20px;font-weight:300;">
-    Motion content crafted for brands, events and social media — hover to preview, click to watch.
-  </p>
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-  <div class="reels-grid" id="reelsGrid">
-
-    <!--
-    ═══════════════════════════════════════════════════════
-    HOW TO ADD A REEL:
-    1. Put your video file next to index.html e.g. reels/1.mp4
-    2. Put a thumbnail image e.g. reels/1-thumb.jpg
-    3. Duplicate any reel-card block below
-    4. Update src, poster, data-title, data-client, data-desc
-    ═══════════════════════════════════════════════════════
-    -->
-
-    <!-- REEL 1 -->
-    <div class="reel-card reveal" data-title="Brand Showcase" data-client="Bukhara"
-      data-desc="Restaurant brand videography for Bukhara by Legacy — showcasing the restaurant's ambiance, cuisine, and brand identity through cinematic visuals."
-      data-year="2025" data-video="reels/1.mp4">
-      <video src="reels/1.mp4" poster="reels/1-thumb.jpg" muted loop playsinline preload="none"></video>
-      <img class="reel-thumb" src="reels/1-thumb.jpg" alt="Bukhara">
-      <div class="reel-badge">
-        <div class="reel-badge-dot"></div> Reel
-      </div>
-      <div class="reel-play">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      </div>
-      <div class="reel-overlay">
-        <div class="reel-client">Bukhara by Legacy</div>
-        <div class="reel-title">Iftar Buffet Campaign</div>
-      </div>
-    </div>
-
-    <!-- REEL 2 -->
-    <div class="reel-card reveal reveal-delay-1" data-title="Brand Showcase" data-client="Bukhara"
-      data-desc="Restaurant brand videography for Bukhara by Legacy — showcasing the restaurant's ambiance, cuisine, and brand identity through cinematic visuals."
-      data-year="2025" data-video="reels/2.mp4">
-      <video src="reels/2.mp4" poster="reels/2-thumb.jpg" muted loop playsinline preload="none"></video>
-      <img class="reel-thumb" src="reels/2-thumb.jpg" alt="Bukhara">
-      <div class="reel-badge">
-        <div class="reel-badge-dot"></div> Reel
-      </div>
-      <div class="reel-play">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      </div>
-      <div class="reel-overlay">
-        <div class="reel-client">Bukhara by Legacy</div>
-        <div class="reel-title">Chef's Testimonial</div>
-      </div>
-    </div>
-
-    <!-- REEL 3 -->
-    <div class="reel-card reveal reveal-delay-2" data-title="Brand Showcase" data-client="Bukhara"
-      data-desc="Restaurant brand videography for Bukhara by Legacy — showcasing the restaurant's ambiance, cuisine, and brand identity through cinematic visuals."
-      data-year="2024" data-video="reels/3.mp4">
-      <video src="reels/3.mp4" poster="reels/3-thumb.jpg" muted loop playsinline preload="none"></video>
-      <img class="reel-thumb" src="reels/3-thumb.jpg" alt="Bukhara">
-      <div class="reel-badge">
-        <div class="reel-badge-dot"></div> Reel
-      </div>
-      <div class="reel-play">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      </div>
-      <div class="reel-overlay">
-        <div class="reel-client">Bukhara by Legacy</div>
-        <div class="reel-title">Influencer Collaboration</div>
-      </div>
-    </div>
-
-    <!-- REEL 4 -->
-    <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Bukhara by Legacy"
-      data-desc="Meetup of Shan Foods and Bukhara by Legacy — showcasing the collaboration, food, and brand storytelling through cinematic visuals."
-      data-year="2025" data-video="reels/4.mp4">
-      <video src="reels/4.mp4" poster="reels/4-thumb.jpg" muted loop playsinline preload="none"></video>
-      <img class="reel-thumb" src="reels/4-thumb.jpg" alt="Bukhara">
-      <div class="reel-badge">
-        <div class="reel-badge-dot"></div> Reel
-      </div>
-      <div class="reel-play">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      </div>
-      <div class="reel-overlay">
-        <div class="reel-client">Bukhara by Legacy</div>
-        <div class="reel-title">Meetup Highlights</div>
-      </div>
-    </div>
-
-      <!-- REEL 5 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Neelam Furniture"
-        data-desc="Brand videography for Neelam Furniture — showcasing the furniture, craftsmanship, and brand identity through cinematic visuals."
-        data-year="2025" data-video="reels/5.mp4">
-        <video src="reels/5.mp4" poster="reels/5-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/5-thumb.jpg" alt="Neelam Furniture">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">Neelam Furniture</div>
-          <div class="reel-title">Furniture Showcase</div>
-        </div>
-      </div>
-      
-      <!-- REEL 6 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Neelam Furniture"
-        data-desc="Brand videography for Neelam Furniture — showcasing the furniture, craftsmanship, and brand identity through cinematic visuals."
-        data-year="2025" data-video="reels/6.mp4">
-        <video src="reels/6.mp4" poster="reels/6-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/6-thumb.jpg" alt="Neelam Furniture">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">Neelam Furniture</div>
-          <div class="reel-title">Furniture Showcase</div>
-        </div>
-      </div>
-
-      <!-- REEL 7 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="FAST National University"
-        data-desc="Brand videography for FAST National University — showcasing the campus, facilities, and brand identity through cinematic visuals."
-        data-year="2025" data-video="reels/7.mp4">
-        <video src="reels/7.mp4" poster="reels/7-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/7-thumb.jpg" alt="FAST National University">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">FAST National University</div>
-          <div class="reel-title">Admission Campaign</div>
-        </div>
-      </div>
-
-      <!-- REEL 8 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="HAVAL"
-        data-desc="Client videography for HAVAL — showcasing the car, features, and brand identity through cinematic visuals."
-        data-year="2025" data-video="reels/8.mp4">
-        <video src="reels/8.mp4" poster="reels/8-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/8-thumb.jpg" alt="HAVAL">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">HAVAL</div>
-          <div class="reel-title">Client Showcase</div>
-        </div>
-      </div>
-
-      <!-- REEL 9 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Client Videography"
-        data-desc="Client at NIC — promotional videography for showcasing the client's brand, products, and services through cinematic visuals."
-        data-year="2025" data-video="reels/9.mp4">
-        <video src="reels/9.mp4" poster="reels/9-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/9-thumb.jpg" alt="Client Videography">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">Client Videography</div>
-          <div class="reel-title">Client Showcase</div>
-        </div>
-      </div>
-
-      <!-- REEL 10 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="DAIRA - Flagship Event"
-        data-desc="Client at NIC — promotional videography for showcasing the client's brand, products, and services through cinematic visuals."
-        data-year="2025" data-video="reels/10.mp4">
-        <video src="reels/10.mp4" poster="reels/10-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/10-thumb.jpg" alt="DAIRA - Flagship Event">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">DAIRA - Flagship Event</div>
-          <div class="reel-title">Flagship Event Promotion</div>
-        </div>
-      </div>
-
-      <!-- REEL 11 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="AIESEC International at NIC"
-        data-desc="AIESEC International at NIC — photography and videography for showcasing the event, activities, and brand identity through cinematic visuals."
-        data-year="2025" data-video="reels/11.mp4">
-        <video src="reels/11.mp4" poster="reels/11-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/11-thumb.jpg" alt="AIESEC International at NIC">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">AIESEC International at NIC</div>
-          <div class="reel-title">Full Event Coverage</div>
-        </div>
-      </div>
-
-      <!-- REEL 12 -->
-      <div class="reel-card reveal reveal-delay-3" data-title="Brand Showcase" data-client="Padel Pavilion"
-        data-desc="Padel Pavilion — promotional videography for showcasing the client's brand, products, and services through cinematic visuals."
-        data-year="2025" data-video="reels/12.mp4">
-        <video src="reels/12.mp4" poster="reels/12-thumb.jpg" muted loop playsinline preload="none"></video>
-        <img class="reel-thumb" src="reels/12-thumb.jpg" alt="Padel Pavilion">
-        <div class="reel-badge">
-          <div class="reel-badge-dot"></div> Reel
-        </div>
-        <div class="reel-play">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-        <div class="reel-overlay">
-          <div class="reel-client">Padel Pavilion</div>
-          <div class="reel-title">Promotional Video</div>
-        </div>
-      </div>
-
-    <!-- ADD MORE REELS HERE — duplicate any reel-card block above -->
-
+<!-- ================= CONTENTS ================= -->
+<section class="contents" id="contents" data-bg="#f4f1ea" data-fg="#111111" data-ac="#2b35ff" aria-labelledby="contents-h">
+  <div class="contents-head">
+    <h2 id="contents-h" class="sec-title">Con&shy;tents</h2>
+    <p>Fourteen projects, each one on its own page and in its own colours. Scroll through, or jump straight to one.</p>
   </div>
+  <ol class="toc" id="toc"></ol>
+  <img class="peek" id="peek" alt="">
 </section>
 
-<!-- ── REEL VIEWER ── -->
-<div id="reelViewer">
-  <button class="rv-close" onclick="closeReelViewer()">✕ Close</button>
-  <button class="rv-arrow rv-prev hidden" id="rvPrev">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polyline points="15 18 9 12 15 6" />
-    </svg>
-  </button>
-  <div class="rv-inner">
-    <div class="rv-video-wrap">
-      <video id="rvVideo" controls playsinline style="width:100%;height:100%;object-fit:cover;"></video>
-    </div>
-    <div class="rv-info">
-      <div class="rv-cat" id="rvCat"></div>
-      <div class="rv-title" id="rvTitle"></div>
-      <div class="rv-desc" id="rvDesc"></div>
-      <div class="rv-year" id="rvYear"></div>
+<div id="posters"></div>
+
+<!-- ================= REELS ================= -->
+<section class="reels" id="reels" data-bg="#111111" data-fg="#f4f1ea" data-ac="#2b35ff" aria-labelledby="reels-h">
+  <div class="wrap sec-head">
+    <h2 id="reels-h" class="sec-title">Moving <em>pictures</em></h2>
+    <p>Restaurant campaigns, product showcases and event coverage, shot and edited by me. Hover to preview, click to watch with sound.</p>
+  </div>
+  <div class="reel-row" id="reelRow"></div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services" data-bg="#f4f1ea" data-fg="#111111" data-ac="#2b35ff" aria-labelledby="services-h">
+  <div class="sec-head">
+    <h2 id="services-h" class="sec-title">What <em>I do</em></h2>
+    <p>Most projects need more than one of these. That’s the point: one person for the design, the photos, the video and the page they live on.</p>
+  </div>
+  <div class="cols">
+    <article class="col"><div class="n">i.</div><h3>Graphic &amp; brand design</h3><p>Identities, posters, packaging, labels and print. The things people hold, pin up and keep.</p><div class="tools mono">Illustrator · Photoshop<br>Figma · Canva</div></article>
+    <article class="col"><div class="n">ii.</div><h3>Social &amp; ad creatives</h3><p>Campaign-ready statics, carousels and Meta ads, sized for every placement and safe zone. AI-assisted when it speeds things up, never as a replacement for taste.</p><div class="tools mono">Photoshop · Canva<br>Gemini · Higgsfield · Veo</div></article>
+    <article class="col"><div class="n">iii.</div><h3>Photo &amp; video</h3><p>Event coverage, product and food shoots, retouching and colour, and short-form reels cut for the feed.</p><div class="tools mono">Lightroom · Premiere Pro<br>CapCut</div></article>
+    <article class="col"><div class="n">iv.</div><h3>Web design &amp; build</h3><p>Designed in Figma, built by hand. I’m a CS grad with MERN experience, comfortable in Git and with a QA checklist. This site is the demo.</p><div class="tools mono">Figma · Framer<br>WordPress · MERN</div></article>
+  </div>
+  <div class="pull">
+    <blockquote>“I care about the last ten percent: <em>the type, the spacing, the crop.</em>”</blockquote>
+    <div class="story">
+      <p>I started in student societies at FAST, designing posters for BOL’s debates and shooting events for the photography society, where I’m now Vice President.</p>
+      <p>Since then I’ve made work for restaurants, fashion, furniture, fitness and e-commerce brands in Pakistan, the US and Australia, and picked up a computer science degree along the way.</p>
     </div>
   </div>
-  <button class="rv-arrow rv-next hidden" id="rvNext">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  </button>
-  <div class="rv-counter" id="rvCounter"></div>
+  <div class="note"><span class="mono">Not on the wall</span><span>Performance ad creatives for US and Australian DTC brands, made under client agreements. Happy to walk you through samples on a call.</span></div>
+</section>
+
+<!-- ================= BACK COVER ================= -->
+<section class="back" id="contact" data-bg="#2b35ff" data-fg="#f4f1ea" data-ac="#ffe14d" aria-labelledby="contact-h">
+  <p class="kicker">Got a brief? Let’s make the next issue.</p>
+  <h2 id="contact-h" class="big display"><span data-fit>Let’s talk.</span></h2>
+  <a class="mail" href="mailto:ahmad.rajput125@gmail.com">ahmad.rajput125@gmail.com</a>
+  <div class="back-grid">
+    <div><span class="mono">WhatsApp</span><a href="https://wa.me/923000033661" target="_blank" rel="noopener">+92 300 0033661</a></div>
+    <div><span class="mono">Based in</span><span class="v">Faisalabad, Pakistan</span></div>
+    <div><span class="mono">Availability</span><span class="v">Freelance &amp; remote roles</span></div>
+    <div><span class="mono">Elsewhere</span><a href="https://github.com/Ahmadkhan03" target="_blank" rel="noopener">GitHub ↗</a></div>
+  </div>
+  <div class="colophon mono"><span>© 2026 Ahmad Khan</span><span>Set in Archivo &amp; Instrument Serif</span><a href="#cover">Back to cover ↑</a></div>
+</section>
+</main>
+
+<!-- lightbox (gallery + reels) -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="lb-top"><div><b id="lbTitle"></b> <span class="mono" id="lbSub"></span></div>
+    <button class="lb-btn" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="lb-stage" id="lbStage">
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <div class="lb-bot mono"><span id="lbCount"></span></div>
 </div>
-
-<!-- ── SERVICES ── -->
-<section id="services">
-  <div class="section-label reveal">What I Do</div>
-  <h2 class="reveal reveal-delay-1">Areas of <em>expertise</em></h2>
-  <div class="services-grid reveal reveal-delay-2">
-    <div class="service-item"><div class="service-num">01</div><div class="service-title">Web Design</div><div class="service-desc">Personal and professional webpages for clients in arts, photography, design, and product industries. Built in Figma, Framer, and WordPress.</div></div>
-    <div class="service-item"><div class="service-num">02</div><div class="service-title">Graphic Design</div><div class="service-desc">Posters, visual identities, promotional materials, and print-ready assets spanning events, societies, and commercial brands.</div></div>
-    <div class="service-item"><div class="service-num">03</div><div class="service-title">Social Media Design</div><div class="service-desc">Cohesive, campaign-ready social content for Instagram, Facebook and beyond. Scroll-stopping visuals that maintain brand consistency.</div></div>
-    <div class="service-item"><div class="service-num">04</div><div class="service-title">Event Branding</div><div class="service-desc">End-to-end visual identity for live events — from initial concept to final rollout across print, digital, and environmental media.</div></div>
-  </div>
-</section>
-
-<!-- ── CLIENTS ── -->
-<section id="clients">
-  <div class="clients-header reveal">
-    <div class="section-label">Clients & Collaborators</div>
-    <h2>Brands I've <em>worked with</em></h2>
-  </div>
-  <div style="overflow:hidden;margin:0 -48px;">
-    <div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-      <div class="marquee-track">
-        <div class="client-item"><span class="client-name">BOL Society</span></div>
-        <div class="client-item"><span class="client-name">LuxeLime</span></div>
-        <div class="client-item"><span class="client-name">BUNAI</span></div>
-        <div class="client-item"><span class="client-name">Daira</span></div>
-        <div class="client-item"><span class="client-name">FPS Society</span></div>
-        <div class="client-item"><span class="client-name">National University</span></div>
-        <div class="client-item"><span class="client-name">Bits & Pieces</span></div>
-        <div class="client-item"><span class="client-name">Manzar Kashi</span></div>
-        <div class="client-item"><span class="client-name">BOL Society</span></div>
-        <div class="client-item"><span class="client-name">LuxeLime</span></div>
-        <div class="client-item"><span class="client-name">BUNAI</span></div>
-        <div class="client-item"><span class="client-name">Daira</span></div>
-        <div class="client-item"><span class="client-name">FPS Society</span></div>
-        <div class="client-item"><span class="client-name">National University</span></div>
-        <div class="client-item"><span class="client-name">Bits & Pieces</span></div>
-        <div class="client-item"><span class="client-name">Manzar Kashi</span></div>
-        <div class="client-item"><span class="client-name">Chase Now</span></div>
-        <div class="client-item"><span class="client-name">Duluxe Fitness</span></div>
-        <div class="client-item"><span class="client-name">Apni Website</span></div>
-        <div class="client-item"><span class="client-name">Felo Mart</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── QUOTE ── -->
-<section id="quote">
-  <div class="quote-inner reveal">
-    <div class="quote-mark">"</div>
-    <p class="quote-text">Design is not just what it looks like. Design is <em>how it works</em> — and how it makes you feel.</p>
-    <div class="quote-attr">Ahmad Khan — Graphic Designer</div>
-  </div>
-</section>
-
-<!-- ── THE PROCESS ── -->
-<section id="process" style="border-top:1px solid var(--border);padding:120px 48px;background:var(--bg2);">
-
-  <div style="margin-bottom:72px;">
-    <div class="section-label reveal">How I Work</div>
-    <h2 class="reveal reveal-delay-1">The <em>Process</em></h2>
-    <p class="reveal reveal-delay-2"
-      style="font-size:16px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:520px;margin-top:20px;font-weight:300;">
-      Every great design starts with a strategy. Here's exactly how I turn a client brief into content that performs —
-      from first conversation to final delivery.
-    </p>
-  </div>
-
-  <!-- Steps -->
-  <div class="process-steps reveal">
-    <div class="process-step">
-      <div class="process-step-num">01</div>
-      <div class="process-step-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-      </div>
-      <div class="process-step-title">Discovery & Brief</div>
-      <div class="process-step-desc">Deep dive into your brand — audience, tone, goals, and what sets you apart. No
-        design starts without full clarity.</div>
-      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <polyline points="9 18 15 12 9 6" />
-        </svg></div>
-    </div>
-    <div class="process-step">
-      <div class="process-step-num">02</div>
-      <div class="process-step-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="3" y="4" width="18" height="18" rx="2" />
-          <line x1="16" y1="2" x2="16" y2="6" />
-          <line x1="8" y1="2" x2="8" y2="6" />
-          <line x1="3" y1="10" x2="21" y2="10" />
-        </svg>
-      </div>
-      <div class="process-step-title">Strategy & Planning</div>
-      <div class="process-step-desc">Monthly content calendars, campaign themes, platform-specific scheduling. Every
-        post has a purpose — nothing is random.</div>
-      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <polyline points="9 18 15 12 9 6" />
-        </svg></div>
-    </div>
-    <div class="process-step">
-      <div class="process-step-num">03</div>
-      <div class="process-step-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 19l7-7 3 3-7 7-3-3z" />
-          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-          <circle cx="11" cy="11" r="2" />
-        </svg>
-      </div>
-      <div class="process-step-title">Design & Creation</div>
-      <div class="process-step-desc">Mood boards, palettes, typography — then the actual assets. Reels, carousels,
-        stories, statics. Crafted for scroll-stopping impact.</div>
-      <div class="process-step-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2">
-          <polyline points="9 18 15 12 9 6" />
-        </svg></div>
-    </div>
-    <div class="process-step">
-      <div class="process-step-num">04</div>
-      <div class="process-step-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      </div>
-      <div class="process-step-title">Review & Deliver</div>
-      <div class="process-step-desc">Client review, revisions, and final delivery — all formats sized and optimised for
-        each platform, ready to post immediately.</div>
-    </div>
-  </div>
-
-  <!-- ── Content Calendar ── -->
-  <div style="margin:80px 0 32px;">
-    <div class="section-label reveal">Content Calendar</div>
-    <h2 class="reveal reveal-delay-1">How I <em>plan</em> a month</h2>
-    <p class="reveal reveal-delay-2"
-      style="font-size:15px;line-height:1.75;color:rgba(242,237,228,0.6);max-width:500px;margin-top:16px;font-weight:300;">
-      A real breakdown of how I structure a client's content month across Instagram and Facebook — balanced,
-      intentional, and platform-optimised.
-    </p>
-  </div>
-
-  <!-- Calendar widget -->
-  <div class="cal-wrap reveal">
-    <div class="cal-header">
-      <div>
-        <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">
-          Real Example</div>
-        <div class="cal-month">May 2026</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-        <div style="display:flex;gap:8px;">
-          <span class="cal-platform-badge cal-platform-ig">Instagram</span>
-          <span class="cal-platform-badge cal-platform-fb">Facebook</span>
-        </div>
-        <div style="font-size:11px;color:var(--muted);letter-spacing:0.06em;">26 posts · 4 weeks</div>
-      </div>
-    </div>
-    <div class="cal-days-header">
-      <div class="cal-day-label">Mon</div>
-      <div class="cal-day-label">Tue</div>
-      <div class="cal-day-label">Wed</div>
-      <div class="cal-day-label">Thu</div>
-      <div class="cal-day-label">Fri</div>
-      <div class="cal-day-label">Sat</div>
-      <div class="cal-day-label">Sun</div>
-    </div>
-    <div class="cal-grid" id="calGrid"></div>
-    <div class="cal-legend">
-      <span
-        style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-right:4px;">Types
-        —</span>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#7C3AED;"></div>Reels
-      </div>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#EC4899;"></div>Stories
-      </div>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#3B82F6;"></div>Carousel
-      </div>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#14B8A6;"></div>Static
-      </div>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#C9A55A;"></div>Event
-      </div>
-      <div class="legend-item">
-        <div class="legend-swatch" style="background:#EF4444;"></div>Deal
-      </div>
-      <div style="margin-left:auto;display:flex;gap:12px;flex-wrap:wrap;">
-        <div class="legend-item">
-          <div
-            style="width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#833ab4,#fd1d1d);flex-shrink:0;">
-          </div>IG only
-        </div>
-        <div class="legend-item">
-          <div style="width:8px;height:8px;border-radius:50%;background:#1877F2;flex-shrink:0;"></div>FB only
-        </div>
-        <div class="legend-item">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;"></div>
-          Both
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tooltip -->
-  <div class="cal-tooltip" id="calTooltip">
-    <div class="cal-tt-type" id="ttType"></div>
-    <div class="cal-tt-label" id="ttLabel"></div>
-    <div class="cal-tt-plat">
-      <div class="cal-tt-plat-dot" id="ttDot"></div>
-      <span id="ttPlat"></span>
-    </div>
-  </div>
-
-</section>
-
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="contact-left">
-    <div class="section-label reveal">Let's Collaborate</div>
-    <h2 class="contact-tagline reveal reveal-delay-1">Have a project<br>in <em>mind?</em></h2>
-    <a href="mailto:ahmad.rajput125@gmail.com" class="contact-email reveal reveal-delay-2">ahmad.rajput125@gmail.com</a>
-    <br>
-    <br>
-    <a href="https://wa.me/923000033661" class="contact-whatsapp reveal reveal-delay-3" style="color: var(--gold);">+92 300 0033661</a>
-  </div>
-  <div class="contact-right">
-    <div class="contact-detail reveal"><div class="contact-detail-label">Based In</div><div class="contact-detail-value">Faisalabad, Pakistan</div></div>
-    <div class="contact-detail reveal reveal-delay-1"><div class="contact-detail-label">Availability</div><div class="contact-detail-value">Open to freelance projects</div></div>
-    <div class="contact-detail reveal reveal-delay-2"><div class="contact-detail-label">Response Time</div><div class="contact-detail-value">Within 24 hours</div></div>
-    <!-- <div class="reveal reveal-delay-3">
-      <div class="contact-detail-label" style="margin-bottom:12px;">Social</div>
-      <div class="social-links">
-        <a href="#" class="social-link">Instagram</a>
-        <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">Behance</a>
-        <a href="#" class="social-link">Dribbble</a>
-      </div>
-    </div> -->
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <span class="footer-copy">© 2026 Ahmad Khan. All rights reserved.</span>
-  <span class="footer-brand">Ahmad <span>Khan</span></span>
-</footer>
 
 <script>
+// ---------- data ----------
+// n = images in media/<id>-<i>.webp; ars = aspect ratios of the images shown on the poster (mega shows one per entry)
+// pal = [background, foreground, accent]; lay = poster layout; type = title treatment
+const PROJECTS = [
+  { id: 'manzar', title: ['Manzar', 'Kashi 3.0'], client: 'FAST Photography Society', cat: 'Events', role: 'Poster series, event promo', year: '2023–24', n: 4, ars: [.8, .8, .8, .8],
+    pal: ['#14021c', '#ff5fa8', '#ffb02e'], lay: 'mega', type: 'neon',
+    desc: 'A neon, high-contrast poster series and social promo for Manzar Kashi 3.0, the photography event by the FAST Photography Society. The glow-sign type gave the event a look you could spot from across the feed.' },
+  { id: 'chopaal', title: ['Chopaal', '’24'], client: 'BOL Society, FAST', cat: 'Events', role: 'Event identity, bilingual print & social', year: '2024', n: 1, ars: [1.664],
+    pal: ['#22382b', '#f6f0d0', '#d9c27a'], lay: 'split', type: 'grotesk', bgword: 'چوپال',
+    desc: 'Full event branding for CHOPAAL, BOL Society’s flagship event: identity, Urdu and English posters, sponsor calls, certificates and social assets, all held together by one green, contour-line system.' },
+  { id: 'bukhara', title: ['Bukhara', '<em>by Legacy</em>'], client: 'Restaurant, Faisalabad', cat: 'Branding', role: 'Visual identity, print, photography, reels', year: '2025–26', n: 12, ars: [.75, .75, .8],
+    pal: ['#0e0a08', '#ead6b4', '#c9a25a'], lay: 'center', type: 'serif',
+    desc: 'Designer for Bukhara by Legacy, a high-end restaurant in Faisalabad: visual identity work, menus, signage and print, plus the photography and reels behind its social presence.' },
+  { id: 'luxe', title: ['Luxe<em>Lime</em>'], client: 'Lifestyle brand', cat: 'Branding', role: 'Logo, social content', year: '2025', n: 12, ars: [1, .8, .8],
+    pal: ['#f6f2e8', '#1d1d1b', '#8f8a6a'], lay: 'split', flip: true, type: 'serif',
+    desc: 'Logo and social content for LuxeLime: a quiet cream-and-charcoal system with plenty of air, built for a calm, minimal feed.' },
+  { id: 'rang', title: ['Rang', 'Rasiya'], client: 'Fashion brand', cat: 'Branding', role: 'Moodboards, Meta ads, packaging', year: '2026', n: 7, ars: [1.5, 1.5, 1.5],
+    pal: ['#5a0707', '#f4ddca', '#e7a58c'], lay: 'mega', type: 'serif',
+    desc: 'Contract design for Rang Rasiya: creative moodboards, Instagram creatives and Meta ad materials, plus packaging, boxes, inserts and banners.' },
+  { id: 'chase', title: ['Chase', 'Now'], client: 'E-commerce store', cat: 'Social & ads', role: 'Head graphic designer, social & ads', year: '2025', n: 6, ars: [1, 1, 1],
+    pal: ['#f7e4d2', '#3a281b', '#ff6a3d'], lay: 'split', type: 'grotesk',
+    desc: 'Head graphic designer for Chase Now: product-led social posts and ad creatives that explain a product’s features at a glance.' },
+  { id: 'bol', title: ['Debates', 'VII'], client: 'BOL Debating Society', cat: 'Events', role: 'Event identity, social, print', year: '2023', n: 3, ars: [.8, .8, .8],
+    pal: ['#8b1c1b', '#fbf3ee', '#ffcfc9'], lay: 'mega', type: 'grotesk',
+    desc: 'Visual identity for BOL Society’s debating competition Debates VII: posters, team announcements, schedules, certificates and social assets.' },
+  { id: 'neelam', title: ['Neelam <em>Furniture</em>'], client: 'Furniture brand', cat: 'Branding', role: 'Social design, photography, reels', year: '2025', n: 22, ars: [.8, .8, .8],
+    pal: ['#e8e4dc', '#33291f', '#8a6c4f'], lay: 'center', type: 'serif',
+    desc: 'Social posts and the Ghulfam House series for Neelam Furniture: photography-led content that lets the pieces speak, plus showcase reels.' },
+  { id: 'fps', title: ['FPS ×', 'Daira'], client: 'FAST Photography Society', cat: 'Events', role: 'Ongoing event design', year: '2023–25', n: 1, ars: [1.6],
+    pal: ['#1a0812', '#f5eedb', '#ff3352'], lay: 'split', flip: true, type: 'grotesk',
+    desc: 'The running visual system for the FAST Photography Society: sponsor calls, photo contests, panel talks and DAIRA promo.' },
+  { id: 'duluxe', title: ['Duluxe', 'Fitness'], client: 'Fitness studio', cat: 'Web', role: 'Website design, social', year: '2025', n: 8, ars: [2, 2, 2],
+    pal: ['#0b0b0a', '#f1f1ee', '#e0392e'], lay: 'mega', type: 'grotesk',
+    desc: 'Website design and social content for Duluxe Fitness, a modern fitness studio: dark, high-contrast layouts and posts with some gym-floor attitude.' },
+  { id: 'bits', title: ['Bits <em>&amp;</em>', 'Pieces'], client: 'Lifestyle brand', cat: 'Web', role: 'Website design', year: '2024', n: 4, ars: [1.6, 1.6, 1.6],
+    pal: ['#dcc2b0', '#2a160b', '#8a4b2a'], lay: 'split', type: 'serif',
+    desc: 'Website design for Bits & Pieces, a curated lifestyle and creative brand: clean editorial layouts that give products and stories room to breathe.' },
+  { id: 'felo', title: ['Felo', 'Mart'], client: 'E-commerce', cat: 'Social & ads', role: 'Campaign banners, promo', year: '2025', n: 3, ars: [1.6, 2, 2],
+    pal: ['#cbe7f0', '#0f3446', '#e8432b'], lay: 'split', flip: true, type: 'grotesk',
+    desc: 'Seasonal campaign banners and promotional creatives for Felo Mart, including the Christmas sale.' },
+  { id: 'bunai', title: ['<em>Bunai</em>'], client: 'Handmade crochet brand', cat: 'Social & ads', role: 'Social content', year: '2024', n: 2, ars: [.8, .8],
+    pal: ['#fbe1e3', '#7e3450', '#9a72b8'], lay: 'center', type: 'serif',
+    desc: 'Soft, hand-drawn social content for BUNAI, a handmade crochet brand.' },
+  { id: 'apni', title: ['apni', 'website'], client: 'apniwebsite project', cat: 'Social & ads', role: 'Social & promo creatives', year: '2024', n: 3, ars: [.8, .8, .8],
+    pal: ['#0a0a0a', '#e8ffcb', '#b6ff4d'], lay: 'split', type: 'grotesk',
+    desc: 'Social and promotional creatives designed for the apniwebsite project.' },
+];
+const REELS = [
+  ['Bukhara by Legacy', 'Iftar Buffet Campaign', 2025], ['Bukhara by Legacy', 'Chef’s Testimonial', 2025],
+  ['Bukhara by Legacy', 'Influencer Collaboration', 2024], ['Bukhara × Shan Foods', 'Meetup Highlights', 2025],
+  ['Neelam Furniture', 'Furniture Showcase', 2025], ['Neelam Furniture', 'Furniture Showcase II', 2025],
+  ['FAST National University', 'Admission Campaign', 2025], ['HAVAL', 'Client Showcase', 2025],
+  ['Client at NIC', 'Client Showcase', 2025], ['DAIRA', 'Flagship Event Promotion', 2025],
+  ['AIESEC at NIC', 'Full Event Coverage', 2025], ['Padel Pavilion', 'Promotional Video', 2025],
+];
 
-  /* ── LOADER ── */
-  (function () {
-    const bar = document.getElementById('loaderBar');
-    const percent = document.getElementById('loaderPercent');
-    const loader = document.getElementById('loader');
-    if (!loader) return;
+const MEDIA = 'media/';
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const src = (id, i, small) => `${MEDIA}${id}-${i}${small ? '-s' : ''}.webp`;
+const pad = n => String(n).padStart(2, '0');
+const page = k => pad(4 + k * 2);
+const plain = p => p.title.join(' ').replace(/<[^>]+>/g, '').replace('&amp;', '&');
 
-    // Lock scroll while loading
-    document.body.style.overflow = 'hidden';
+// ---------- ticker ----------
+const words = ['Graphic design', 'and', 'Branding', 'plus', 'Social & ads', 'with', 'Photography', 'and', 'Video', 'also', 'Web'];
+$('#ticker').innerHTML = [...words, ...words].map(w => `<span>${w}</span>`).join('');
 
-    let current = 0;
-    let target = 0;
-    let rafId = null;
-
-    // Randomly advance target in organic bursts
-    const bursts = [
-      { to: 15, delay: 0 },
-      { to: 30, delay: 300 },
-      { to: 48, delay: 700 },
-      { to: 60, delay: 1100 },
-      { to: 72, delay: 1500 },
-      { to: 83, delay: 1900 },
-      { to: 91, delay: 2300 },
-      { to: 100, delay: 2700 },
-    ];
-
-    bursts.forEach(b => {
-      setTimeout(() => { target = b.to; }, b.delay);
-    });
-
-    // Smoothly animate current → target every frame
-    function tick() {
-      if (current < target) {
-        current += (target - current) * 0.06;
-        if (current > target) current = target;
-
-        const rounded = Math.floor(current);
-        bar.style.width = current + '%';
-        percent.textContent = rounded + '%';
-      }
-
-      if (current < 99.9) {
-        rafId = requestAnimationFrame(tick);
-      } else {
-        // Finished — pause then fade out
-        bar.style.width = '100%';
-        percent.textContent = '100%';
-
-        setTimeout(() => {
-          loader.style.transition = 'opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease';
-          loader.classList.add('done');
-          document.body.style.overflow = '';
-        }, 500);
-      }
-    }
-
-    rafId = requestAnimationFrame(tick);
-  })();
-
-  /* ── SCROLL PROGRESS ── */
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    document.getElementById('scrollBar').style.width = (scrolled / total * 100) + '%';
-  });
-
-  /* ── ACTIVE NAV ── */
-    const navSections = ['about', 'work', 'services', 'clients', 'contact'];
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY + window.innerHeight / 3;
-
-      navSections.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
-
-        if (scrollY >= top && scrollY < bottom) {
-          document.querySelectorAll('.nav-links a').forEach(a => {
-            a.classList.remove('active');
-            if (a.dataset.section === id) a.classList.add('active');
-          });
-        }
-      });
-    });
-
-/* ── CURSOR ── */
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function tick(){
-  rx+=(mx-rx)*0.15; ry+=(my-ry)*0.15;
-  dot.style.left=mx+'px'; dot.style.top=my+'px';
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(tick);
-})();
-document.querySelectorAll('a,button,.project-card,.filter-btn,.add-project-card,.lb-dot').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
-});
-
-/* ── NAV ── */
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80);
-});
-
-/* ── REVEAL ── */
-const ro = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);} });
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-function isMobile() {
-  return window.matchMedia('(max-width: 900px)').matches;
-}
-
-  /* ── CARD SLIDESHOW ── */
-  document.querySelectorAll('.project-card[data-images]').forEach(card => {
-    const images = card.dataset.images.split(',').map(s => s.trim()).filter(Boolean);
-    if (!images.length) return;
-
-    const wrap = card.querySelector('.card-img-wrap');
-    if (!wrap) return;
-
-    // Layer A — always shows current image, never hides
-    const imgA = document.createElement('img');
-    imgA.style.cssText = `
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;display:block;
-    z-index:2;opacity:1;
-    transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-  `;
-    imgA.src = images[0];
-    imgA.alt = card.dataset.title || '';
-
-    // Layer B — next image fades IN on top, background never exposed
-    const imgB = document.createElement('img');
-    imgB.style.cssText = `
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;display:block;
-    z-index:3;opacity:0;
-    transition:opacity 0.55s ease;
-  `;
-    imgB.alt = '';
-
-    // Shimmer overlay — gold sweep during transition
-    const shimmer = document.createElement('div');
-    shimmer.style.cssText = `
-    position:absolute;inset:0;z-index:4;pointer-events:none;
-    background:linear-gradient(105deg,
-      transparent 30%,
-      rgba(201,165,90,0.06) 50%,
-      transparent 70%
-    );
-    background-size:200% 100%;
-    opacity:0;
-    transition:opacity 0.3s ease;
-    border-radius: inherit;
-    overflow: hidden;
-  `;
-
-    wrap.appendChild(imgA);
-    wrap.appendChild(imgB);
-    wrap.appendChild(shimmer);
-
-    // Zoom on hover
-    card.addEventListener('mouseenter', () => imgA.style.transform = 'scale(1.05)');
-    card.addEventListener('mouseleave', () => imgA.style.transform = 'scale(1)');
-
-    // Counter badge
-    const ctr = card.querySelector('.img-counter');
-    if (ctr && images.length > 1) ctr.textContent = '1 / ' + images.length;
-
-    // Dots
-    const dotsEl = card.querySelector('.card-dots');
-    if (dotsEl && images.length > 1) {
-      images.forEach((_, i) => {
-        const d = document.createElement('div');
-        d.className = 'card-dot' + (i === 0 ? ' active' : '');
-        dotsEl.appendChild(d);
-      });
-    }
-
-    function updateUI(i) {
-      if (ctr && images.length > 1) ctr.textContent = (i + 1) + ' / ' + images.length;
-      if (dotsEl) dotsEl.querySelectorAll('.card-dot')
-        .forEach((d, n) => d.classList.toggle('active', n === i));
-    }
-
-    let idx = 0, timer = null, busy = false;
-
-    function goTo(n) {
-      const next = (n + images.length) % images.length;
-      if (next === idx || busy) return;
-      busy = true;
-
-      // Preload next image into layer B
-      imgB.src = images[next];
-      shimmer.style.opacity = '1';
-
-      const doSwap = () => {
-        // Fade B in ON TOP of A — background never shows
-        imgB.style.opacity = '1';
-
-        setTimeout(() => {
-          // Once B is visible, quietly move it to A and reset B
-          imgA.src = images[next];
-          imgB.style.opacity = '0';
-          imgB.src = '';
-          shimmer.style.opacity = '0';
-          idx = next;
-          busy = false;
-          updateUI(idx);
-        }, 580);
-      };
-
-      if (imgB.complete && imgB.naturalWidth) doSwap();
-      else imgB.onload = doSwap;
-    }
-
-    // Desktop — hover
-    card.addEventListener('mouseenter', () => {
-      if (images.length <= 1 || isMobile()) return;
-      timer = setInterval(() => goTo(idx + 1), 1800);
-    });
-    card.addEventListener('mouseleave', () => {
-      if (isMobile()) return;
-      clearInterval(timer);
-      timer = null;
-      if (idx !== 0) setTimeout(() => goTo(0), 300);
-    });
-
-    // Mobile — auto-play on scroll into view
-    if (images.length > 1) {
-      const mobileObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && isMobile()) {
-            timer = setInterval(() => goTo(idx + 1), 1800);
-          } else {
-            clearInterval(timer);
-            timer = null;
-          }
-        });
-      }, { threshold: 0.5 });
-      mobileObserver.observe(card);
-    }
-  });
-
-/* ── FILTER ── */
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const f=btn.dataset.filter;
-    document.querySelectorAll('.project-card[data-cat]').forEach(c=>{
-      c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
-    });
-  });
-});
-
-/* ── LIGHTBOX ── */
-let lbImgs=[], lbIdx=0;
-
-function openLightbox(card){
-  lbImgs = (card.dataset.images||'').split(',').map(s=>s.trim()).filter(Boolean);
-  lbIdx  = 0;
-
-  const cat = (card.dataset.cat||'').toUpperCase().replace(/-/g,' ');
-  document.getElementById('lb-badge').textContent    = cat;
-  document.getElementById('lb-name-top').textContent = card.dataset.title||'';
-  document.getElementById('lb-cat').textContent      = cat;
-  document.getElementById('lb-title').textContent    = card.dataset.title||'';
-  document.getElementById('lb-desc').textContent     = card.dataset.description||'';
-  document.getElementById('lb-year').textContent     = card.dataset.year ? '— '+card.dataset.year : '';
-
-  buildDots();
-  renderImg(false);
-
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-
-  history.pushState({ lightbox: true }, '');
-}
-
-function buildDots(){
-  const strip=document.getElementById('lb-dots');
-  strip.innerHTML='';
-  lbImgs.forEach((_,i)=>{
-    const d=document.createElement('div');
-    d.className='lb-dot'+(i===0?' active':'');
-    d.addEventListener('click',()=>jumpTo(i));
-    strip.appendChild(d);
+// ---------- contents ----------
+$('#toc').innerHTML = PROJECTS.map((p, k) => `
+  <li><a href="#p-${p.id}" data-peek="${p.id}">
+    <span class="mono">p.${page(k)}</span><span class="t">${plain(p)}</span>
+    <span class="mono cat">${p.cat}</span><span class="mono yr">${p.year}</span><span class="arrow">→</span>
+  </a></li>`).join('');
+const peek = $('#peek');
+if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  $$('[data-peek]').forEach(a => {
+    a.addEventListener('mouseenter', () => { peek.src = src(a.dataset.peek, 1, 1); peek.classList.add('on'); });
+    a.addEventListener('mouseleave', () => peek.classList.remove('on'));
+    a.addEventListener('mousemove', e => { peek.style.left = e.clientX + 150 + 'px'; peek.style.top = e.clientY + 'px'; });
   });
 }
 
-function renderImg(animate){
-  const box=document.getElementById('lb-img-container');
-  let img=box.querySelector('img');
-  if(!img){
-    if(!lbImgs.length){
-      box.innerHTML='<div class="lb-placeholder"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="3 9 21 9"/></svg></div>';
-      return;
-    }
-    img=document.createElement('img');
-    box.innerHTML='';
-    box.appendChild(img);
+// ---------- posters ----------
+const shot = (p, i, cls = '') => `<div class="shot ${cls}" style="--ar:${p.ars[i - 1] || 1}"><img class="p-img" src="${src(p.id, i, i > 1)}" alt="${plain(p)}, piece ${i}" loading="lazy" data-gal="${p.id}" data-i="${i}"></div>`;
+const facts = p => `<dl class="p-facts"><dt>Client</dt><dd>${p.client}</dd><dt>My part</dt><dd>${p.role}</dd><dt>Year</dt><dd>${p.year}</dd></dl>`;
+const more = p => `<button class="p-more" data-gal="${p.id}" data-i="1">${p.n > 1 ? `See all ${p.n} pieces` : 'View full size'} →</button>`;
+const meta = (p, k) => `<div class="p-meta mono"><span>No.${pad(k + 1)} — <span class="tag">${p.cat}</span></span><span>${p.client}</span><span>${p.year}</span></div>`;
+const folio = (p, k) => `<div class="folio mono"><span>Ahmad Khan</span><span>p.${page(k)}</span></div>`;
+
+function poster(p, k) {
+  const attrs = `class="poster lay-${p.lay} type-${p.type}${p.flip ? ' flip' : ''}" id="p-${p.id}" data-bg="${p.pal[0]}" data-fg="${p.pal[1]}" data-ac="${p.pal[2]}" aria-label="${plain(p)}"`;
+  const bg = p.bgword ? `<div class="bgword" aria-hidden="true">${p.bgword}</div>` : '';
+  if (p.lay === 'mega') {
+    const n = Math.min(p.n, p.ars.length);
+    return `<section ${attrs}>${meta(p, k)}
+      <h2 class="p-title">${p.title.map(l => `<span data-fit>${l}</span>`).join('')}</h2>
+      <div class="strip">${Array.from({ length: n }, (_, i) => shot(p, i + 1)).join('')}</div>
+      <div class="p-under"><p class="p-desc">${p.desc}</p>${facts(p)}${more(p)}</div>
+      ${folio(p, k)}</section>`;
   }
-  if(animate){
-    img.classList.add('fading');
-    setTimeout(()=>{ img.src=lbImgs[lbIdx]; img.classList.remove('fading'); },220);
-  } else {
-    img.src=lbImgs[lbIdx];
+  if (p.lay === 'center') {
+    return `<section ${attrs}>${meta(p, k)}
+      <div class="p-grid">
+        <h2 class="p-title">${p.title.join(' ')}</h2>
+        ${shot(p, 1, 'main')}
+        <div class="p-side">
+          <div class="big-n">${pad(p.n)}<span class="mono" style="display:block;font-size:11px;color:var(--fg);margin-top:8px">pieces in this project</span></div>
+          ${p.n > 1 ? shot(p, 2) : ''}
+          <p class="p-desc">${p.desc}</p>${facts(p)}${more(p)}
+        </div>
+      </div>${folio(p, k)}</section>`;
   }
-  // Arrows — always show if >1 image
-  document.getElementById('lb-prev').classList.toggle('hidden',lbImgs.length<=1);
-  document.getElementById('lb-next').classList.toggle('hidden',lbImgs.length<=1);
-  // Count
-  document.getElementById('lb-count').textContent = lbImgs.length>1 ? (lbIdx+1)+' / '+lbImgs.length : '';
-  // Dots
-  document.querySelectorAll('.lb-dot').forEach((d,i)=>d.classList.toggle('active',i===lbIdx));
+  return `<section ${attrs}>${bg}${meta(p, k)}
+    <div class="p-grid">
+      <div class="p-text"><h2 class="p-title">${p.title.map(l => `<span data-fit="${p.id}">${l}</span>`).join('')}</h2><p class="p-desc">${p.desc}</p>${facts(p)}${more(p)}</div>
+      <div class="p-media">${shot(p, 1, 'main')}${p.n > 1 ? shot(p, 2, 'float') : ''}</div>
+    </div>${folio(p, k)}</section>`;
 }
+$('#posters').outerHTML = PROJECTS.map(poster).join('');
 
-function jumpTo(n){ lbIdx=(n+lbImgs.length)%lbImgs.length; renderImg(true); }
-function lbNext(){ jumpTo(lbIdx+1); }
-function lbPrev(){ jumpTo(lbIdx-1); }
-
-document.getElementById('lb-prev').addEventListener('click',lbPrev);
-document.getElementById('lb-next').addEventListener('click',lbNext);
-
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
+// ---------- fit text to its column ----------
+// lines sharing a data-fit value get one size (the smallest that fits); the cover name is also capped by viewport height
+function fit() {
+  const groups = {};
+  $$('[data-fit]').forEach(el => {
+    el.style.fontSize = '100px';
+    const cap = el.closest('.lay-split') ? 170 : el.closest('.poster') ? 300 : 520;
+    let size = Math.min(97 * el.parentElement.clientWidth / el.scrollWidth, cap);
+    if (el.dataset.fit === 'name') size = Math.min(size, innerHeight * .25);
+    if (el.closest('.lay-mega')) size = Math.min(size, innerHeight * .2);
+    const g = el.dataset.fit || Math.random();
+    (groups[g] = groups[g] || []).push([el, size]);
+  });
+  Object.values(groups).forEach(list => {
+    const size = Math.min(...list.map(x => x[1]));
+    list.forEach(([el]) => el.style.fontSize = size + 'px');
+  });
 }
+document.fonts.ready.then(fit); fit();
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 120); });
 
-document.querySelectorAll('.project-card[data-title]').forEach(card => {
-  let touchMoved = false;
+// ---------- palette switching ----------
+const root = document.documentElement.style;
+const palSections = $$('[data-bg]');
+let palCur = null;
+function syncPalette() {
+  const mid = innerHeight / 2;
+  const s = palSections.find(el => { const r = el.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
+  if (!s || s === palCur) return;
+  palCur = s;
+  const d = s.dataset;
+  root.setProperty('--bg', d.bg); root.setProperty('--fg', d.fg); root.setProperty('--ac', d.ac);
+}
+addEventListener('scroll', syncPalette, { passive: true });
+// posters are built by JS, so the browser can't jump to a #p-… link on its own
+const hashTarget = location.hash && document.getElementById(location.hash.slice(1));
+if (hashTarget) hashTarget.scrollIntoView({ behavior: 'instant' });
+syncPalette();
 
-  card.addEventListener('touchstart', () => {
-    touchMoved = false;
-  }, { passive: true });
-
-  card.addEventListener('touchmove', () => {
-    touchMoved = true;
-  }, { passive: true });
-
-  card.addEventListener('touchend', e => {
-    if (!touchMoved) {
-      e.preventDefault();
-      openLightbox(card);
-    }
-  });
-
-  // Desktop click still works
-  card.addEventListener('click', () => {
-    if (!isMobile()) openLightbox(card);
-  });
-});
-document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeLightbox(); });
-
-document.addEventListener('keydown',e=>{
-
-  if (document.getElementById('reelViewer').classList.contains('open')) {
-    if (e.key === 'ArrowRight') rvNext();
-    if (e.key === 'ArrowLeft') rvPrev();
-    if (e.key === 'Escape') closeReelViewer();
-    return;
+// ---------- reels ----------
+$('#reelRow').innerHTML = REELS.map(([client, title, year], i) => `
+  <button class="reel" data-reel="${i + 1}" aria-label="Play ${client}: ${title}">
+    <span class="shot"><span class="num">R${pad(i + 1)}</span>
+      <img src="${MEDIA}reel-${i + 1}-s.webp" alt="" loading="lazy">
+      <video muted loop playsinline preload="none" data-src="reels/${i + 1}.mp4"></video></span>
+    <b>${title}</b><span class="mono">${client} · ${year}</span>
+  </button>`).join('');
+const hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+$$('.reel').forEach(r => {
+  const v = $('video', r);
+  if (hover) {
+    r.addEventListener('mouseenter', () => { if (!v.src) v.src = v.dataset.src; v.play().then(() => r.classList.add('playing')).catch(() => {}); });
+    r.addEventListener('mouseleave', () => { v.pause(); r.classList.remove('playing'); });
   }
-
-  if(!document.getElementById('lightbox').classList.contains('open')) return;
-  if(e.key==='Escape') closeLightbox();
-  if(e.key==='ArrowRight') lbNext();
-  if(e.key==='ArrowLeft')  lbPrev();
+  r.addEventListener('click', () => { v.pause(); r.classList.remove('playing'); openReel(+r.dataset.reel); });
 });
 
-// Touch swipe
-let tx=0;
-document.getElementById('lightbox').addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
-document.getElementById('lightbox').addEventListener('touchend',e=>{
-  const diff=tx-e.changedTouches[0].clientX;
-  if(Math.abs(diff)>50){ diff>0?lbNext():lbPrev(); }
+// ---------- lightbox ----------
+const lb = $('#lb'), stage = $('#lbStage');
+let cur = null, idx = 1, lastFocus = null;
+function openLb() { lastFocus = document.activeElement; lb.classList.add('open'); document.body.style.overflow = 'hidden'; $('#lbClose').focus(); }
+function closeLb() {
+  lb.classList.remove('open'); document.body.style.overflow = '';
+  const v = $('video', stage); if (v) { v.pause(); v.remove(); }
+  lastFocus && lastFocus.focus();
+}
+function setMedia(el) { const old = stage.querySelector('img, video'); if (old) old.remove(); stage.prepend(el); }
+function show(i) {
+  idx = (i - 1 + cur.n) % cur.n + 1;
+  const im = new Image(); im.src = src(cur.id, idx); im.alt = `${plain(cur)}, piece ${idx} of ${cur.n}`;
+  setMedia(im);
+  $('#lbCount').textContent = `${pad(idx)} / ${pad(cur.n)}`;
+}
+function openGallery(id, i) {
+  cur = PROJECTS.find(p => p.id === id);
+  $('#lbTitle').textContent = plain(cur);
+  $('#lbSub').textContent = `${cur.cat} · ${cur.year}`;
+  $('#lbPrev').hidden = $('#lbNext').hidden = cur.n < 2;
+  show(i); openLb();
+}
+function openReel(i) {
+  cur = null;
+  const [client, title, year] = REELS[i - 1];
+  const v = document.createElement('video');
+  Object.assign(v, { src: `reels/${i}.mp4`, poster: `${MEDIA}reel-${i}.webp`, controls: true, playsInline: true, autoplay: true });
+  setMedia(v);
+  $('#lbTitle').textContent = title; $('#lbSub').textContent = `${client} · ${year}`;
+  $('#lbPrev').hidden = $('#lbNext').hidden = true; $('#lbCount').textContent = '';
+  openLb();
+}
+document.addEventListener('click', e => {
+  const g = e.target.closest('[data-gal]');
+  if (g) openGallery(g.dataset.gal, +g.dataset.i);
 });
-
-  // CONTENT CALENDAR
-  (function () {
-    const grid = document.getElementById('calGrid');
-    if (!grid) return;
-
-    // May 2026 starts on Friday → 4 empty cells (Mon=0 … Fri=4)
-    const startOffset = 4;
-    const totalDays = 31;
-    const todayDay = 8; 
-
-
-    // ── Calendar data ──
-    const schedule = [
-      { day: 1, type: 'static', platform: 'ig', label: 'Brand Introduction Post' },
-      { day: 2, type: 'reel', platform: 'both', label: 'Behind the Scenes — Studio' },
-      { day: 3, type: 'story', platform: 'ig', label: 'Weekend Poll & Q&A' },
-      { day: 5, type: 'carousel', platform: 'ig', label: 'Fun Facts' },
-      { day: 6, type: 'story', platform: 'ig', label: 'Day in the Life' },
-      { day: 7, type: 'static', platform: 'fb', label: 'Brand Spotlight' },
-      { day: 8, type: 'reel', platform: 'both', label: 'Order Process Time-lapse' },
-      { day: 9, type: 'story', platform: 'ig', label: 'Ask Us Anything Session' },
-      { day: 10, type: 'event', platform: 'both', label: 'Event Highlight' },
-      { day: 12, type: 'deal', platform: 'both', label: 'Monday Deal — 20% Off Package' },
-      { day: 13, type: 'carousel', platform: 'ig', label: 'Branding Process Breakdown' },
-      { day: 14, type: 'reel', platform: 'ig', label: 'Behind the Kitchen' },
-      { day: 15, type: 'static', platform: 'both', label: 'Motivational Quote Card' },
-      { day: 16, type: 'story', platform: 'ig', label: 'Flash Poll — Next Content' },
-      { day: 17, type: 'event', platform: 'both', label: 'Campaign Launch' },
-      { day: 19, type: 'static', platform: 'both', label: 'Product Feature — New Work' },
-      { day: 20, type: 'reel', platform: 'both', label: 'Trending Audio Reel' },
-      { day: 21, type: 'carousel', platform: 'ig', label: 'Before & After — Rebrand' },
-      { day: 22, type: 'story', platform: 'ig', label: 'Project Countdown' },
-      { day: 23, type: 'deal', platform: 'both', label: 'Flash Sale — 24 Hours Only' },
-      { day: 24, type: 'event', platform: 'both', label: 'Showcase' },
-      { day: 26, type: 'deal', platform: 'both', label: 'End of Month Sale Announcement' },
-      { day: 27, type: 'carousel', platform: 'ig', label: 'Top 5 Wins' },
-      { day: 28, type: 'static', platform: 'fb', label: 'Client Testimonials/Reviews' },
-      { day: 29, type: 'reel', platform: 'both', label: 'Monthly Highlights Reel' },
-      { day: 30, type: 'story', platform: 'ig', label: 'Thank You — See You in June' },
-      { day: 31, type: 'static', platform: 'both', label: 'June Preview Teaser' },
-    ];
-
-    // Map day → items
-    const dayMap = {};
-    schedule.forEach(s => {
-      if (!dayMap[s.day]) dayMap[s.day] = [];
-      dayMap[s.day].push(s);
-    });
-
-    // Type config
-    const types = {
-      reel: { color: '#A78BFA', bg: 'rgba(124,58,237,0.18)', border: 'rgba(124,58,237,0.35)', dot: '#7C3AED' },
-      story: { color: '#F9A8D4', bg: 'rgba(236,72,153,0.18)', border: 'rgba(236,72,153,0.35)', dot: '#EC4899' },
-      carousel: { color: '#93C5FD', bg: 'rgba(59,130,246,0.18)', border: 'rgba(59,130,246,0.35)', dot: '#3B82F6' },
-      static: { color: '#5EEAD4', bg: 'rgba(20,184,166,0.18)', border: 'rgba(20,184,166,0.35)', dot: '#14B8A6' },
-      event: { color: '#FCD34D', bg: 'rgba(201,165,90,0.18)', border: 'rgba(201,165,90,0.35)', dot: '#C9A55A' },
-      deal: { color: '#FCA5A5', bg: 'rgba(239,68,68,0.18)', border: 'rgba(239,68,68,0.35)', dot: '#EF4444' },
-    };
-
-    const platformDot = {
-      ig: 'linear-gradient(135deg,#833ab4,#fd1d1d)',
-      fb: '#1877F2',
-      both: '#C9A55A',
-    };
-    const platformLabel = {
-      ig: 'Instagram',
-      fb: 'Facebook',
-      both: 'Instagram & Facebook',
-    };
-
-    // Tooltip
-    const tooltip = document.getElementById('calTooltip');
-    const ttType = document.getElementById('ttType');
-    const ttLabel = document.getElementById('ttLabel');
-    const ttDot = document.getElementById('ttDot');
-    const ttPlat = document.getElementById('ttPlat');
-
-    function showTT(e, item) {
-      const t = types[item.type];
-      ttType.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
-      ttType.style.color = t.dot;
-      ttLabel.textContent = item.label;
-      ttDot.style.background = platformDot[item.platform];
-      ttPlat.textContent = platformLabel[item.platform];
-      tooltip.classList.add('show');
-      moveTT(e);
-    }
-    function moveTT(e) {
-      let x = e.clientX + 18, y = e.clientY - 50;
-      if (x + 190 > window.innerWidth) x = e.clientX - 208;
-      if (y < 8) y = e.clientY + 18;
-      tooltip.style.left = x + 'px';
-      tooltip.style.top = y + 'px';
-    }
-    function hideTT() { tooltip.classList.remove('show'); }
-
-    // Build grid
-    // Empty offset cells
-    for (let i = 0; i < startOffset; i++) {
-      const c = document.createElement('div');
-      c.className = 'cal-cell empty';
-      grid.appendChild(c);
-    }
-
-    for (let day = 1; day <= totalDays; day++) {
-      const cell = document.createElement('div');
-      cell.className = 'cal-cell' + (day === todayDay ? ' today' : '');
-
-      // Date number
-      const dn = document.createElement('div');
-      dn.className = 'cal-date';
-      dn.textContent = day;
-      if (day === todayDay) {
-        dn.style.cssText = 'font-size:11px;color:var(--gold);font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:4px;';
-        const dot = document.createElement('span');
-        dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;';
-        dn.appendChild(dot);
-      }
-      cell.appendChild(dn);
-
-      // Pills
-      const items = dayMap[day] || [];
-      items.forEach(item => {
-        const t = types[item.type] || types.static;
-        const pill = document.createElement('div');
-        pill.className = 'cal-pill';
-        pill.style.cssText = `background:${t.bg};color:${t.color};border:1px solid ${t.border};`;
-
-        // Platform dot
-        const pd = document.createElement('span');
-        pd.className = 'cal-pill-dot';
-        pd.style.background = platformDot[item.platform];
-        pill.appendChild(pd);
-
-        // Label
-        const pl = document.createElement('span');
-        pl.className = 'cal-pill-text';
-        pl.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
-        pill.appendChild(pl);
-
-        // Desktop hover
-        pill.addEventListener('mouseenter', e => showTT(e, item));
-        pill.addEventListener('mousemove', e => moveTT(e));
-        pill.addEventListener('mouseleave', hideTT);
-
-        // Mobile tap — show centered above the pill
-        pill.addEventListener('touchstart', e => {
-          e.stopPropagation();
-          const rect = pill.getBoundingClientRect();
-
-          // Position tooltip centered above the tapped pill
-          const tt = document.getElementById('calTooltip');
-          const ttWidth = 180;
-          let x = rect.left + (rect.width / 2) - (ttWidth / 2);
-          let y = rect.top - 90 + window.scrollY;
-
-          // Keep inside screen horizontally
-          if (x < 8) x = 8;
-          if (x + ttWidth > window.innerWidth - 8) x = window.innerWidth - ttWidth - 8;
-          // If too close to top flip it below
-          if (rect.top < 100) y = rect.bottom + 10 + window.scrollY;
-
-          tt.style.left = x + 'px';
-          tt.style.top = y + 'px';
-
-          document.getElementById('ttType').textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
-          document.getElementById('ttType').style.color = types[item.type].dot;
-          document.getElementById('ttLabel').textContent = item.label;
-          document.getElementById('ttDot').style.background = platformDot[item.platform];
-          document.getElementById('ttPlat').textContent = platformLabel[item.platform];
-
-          tt.classList.add('show');
-          clearTimeout(tt._hideTimer);
-          tt._hideTimer = setTimeout(() => tt.classList.remove('show'), 2500);
-        }, { passive: true });
-
-        cell.appendChild(pill);
-      });
-
-      grid.appendChild(cell);
-    }
-
-    // Dismiss calendar tooltip on outside tap
-    document.addEventListener('touchstart', e => {
-      const tt = document.getElementById('calTooltip');
-      if (tt && !e.target.closest('.cal-pill')) {
-        tt.classList.remove('show');
-      }
-    }, { passive: true });
-
-  })();
-
-  /* ── BACK BUTTON CLOSES LIGHTBOX ── */
-    window.addEventListener('popstate', () => {
-
-      if (document.getElementById('reelViewer').classList.contains('open')) {
-        closeReelViewer(); return;
-      }
-
-      if (document.getElementById('lightbox').classList.contains('open')) {
-        closeLightbox();
-      }
-    });
-
-    /* ── BACK TO TOP ── */
-      const backToTop = document.getElementById('backToTop');
-
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const scrolled = scrollY > 600;
-        const footer = document.querySelector('footer');
-        const nearFooter = footer &&
-          scrollY + window.innerHeight >= footer.offsetTop - 100;
-
-        // Desktop — show after 600px
-        if (!isMobile()) {
-          backToTop.classList.toggle('visible', scrolled);
-        }
-
-        // Mobile — only show when near footer
-        if (isMobile()) {
-          backToTop.classList.toggle('near-footer', nearFooter);
-        }
-
-      }, { passive: true });
-
-      backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // Mobile touch
-      backToTop.addEventListener('touchend', e => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-  /* ── REELS ── */
-  const reelCards = document.querySelectorAll('.reel-card[data-video]');
-  let rvIdx = 0;
-
-  // Hover to preview
-  reelCards.forEach(card => {
-    const video = card.querySelector('video');
-    if (!video) return;
-
-    card.addEventListener('mouseenter', () => {
-      video.play().catch(() => { });
-    });
-    card.addEventListener('mouseleave', () => {
-      video.pause();
-      video.currentTime = 0;
-    });
-  });
-
-  // Open viewer
-  function openReelViewer(idx) {
-    rvIdx = idx;
-    renderReel();
-    document.getElementById('reelViewer').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    history.pushState({ reelViewer: true }, '');
-  }
-
-  function renderReel() {
-    const card = reelCards[rvIdx];
-    const video = document.getElementById('rvVideo');
-
-    video.pause();
-    video.src = card.dataset.video;
-    video.load();
-    video.play().catch(() => { });
-
-    document.getElementById('rvCat').textContent = card.dataset.client || '';
-    document.getElementById('rvTitle').textContent = card.dataset.title || '';
-    document.getElementById('rvDesc').textContent = card.dataset.desc || '';
-    document.getElementById('rvYear').textContent = card.dataset.year ? '— ' + card.dataset.year : '';
-    document.getElementById('rvCounter').textContent = (rvIdx + 1) + ' / ' + reelCards.length;
-
-    document.getElementById('rvPrev').classList.toggle('hidden', reelCards.length <= 1);
-    document.getElementById('rvNext').classList.toggle('hidden', reelCards.length <= 1);
-  }
-
-  function closeReelViewer() {
-    const video = document.getElementById('rvVideo');
-    video.pause();
-    video.src = '';
-    document.getElementById('reelViewer').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function rvNext() { rvIdx = (rvIdx + 1) % reelCards.length; renderReel(); }
-  function rvPrev() { rvIdx = (rvIdx - 1 + reelCards.length) % reelCards.length; renderReel(); }
-
-  document.getElementById('rvPrev').addEventListener('click', rvPrev);
-  document.getElementById('rvNext').addEventListener('click', rvNext);
-
-  reelCards.forEach((card, i) => {
-    card.addEventListener('click', () => openReelViewer(i));
-
-    // Mobile tap
-    let touched = false;
-    card.addEventListener('touchstart', () => { touched = false; }, { passive: true });
-    card.addEventListener('touchmove', () => { touched = true; }, { passive: true });
-    card.addEventListener('touchend', e => {
-      if (!touched) { e.preventDefault(); openReelViewer(i); }
-    });
-  });
-
-  document.getElementById('reelViewer').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeReelViewer();
-  });
-
-  // Touch swipe in viewer
-  let rvTouch = 0;
-  document.getElementById('reelViewer').addEventListener('touchstart', e => {
-    rvTouch = e.touches[0].clientX;
-  }, { passive: true });
-  document.getElementById('reelViewer').addEventListener('touchend', e => {
-    const diff = rvTouch - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) { diff > 0 ? rvNext() : rvPrev(); }
-  });
-
-// /* ── ADD TIP ── */
-// function showAddTip(){
-//   const t=document.getElementById('addTip');
-//   t.style.display=t.style.display==='none'?'block':'none';
-//   if(t.style.display==='block') t.scrollIntoView({behavior:'smooth',block:'nearest'});
-// }
+$('#lbPrev').addEventListener('click', () => show(idx - 1));
+$('#lbNext').addEventListener('click', () => show(idx + 1));
+$('#lbClose').addEventListener('click', closeLb);
+stage.addEventListener('click', e => { if (e.target === stage) closeLb(); });
+addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (cur && cur.n > 1 && e.key === 'ArrowLeft') show(idx - 1);
+  if (cur && cur.n > 1 && e.key === 'ArrowRight') show(idx + 1);
+});
 </script>
 </body>
 </html>
