@@ -25,6 +25,10 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+/* smooth wheel scrolling (Lenis) takes over from the CSS version when it loads */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 body {
   background: var(--bg); color: var(--fg);
   font-family: var(--sans); font-variation-settings: "wdth" 100;
@@ -487,6 +491,7 @@ a { color: inherit; }
 </div>
 
 <script src="ai-media.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 // ---------- data ----------
 // n = images in media/<id>-<i>.webp; ars = aspect ratios of the first images (sizes the strips and thumbnails)
@@ -829,9 +834,9 @@ $$('.reel').forEach(r => {
 // ---------- lightbox ----------
 const lb = $('#lb'), stage = $('#lbStage');
 let cur = null, idx = 1, lastFocus = null;
-function openLb() { lastFocus = document.activeElement; lb.classList.add('open'); document.body.style.overflow = 'hidden'; $('#lbClose').focus(); }
+function openLb() { lastFocus = document.activeElement; lb.classList.add('open'); document.body.style.overflow = 'hidden'; lenis && lenis.stop(); $('#lbClose').focus(); }
 function closeLb() {
-  lb.classList.remove('open'); document.body.style.overflow = '';
+  lb.classList.remove('open'); document.body.style.overflow = ''; lenis && lenis.start();
   const v = $('video', stage); if (v) { v.pause(); v.remove(); }
   films.forEach(f => { filmIO.unobserve(f); filmIO.observe(f); }); // resume films still on screen
   lastFocus && lastFocus.focus();
@@ -868,6 +873,22 @@ document.addEventListener('click', e => {
   const g = e.target.closest('[data-gal]');
   if (g) openGallery(g.dataset.gal, +g.dataset.i);
 });
+// ---------- smooth scrolling ----------
+// eases mouse-wheel and menu-link scrolling; touch scrolling stays native. Skipped for reduced motion or if the CDN fails.
+var lenis = null;
+if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  lenis = new Lenis({ duration: 1.15, easing: t => 1 - Math.pow(1 - t, 4) });
+  (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    const target = a && a.getAttribute('href').length > 1 && document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    lenis.scrollTo(target, { duration: 1.6 });
+    history.replaceState(null, '', a.getAttribute('href'));
+  });
+}
+
 $('#lbPrev').addEventListener('click', () => show(idx - 1));
 $('#lbNext').addEventListener('click', () => show(idx + 1));
 $('#lbClose').addEventListener('click', closeLb);
