@@ -146,6 +146,41 @@ a { color: inherit; }
 .lay-center .p-side .shot { width: 46%; }
 .lay-center .big-n { font-family: var(--serif); font-size: clamp(70px, 8vw, 120px); line-height: .8; color: var(--ac); }
 
+/* layout: deck (carousels + singles) */
+.lay-deck .dk-top { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: end; margin-top: 30px; position: relative; z-index: 1; }
+.lay-deck .p-title em { font-style: italic; color: var(--ac); }
+.lay-deck .dk-intro { display: flex; flex-direction: column; gap: 22px; }
+.dk-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.dk-btns .ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--fg); }
+.dk-label { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid currentColor; padding-top: 10px; margin: 56px 0 26px; position: relative; z-index: 1; }
+.dk-label span:first-child { color: var(--ac); }
+.dk-decks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); padding: 0 clamp(0px, 2vw, 32px); position: relative; z-index: 1; }
+.deck { margin: 0; }
+.dk-pile { position: relative; }
+.dk-pile::before, .dk-pile::after { content: ""; position: absolute; inset: 0; border-radius: 14px; background: var(--b1) center / cover; box-shadow: 0 20px 40px -20px rgba(0,0,0,.6);
+  transform: rotate(-5deg) translate(-4%, 2%) scale(.94); filter: brightness(.55); transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s; }
+.dk-pile::after { background-image: var(--b2); transform: rotate(4deg) translate(4%, 1%) scale(.94); }
+.deck:hover .dk-pile::before { transform: rotate(-9deg) translate(-12%, 3%) scale(.92); filter: brightness(.8); }
+.deck:hover .dk-pile::after { transform: rotate(8deg) translate(12%, 2%) scale(.92); filter: brightness(.8); }
+.dk-view { position: relative; z-index: 1; border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.14); }
+.dk-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.dk-track::-webkit-scrollbar { display: none; }
+.dk-track img { flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; scroll-snap-align: start; cursor: zoom-in; }
+.dk-count { position: absolute; z-index: 2; top: 10px; right: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; pointer-events: none; }
+.dk-nav { position: absolute; z-index: 2; top: 50%; width: 38px; height: 38px; margin-top: -19px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.92); color: #111; box-shadow: 0 6px 18px rgba(0,0,0,.3); opacity: 0; transition: opacity .25s, transform .25s; }
+.dk-nav svg { width: 16px; height: 16px; }
+.dk-prev { left: 10px; transform: translateX(-6px); } .dk-next { right: 10px; transform: translateX(6px); }
+.deck:hover .dk-nav, .dk-nav:focus-visible { opacity: 1; transform: none; }
+.dk-nav[disabled] { opacity: 0 !important; pointer-events: none; }
+.dk-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.dk-dots button { width: 7px; height: 7px; border-radius: 999px; background: currentColor; opacity: .3; transition: width .3s, opacity .3s, background-color .3s; }
+.dk-dots button[aria-current="true"] { width: 22px; opacity: 1; background: var(--ac); }
+.deck figcaption { margin-top: 12px; text-align: center; }
+.deck figcaption .mono { display: block; opacity: .7; font-size: 10.5px; }
+.deck figcaption b { display: block; margin-top: 4px; font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 1.9vw, 28px); line-height: 1.05; }
+.dk-singles { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; position: relative; z-index: 1; }
+.dk-singles .shot { border-radius: 8px; }
+
 /* ---------- reels ---------- */
 .reels { padding: 110px 0 120px; }
 .reels .wrap { padding: 0 var(--gutter); }
@@ -253,6 +288,44 @@ a { color: inherit; }
 .ai-foot { margin: 48px var(--gutter) 0; padding: 16px 18px; border: 1px dashed rgba(255,255,255,.3); border-radius: 14px; display: flex; gap: 14px; align-items: baseline; max-width: 820px; font-size: 15px; line-height: 1.5; }
 .ai-foot .mono { color: var(--ac); white-space: nowrap; }
 
+/* ---------- toolkit ---------- */
+.kit { position: relative; padding: 110px 0 0; overflow: hidden; isolation: isolate; }
+.kit .wrap { padding: 0 var(--gutter); }
+.kit::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 900px; pointer-events: none; opacity: .35;
+  background: radial-gradient(40vw 40vw at 85% 0%, #6d4bff, transparent 70%), radial-gradient(34vw 34vw at 5% 30%, #16c6e6, transparent 70%); }
+.kit::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .06;
+  background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+  background-size: 56px 56px; mask-image: linear-gradient(#000, transparent 800px); -webkit-mask-image: linear-gradient(#000, transparent 800px); }
+.kit .sec-title em.grad { color: transparent; padding-right: .06em; }
+.kit-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid currentColor; margin-bottom: 40px; }
+.kit-stats div { padding: 12px 12px 0 0; }
+.kit-stats b { display: block; font-weight: 900; font-variation-settings: "wdth" 125; font-size: clamp(36px, 4vw, 60px); line-height: .9; letter-spacing: -.02em; }
+.kit-stats .mono { opacity: .7; }
+.kit-legend { display: flex; gap: 8px 18px; flex-wrap: wrap; margin-bottom: 18px; opacity: .7; }
+.kit-legend span:first-child { color: var(--ac); }
+.kit-group { display: grid; grid-template-columns: minmax(180px, .32fr) minmax(0, 1fr); gap: 28px; padding: 26px 0 34px; border-top: 1px solid rgba(255,255,255,.22); }
+.kit-group header .n { font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--ac); }
+.kit-group h3 { font-weight: 900; font-variation-settings: "wdth" 120; text-transform: uppercase; font-size: clamp(22px, 2.2vw, 30px); line-height: .95; letter-spacing: -.015em; margin: 8px 0 10px; }
+.kit-group h3 em { font-family: var(--serif); font-weight: 400; text-transform: none; font-variation-settings: normal; }
+.kit-group header p { font-size: 14.5px; line-height: 1.5; opacity: .75; max-width: 30ch; }
+.kit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.kit-tool { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 14px; align-items: center; padding: 14px; border-radius: 16px;
+  background: linear-gradient(rgba(255,255,255,.05), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.12); transition: transform .25s, border-color .25s, box-shadow .25s; }
+.kit-tool:hover { transform: translateY(-3px); border-color: var(--c); box-shadow: 0 24px 50px -30px var(--c); }
+.kit-tool .mark { grid-row: 1 / 3; width: 52px; height: 52px; border-radius: 13px; display: grid; place-items: center; background: var(--c); color: var(--t, #0b0b10);
+  font-weight: 900; font-variation-settings: "wdth" 115; font-size: 19px; letter-spacing: -.02em; box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), 0 8px 22px -10px var(--c); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.kit-tool:hover .mark { transform: rotate(-6deg) scale(1.06); }
+.kit-tool b { align-self: end; font-weight: 800; font-variation-settings: "wdth" 110; font-size: 17px; letter-spacing: -.01em; line-height: 1.1; }
+.kit-tool .use { align-self: start; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; opacity: .65; line-height: 1.4; }
+.kit-tool .lvl { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,.16); }
+.kit-tool .pips { display: flex; gap: 4px; flex: 1; }
+.kit-tool .pips i { flex: 1; height: 4px; border-radius: 4px; background: rgba(255,255,255,.14); }
+.kit-tool .pips i.on { background: var(--c); box-shadow: 0 0 8px var(--c); }
+.kit-tool .lvl > span:last-child { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; white-space: nowrap; }
+.kit-marquee { margin-top: 56px; overflow: hidden; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; padding: 14px 0; white-space: nowrap; }
+.kit-marquee .ticker-track { animation-duration: 45s; animation-direction: reverse; }
+.kit.off .ticker-track { animation-play-state: paused; }
+
 /* ---------- services ---------- */
 .services { padding: 110px var(--gutter) 120px; }
 .cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid currentColor; }
@@ -315,6 +388,13 @@ a { color: inherit; }
   .lay-mega .strip { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); }
   .lay-mega .strip .shot { flex: 0 0 auto; height: 52svh; aspect-ratio: var(--ar); scroll-snap-align: start; }
   .lay-mega .p-under { grid-template-columns: 1fr; gap: 22px; }
+  .lay-deck .dk-top { grid-template-columns: minmax(0, 1fr); }
+  .dk-decks { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(74vw, 340px); overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 calc(var(--gutter) * -1); padding: 10px calc(var(--gutter) + 6vw) 6px; scroll-padding-inline: calc(var(--gutter) + 6vw); scrollbar-width: none; }
+  .deck { scroll-snap-align: start; }
+  .dk-nav { opacity: 1; transform: none; width: 32px; height: 32px; margin-top: -16px; }
+  .dk-singles { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 40vw; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .dk-singles .shot { scroll-snap-align: start; }
   .lay-center .p-grid { grid-template-columns: minmax(0, 1fr); }
   .lay-center .p-title { writing-mode: horizontal-tb; transform: none; font-size: clamp(48px, 13vw, 96px); white-space: normal; order: -1; }
   .lay-center .main { height: auto; width: 100%; max-height: none; }
@@ -324,6 +404,9 @@ a { color: inherit; }
   .pull { grid-template-columns: 1fr; gap: 28px; }
   .back-grid { grid-template-columns: 1fr 1fr; }
   .ai-lede { grid-template-columns: 1fr; gap: 28px; }
+  .kit-group { grid-template-columns: 1fr; gap: 18px; }
+  .kit-stats { grid-template-columns: 1fr 1fr; row-gap: 14px; }
+  .kit .sec-title { font-size: clamp(48px, 14vw, 100px); }
   .ai-kicker span:last-child { display: none; }
   .ai-filters { top: 54px; flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scrollbar-width: none; }
   .ai-filters button { flex: none; }
@@ -353,6 +436,7 @@ a { color: inherit; }
 <header class="nav">
   <a class="brand" href="#cover">Ahmad Khan <i>studio</i></a>
   <nav class="nav-links" aria-label="Sections">
+    <a href="#toolkit">Toolkit</a>
     <a href="#ai">AI studio</a>
     <a href="#contents">Work</a>
     <a href="#reels">Reels</a>
@@ -379,9 +463,9 @@ a { color: inherit; }
       <p class="cover-lede">Graphic designer who also <em>shoots, edits</em> &amp; writes code.</p>
       <nav class="coverlines" aria-label="In this issue">
         <a href="#ai">Special insert: the AI studio <span>p.02</span></a>
-        <a href="#contents">14 brands, one wall <span>p.04</span></a>
-        <a href="#reels">Reels, shot &amp; cut by me <span>p.32</span></a>
-        <a href="#services">Why a CS grad makes posters <span>p.36</span></a>
+        <a href="#contents">15 brands, one wall <span>p.04</span></a>
+        <a href="#reels">Reels, shot &amp; cut by me <span>p.34</span></a>
+        <a href="#services">Why a CS grad makes posters <span>p.38</span></a>
         <a href="#contact">Hire me <span>back cover</span></a>
       </nav>
       <div class="barcode"><i></i><span class="mono">3+ yrs · 15+ clients<br>US · AU · PK</span></div>
@@ -392,6 +476,21 @@ a { color: inherit; }
       <figcaption class="mono"><span>Cover: the designer</span><span>Photo &amp; type, AK</span></figcaption>
     </figure>
   </div>
+</section>
+
+<!-- ================= TOOLKIT ================= -->
+<section class="kit" id="toolkit" data-bg="#0b0b12" data-fg="#f1efff" data-ac="#c6ff3d" aria-labelledby="kit-h">
+  <div class="wrap">
+    <div class="ai-kicker mono"><span class="live">The toolkit</span><span>Design · Photo &amp; video · AI studio · Web</span><span>What’s on my desktop</span></div>
+    <div class="sec-head">
+      <h2 id="kit-h" class="sec-title">Tools <em class="grad">of the</em><br>trade.</h2>
+      <p>The software behind every page of this portfolio, from the Adobe classics to the AI models I direct. Each one is here because I use it on real client work.</p>
+    </div>
+    <div class="kit-stats" id="kitStats"></div>
+    <div class="kit-legend mono"><span>Level</span><span>●●●●● Daily driver</span><span>●●●●○ Advanced</span><span>●●●○○ Confident</span></div>
+    <div id="kitGroups"></div>
+  </div>
+  <div class="kit-marquee" aria-hidden="true"><div class="ticker-track" id="kitTicker"></div></div>
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
@@ -406,7 +505,7 @@ a { color: inherit; }
       <p>AI UGC, performance ads and SaaS visuals for brands in the US, Australia, Mexico and Pakistan. The models make the pixels. I write the brief, direct the shots and do the design.</p>
       <div class="ai-stats" id="aiStats"></div>
     </div>
-    <div class="stack-label mono"><span>The stack</span><span>What I use, and for what</span></div>
+    <div class="stack-label mono"><span>The stack</span><a href="#toolkit" style="text-decoration:none">Full toolkit ↑</a></div>
     <div class="tools-row" id="aiTools"></div>
     <div class="ai-filters" id="aiFilters" role="group" aria-label="Filter AI work"></div>
   </div>
@@ -425,7 +524,7 @@ a { color: inherit; }
 <section class="contents" id="contents" data-bg="#f4f1ea" data-fg="#111111" data-ac="#2b35ff" aria-labelledby="contents-h">
   <div class="contents-head">
     <h2 id="contents-h" class="sec-title">Con&shy;tents</h2>
-    <p>Fourteen projects, each one on its own page and in its own colours. Scroll through, or jump straight to one.</p>
+    <p>Fifteen projects, each one on its own page and in its own colours. Scroll through, or jump straight to one.</p>
   </div>
   <ol class="toc" id="toc"></ol>
   <img class="peek" id="peek" alt="">
@@ -506,6 +605,11 @@ const PROJECTS = [
   { id: 'bukhara', title: ['Bukhara', '<em>by Legacy</em>'], client: 'Restaurant, Faisalabad', cat: 'Branding', role: 'Visual identity, print, photography, reels', year: '2025–26', n: 12, ars: [.75, .75, .8, 1, .8, .752, .75, .8],
     pal: ['#0e0a08', '#ead6b4', '#c9a25a'], lay: 'mega', type: 'serif',
     desc: 'Designer for Bukhara by Legacy, a high-end restaurant in Faisalabad: visual identity work, menus, signage and print, plus the photography and reels behind its social presence.' },
+  // lay 'deck': images 1-8 are single posts; each deck is [first image, slides, title]
+  { id: 'sheran', title: ['Sheranwala', '<em>Developers</em>'], client: 'Real estate developer, Lahore', cat: 'Social & ads', role: 'Social media design, carousels, reels', year: 'Feb 2026–now', n: 26, ars: [.8, .8, .8, .8, .8, .8, .8, .8],
+    pal: ['#0f2150', '#f3efe6', '#d6b46a'], lay: 'deck', type: 'serif', singles: 8, reel: 13,
+    decks: [[9, 6, 'Amenities that elevate living'], [15, 6, 'From vision to reality'], [21, 6, 'A new standard of living']],
+    desc: 'Freelance social designer for Sheranwala Developers since February, launching Mayfair Residencia on Main Canal Road, Lahore. Editorial single posts, swipeable carousels on the amenities and the construction progress, and reels.' },
   { id: 'luxe', title: ['Luxe<em>Lime</em>'], client: 'Lifestyle brand', cat: 'Branding', role: 'Logo, social content', year: '2025', n: 12, ars: [1, .8, .8, .809, 1, .75, 1, .75],
     pal: ['#f6f2e8', '#1d1d1b', '#8f8a6a'], lay: 'split', flip: true, type: 'serif',
     desc: 'Logo and social content for LuxeLime: a quiet cream-and-charcoal system with plenty of air, built for a calm, minimal feed.' },
@@ -547,6 +651,7 @@ const REELS = [
   ['FAST National University', 'Admission Campaign', 2025], ['HAVAL', 'Client Showcase', 2025],
   ['Client at NIC', 'Client Showcase', 2025], ['DAIRA', 'Flagship Event Promotion', 2025],
   ['AIESEC at NIC', 'Full Event Coverage', 2025], ['Padel Pavilion', 'Promotional Video', 2025],
+  ['Sheranwala Developers', 'Mayfair Residencia', 2026],
 ];
 
 // ---------- AI studio data ----------
@@ -657,6 +762,33 @@ function poster(p, k) {
       <div class="p-under"><p class="p-desc">${p.desc}</p>${facts(p)}${more(p)}</div>
       ${folio(p, k)}</section>`;
   }
+  if (p.lay === 'deck') {
+    const arrow = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="${d}"/></svg>`;
+    const slides = p.decks.reduce((a, d) => a + d[1], 0);
+    return `<section ${attrs}>${meta(p, k)}
+      <div class="dk-top">
+        <h2 class="p-title">${p.title.map(l => `<span data-fit="${p.id}">${l}</span>`).join('')}</h2>
+        <div class="dk-intro"><p class="p-desc">${p.desc}</p>${facts(p)}
+          <div class="dk-btns">${more(p)}${p.reel ? `<button class="p-more ghost" data-reel-open="${p.reel}">Watch the reel ▶</button>` : ''}</div></div>
+      </div>
+      <div class="dk-label mono"><span>Carousels · swipe through</span><span>${p.decks.length} sets · ${slides} slides</span></div>
+      <div class="dk-decks">${p.decks.map(([first, n, title], d) => `
+        <figure class="deck" style="--b1:url(${src(p.id, first + 1, 1)});--b2:url(${src(p.id, first + 2, 1)})">
+          <div class="dk-pile"><div class="dk-view">
+            <div class="dk-track" tabindex="0" aria-label="${title}, carousel of ${n} slides">${Array.from({ length: n }, (_, i) =>
+              `<img src="${src(p.id, first + i, i > 0)}" alt="${title}, slide ${i + 1} of ${n}" loading="lazy" data-gal="${p.id}" data-i="${first + i}">`).join('')}</div>
+            <span class="dk-count">1 / ${n}</span>
+            <button class="dk-nav dk-prev" aria-label="Previous slide" disabled>${arrow('M15 5l-7 7 7 7')}</button>
+            <button class="dk-nav dk-next" aria-label="Next slide">${arrow('M9 5l7 7-7 7')}</button>
+          </div></div>
+          <div class="dk-dots">${Array.from({ length: n }, (_, i) => `<button aria-label="Slide ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div>
+          <figcaption><span class="mono">Carousel ${pad(d + 1)} · ${n} slides</span><b>${title}</b></figcaption>
+        </figure>`).join('')}
+      </div>
+      <div class="dk-label mono"><span>Single posts</span><span>${p.singles} posts · click to enlarge</span></div>
+      <div class="dk-singles">${Array.from({ length: p.singles }, (_, i) => shot(p, i + 1)).join('')}</div>
+      ${folio(p, k)}</section>`;
+  }
   if (p.lay === 'center') {
     return `<section ${attrs}>${meta(p, k)}
       <div class="p-grid">
@@ -687,6 +819,7 @@ function fit() {
     let size = Math.min(97 * el.parentElement.clientWidth / el.scrollWidth, cap);
     if (el.dataset.fit === 'name') size = Math.min(size, innerHeight * .27);
     if (el.closest('.lay-mega')) size = Math.min(size, innerHeight * .18);
+    if (el.closest('.lay-deck')) size = Math.min(size, innerHeight * .2);
     const g = el.dataset.fit || Math.random();
     (groups[g] = groups[g] || []).push([el, size]);
   });
@@ -725,6 +858,43 @@ function layoutStrips() {
 }
 layoutStrips();
 addEventListener('resize', layoutStrips);
+
+// ---------- carousel decks ----------
+// swipe / arrows / dots; while a deck is on screen it advances by itself until someone touches it
+const decks = $$('.deck').map((el, d) => {
+  const track = $('.dk-track', el), dots = $$('.dk-dots button', el), n = dots.length;
+  const deck = { el, i: 0, seen: false, held: false, touched: false, delay: d * 900 };
+  const go = i => track.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * track.clientWidth, behavior: 'smooth' });
+  const update = () => {
+    deck.i = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach((b, j) => b.setAttribute('aria-current', j === deck.i));
+    $('.dk-count', el).textContent = `${deck.i + 1} / ${n}`;
+    $('.dk-prev', el).disabled = deck.i === 0;
+    $('.dk-next', el).disabled = deck.i === n - 1;
+  };
+  const stop = () => { deck.touched = true; };
+  track.addEventListener('scroll', update, { passive: true });
+  ['pointerdown', 'touchstart', 'wheel'].forEach(t => track.addEventListener(t, stop, { passive: true }));
+  $('.dk-prev', el).addEventListener('click', () => { stop(); go(deck.i - 1); });
+  $('.dk-next', el).addEventListener('click', () => { stop(); go(deck.i + 1); });
+  dots.forEach((b, j) => b.addEventListener('click', () => { stop(); go(j); }));
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); stop(); go(deck.i + (e.key === 'ArrowRight' ? 1 : -1)); }
+  });
+  el.addEventListener('mouseenter', () => deck.held = true);
+  el.addEventListener('mouseleave', () => deck.held = false);
+  deck.next = () => go(deck.i === n - 1 ? 0 : deck.i + 1);
+  return deck;
+});
+if (decks.length && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const deckIO = new IntersectionObserver(es => es.forEach(e => { decks.find(d => d.el === e.target).seen = e.isIntersecting; }), { threshold: .6 });
+  decks.forEach(d => deckIO.observe(d.el));
+  setInterval(() => decks.forEach(d => {
+    if (!d.seen || d.held || d.touched || document.hidden || lb.classList.contains('open')) return;
+    setTimeout(d.next, d.delay);
+  }), 3200);
+}
+$$('[data-reel-open]').forEach(b => b.addEventListener('click', () => openReel(+b.dataset.reelOpen)));
 
 // ---------- AI studio ----------
 const playSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>';
@@ -794,6 +964,44 @@ $$('#aiFilters button').forEach(b => b.addEventListener('click', () => {
   $('#filmRow').scrollLeft = 0;
   pickFilm();
 }));
+
+// ---------- toolkit ----------
+// [name, monogram, what I use it for, level 1-5, tile colour, text colour on the tile]
+const KIT = [
+  ['i.', 'Graphic', 'design', 'Identities, posters, packaging and social. Where every project starts.', [
+    ['Photoshop', 'Ps', 'Retouch, compositing, ad statics', 5, '#31a8ff', '#001e36'],
+    ['Illustrator', 'Ai', 'Logos, vectors, print & packaging', 5, '#ff9a00', '#330000'],
+    ['Figma', 'Fi', 'Layouts, UI, design systems', 4, '#a259ff', '#fff'],
+    ['Canva', 'Ca', 'Fast social sets & brand kits', 5, '#00c4cc', '#06202a'],
+  ]],
+  ['ii.', 'Photo', '& video', 'Shoots, colour and short-form edits, cut for the feed.', [
+    ['Lightroom', 'Lr', 'Colour grading & batch edits', 5, '#4fccfe', '#001d26'],
+    ['Premiere Pro', 'Pr', 'Reels, promos & event films', 4, '#9999ff', '#00005b'],
+    ['CapCut', 'Cc', 'Quick-turn vertical edits', 5, '#f4f1ea', '#111'],
+  ]],
+  ['iii.', 'AI', 'studio', 'The models make the pixels. I write the brief, direct the shots and design.', AI_TOOLS.filter(t => t[0] !== 'Photoshop').map(([n, d, c]) =>
+    [n, { 'Higgsfield': 'Hf', 'Nano Banana Pro': 'Nb', 'Claude Design': 'Cd', 'ElevenLabs': 'El', 'Veo 3': 'V3', 'Kling': 'Kl' }[n] || n.slice(0, 2), d,
+     { 'Higgsfield': 5, 'Nano Banana Pro': 5 }[n] || 4, c, '#0b0b12'])],
+  ['iv.', 'Web', '& code', 'Designed in Figma, built by hand. This site is the demo.', [
+    ['Framer', 'Fr', 'Fast, animated marketing sites', 4, '#0099ff', '#fff'],
+    ['WordPress', 'Wp', 'Client sites & content', 4, '#21759b', '#fff'],
+    ['MERN stack', 'Js', 'MongoDB, Express, React, Node', 3, '#61dafb', '#04222b'],
+    ['Git & GitHub', 'Gt', 'Versioning & deploys', 4, '#f05032', '#fff'],
+  ]],
+];
+const LVL = ['', 'Learning', 'Working', 'Confident', 'Advanced', 'Daily driver'];
+const kitAll = KIT.flatMap(g => g[4]);
+$('#kitStats').innerHTML = [[kitAll.length, 'Tools'], [KIT.length, 'Disciplines'], [kitAll.filter(t => t[3] === 5).length, 'Daily drivers'], [KIT[2][4].length, 'AI models']]
+  .map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join('');
+$('#kitGroups').innerHTML = KIT.map(([n, a, b, p, tools]) => `
+  <div class="kit-group"><header><div class="n">${n}</div><h3>${a} <em>${b}</em></h3><p>${p}</p></header>
+    <div class="kit-grid">${tools.map(([name, m, use, l, c, t]) => `
+      <div class="kit-tool" style="--c:${c};--t:${t}"><span class="mark" aria-hidden="true">${m}</span><b>${name}</b><span class="use">${use}</span>
+        <span class="lvl"><span class="pips" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= l ? 'on' : ''}"></i>`).join('')}</span><span>${LVL[l]}</span></span></div>`).join('')}
+    </div></div>`).join('');
+const kitNames = kitAll.map(t => `<span>${t[0]}</span>`).join('');
+$('#kitTicker').innerHTML = kitNames + kitNames;
+new IntersectionObserver(([e]) => $('#toolkit').classList.toggle('off', !e.isIntersecting)).observe($('#toolkit'));
 
 // ---------- palette switching ----------
 const root = document.documentElement.style;
